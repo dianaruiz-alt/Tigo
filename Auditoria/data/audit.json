@@ -1,0 +1,4968 @@
+{
+ "schema": "tigo-catalog-audit/v1",
+ "generatedAt": "2026-10-15T19:00:55.558Z",
+ "account": "tigocolombia-demo",
+ "storeUrl": "https://compras.tigo.com.co",
+ "thresholds": {
+  "verde": 85,
+  "amarillo": 60,
+  "specThreshold": 0.6
+ },
+ "weights": {
+  "imagenes": 20,
+  "especificaciones": 25,
+  "descripcion": 20,
+  "seo": 15,
+  "consistencia": 10,
+  "vendibilidad": 10
+ },
+ "summary": {
+  "totalSkus": 53,
+  "auditados": 52,
+  "errores": 1,
+  "productos": 39,
+  "scorePromedio": 71,
+  "verde": 5,
+  "amarillo": 41,
+  "rojo": 6,
+  "comprables": 35,
+  "activosSinStock": 9,
+  "sugerenciasIA": 35
+ },
+ "expectedByCategory": {
+  "Smartphones": [
+   "Almacenamiento",
+   "Batería",
+   "Color",
+   "Cámara principal",
+   "Memoria RAM",
+   "Pantalla",
+   "Red",
+   "Sistema Operativo",
+   "Tipo de equipo",
+   "eSIM"
+  ],
+  "Equipos reacondicionados": [
+   "Almacenamiento",
+   "Color",
+   "Estado",
+   "Garantía",
+   "Sistema Operativo"
+  ],
+  "Smartwatches": [
+   "Batería",
+   "Color",
+   "Compatibilidad",
+   "Resistencia al agua",
+   "Tamaño de caja"
+  ],
+  "Tablets": [
+   "Almacenamiento",
+   "Color",
+   "Conectividad",
+   "Memoria RAM",
+   "Pantalla",
+   "Sistema Operativo"
+  ],
+  "Audífonos": [
+   "Autonomía",
+   "Cancelación de ruido",
+   "Color",
+   "Conectividad",
+   "Tipo"
+  ],
+  "Cargadores": [
+   "Compatibilidad",
+   "Conector",
+   "Potencia"
+  ],
+  "Fundas y protectores": [
+   "Color",
+   "Compatibilidad",
+   "Material"
+  ],
+  "Televisores": [
+   "HDMI",
+   "Resolución",
+   "Sistema Operativo",
+   "Tamaño de pantalla"
+  ]
+ },
+ "products": {
+  "101": {
+   "productId": "101",
+   "name": "Samsung Galaxy A16 128GB",
+   "title": "Samsung Galaxy A16 128GB con el mejor precio, envío gratis y plan Tigo incluido para ti",
+   "metaDescription": "Samsung Galaxy A16 128GB",
+   "keywords": "",
+   "descriptionShort": "Samsung Galaxy A16 128GB con garantía oficial.",
+   "description": "Descubre el Samsung Galaxy A16 128GB, diseñado para acompañarte todo el día con rendimiento confiable y un diseño moderno.\nSu pantalla ofrece colores vivos y gran nitidez para ver tus series, redes sociales y videollamadas. La batería de larga duración te permite usarlo desde la mañana hasta la noche sin preocuparte por cargarlo.\nRendimiento fluido para apps y juegos.\nCámara para fotos claras incluso de noche.\nConectividad para navegar rápido con tu plan Tigo.\nLlévalo con el plan que mejor se adapte a ti y disfruta la cobertura de Tigo en todo el país.",
+   "descLength": 558,
+   "linkId": "samsung-galaxy-a16-128gb",
+   "ia": {
+    "ok": true,
+    "calidad": 5,
+    "problemas": [
+     "Title de 87 caracteres (recomendado 30–65)",
+     "Meta description de 24 caracteres (recomendado 70–160)"
+    ],
+    "datosFaltantes": [],
+    "titleSugerido": "Samsung Galaxy A16 128GB | Tigo",
+    "metaSugerida": "Compra Samsung Galaxy A16 128GB en Tigo: sistema operativo Android, memoria ram 6 GB. Envío a todo Colombia y garantía oficial de Samsung.",
+    "descCortaSugerida": "Samsung Galaxy A16 128GB con sistema operativo Android y memoria ram 6 GB, garantía oficial.",
+    "descSugerida": "El Samsung Galaxy A16 128GB de Samsung está pensado para quienes buscan un equipo confiable en smartphones sin complicaciones.\n\nCuenta con sistema operativo Android, memoria ram 6 GB, almacenamiento 128 GB, pantalla 6,1\", una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "102": {
+   "productId": "102",
+   "name": "Samsung Galaxy A26 5G 256GB",
+   "title": "Samsung Galaxy A26 5G 256GB | Compra en Tigo",
+   "metaDescription": "Compra el Samsung Galaxy A26 5G 256GB en Tigo. Paga con tu plan, recibe envío a todo Colombia y estrena tecnología con garantía oficial.",
+   "keywords": "",
+   "descriptionShort": "",
+   "description": "Descubre el Samsung Galaxy A26 5G 256GB, diseñado para acompañarte todo el día con rendimiento confiable y un diseño moderno.\nSu pantalla ofrece colores vivos y gran nitidez para ver tus series, redes sociales y videollamadas. La batería de larga duración te permite usarlo desde la mañana hasta la noche sin preocuparte por cargarlo.\nRendimiento fluido para apps y juegos.\nCámara para fotos claras incluso de noche.\nConectividad para navegar rápido con tu plan Tigo.\nLlévalo con el plan que mejor se adapte a ti y disfruta la cobertura de Tigo en todo el país.",
+   "descLength": 561,
+   "linkId": "samsung-galaxy-a26-5g-256gb",
+   "ia": {
+    "ok": true,
+    "calidad": 5,
+    "problemas": [
+     "Sin descripción corta"
+    ],
+    "datosFaltantes": [],
+    "titleSugerido": "Samsung Galaxy A26 5G 256GB | Tigo",
+    "metaSugerida": "Compra Samsung Galaxy A26 5G 256GB en Tigo: sistema operativo Android, memoria ram 12 GB. Envío a todo Colombia y garantía oficial de Samsung.",
+    "descCortaSugerida": "Samsung Galaxy A26 5G 256GB con sistema operativo Android y memoria ram 12 GB, garantía oficial.",
+    "descSugerida": "El Samsung Galaxy A26 5G 256GB de Samsung está pensado para quienes buscan un equipo confiable en smartphones sin complicaciones.\n\nCuenta con sistema operativo Android, memoria ram 12 GB, pantalla 6,5\", esim No, una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "103": {
+   "productId": "103",
+   "name": "Samsung Galaxy S25 FE",
+   "title": "Samsung Galaxy S25 FE | Compra en Tigo",
+   "metaDescription": "Samsung Galaxy S25 FE",
+   "keywords": "",
+   "descriptionShort": "",
+   "description": "Descubre el Samsung Galaxy S25 FE, diseñado para acompañarte todo el día con rendimiento confiable y un diseño moderno.\nSu pantalla ofrece colores vivos y gran nitidez para ver tus series, redes sociales y videollamadas. La batería de larga duración te permite usarlo desde la mañana hasta la noche sin preocuparte por cargarlo.\nRendimiento fluido para apps y juegos.\nCámara para fotos claras incluso de noche.\nConectividad para navegar rápido con tu plan Tigo.\nLlévalo con el plan que mejor se adapte a ti y disfruta la cobertura de Tigo en todo el país.",
+   "descLength": 555,
+   "linkId": "samsung-galaxy-s25-fe",
+   "ia": {
+    "ok": true,
+    "calidad": 5,
+    "problemas": [
+     "Sin descripción corta",
+     "Meta description de 21 caracteres (recomendado 70–160)"
+    ],
+    "datosFaltantes": [],
+    "titleSugerido": "Samsung Galaxy S25 FE | Tigo",
+    "metaSugerida": "Compra Samsung Galaxy S25 FE en Tigo: sistema operativo Android, memoria ram 6 GB. Envío a todo Colombia y garantía oficial de Samsung.",
+    "descCortaSugerida": "Samsung Galaxy S25 FE con sistema operativo Android y memoria ram 6 GB, garantía oficial.",
+    "descSugerida": "El Samsung Galaxy S25 FE de Samsung está pensado para quienes buscan un equipo confiable en smartphones sin complicaciones.\n\nCuenta con sistema operativo Android, memoria ram 6 GB, almacenamiento 128 GB, pantalla 6,5\", una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "104": {
+   "productId": "104",
+   "name": "Motorola Moto G85 5G",
+   "title": "Motorola Moto G85 5G | Compra en Tigo",
+   "metaDescription": "",
+   "keywords": "",
+   "descriptionShort": "Motorola Moto G85 5G con garantía oficial.",
+   "description": "Motorola Moto G85 5G con gran pantalla y procesador de alto rendimiento para que disfrutes de tus aplicaciones favoritas, fotos y videos durante todo el día.",
+   "descLength": 157,
+   "linkId": "motorola-moto-g85-5g",
+   "ia": {
+    "ok": true,
+    "calidad": 2,
+    "problemas": [
+     "Descripción corta (157 caracteres, recomendado ≥ 300)",
+     "HTML con estilos embebidos (copiado de Word/web)",
+     "Meta description vacía",
+     "No conecta las especificaciones con beneficios para el cliente"
+    ],
+    "datosFaltantes": [],
+    "titleSugerido": "Motorola Moto G85 5G | Tigo",
+    "metaSugerida": "Compra Motorola Moto G85 5G en Tigo: sistema operativo Android, memoria ram 4 GB. Envío a todo Colombia y garantía oficial de Motorola.",
+    "descCortaSugerida": "Motorola Moto G85 5G con sistema operativo Android y memoria ram 4 GB, garantía oficial.",
+    "descSugerida": "El Motorola Moto G85 5G de Motorola está pensado para quienes buscan un equipo confiable en smartphones sin complicaciones.\n\nCuenta con sistema operativo Android, memoria ram 4 GB, almacenamiento 128 GB, pantalla 6,1\", una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "105": {
+   "productId": "105",
+   "name": "MOTOROLA EDGE 60 FUSION",
+   "title": "Motorola Edge 60 Fusion | Compra en Tigo",
+   "metaDescription": "Compra el Motorola Edge 60 Fusion en Tigo. Paga con tu plan, recibe envío a todo Colombia y estrena tecnología con garantía oficial.",
+   "keywords": "",
+   "descriptionShort": "Motorola Edge 60 Fusion con garantía oficial.",
+   "description": "Descubre el Motorola Edge 60 Fusion, diseñado para acompañarte todo el día con rendimiento confiable y un diseño moderno.\nSu pantalla ofrece colores vivos y gran nitidez para ver tus series, redes sociales y videollamadas. La batería de larga duración te permite usarlo desde la mañana hasta la noche sin preocuparte por cargarlo.\nRendimiento fluido para apps y juegos.\nCámara para fotos claras incluso de noche.\nConectividad para navegar rápido con tu plan Tigo.\nLlévalo con el plan que mejor se adapte a ti y disfruta la cobertura de Tigo en todo el país.",
+   "descLength": 557,
+   "linkId": "motorola-edge-60-fusion",
+   "ia": null
+  },
+  "106": {
+   "productId": "106",
+   "name": "Xiaomi Redmi Note 14 Pro",
+   "title": "",
+   "metaDescription": "Xiaomi Redmi Note 14 Pro",
+   "keywords": "",
+   "descriptionShort": "",
+   "description": "Xiaomi Redmi Note 14 Pro",
+   "descLength": 24,
+   "linkId": "xiaomi-redmi-note-14-pro",
+   "ia": {
+    "ok": true,
+    "calidad": 2,
+    "problemas": [
+     "Descripción muy corta (24 caracteres)",
+     "Sin descripción corta",
+     "Title SEO vacío (VTEX usa el nombre por defecto)",
+     "No conecta las especificaciones con beneficios para el cliente"
+    ],
+    "datosFaltantes": [],
+    "titleSugerido": "Xiaomi Redmi Note 14 Pro | Tigo",
+    "metaSugerida": "Compra Xiaomi Redmi Note 14 Pro en Tigo: sistema operativo Android, memoria ram 4 GB. Envío a todo Colombia y garantía oficial de Xiaomi.",
+    "descCortaSugerida": "Xiaomi Redmi Note 14 Pro con sistema operativo Android y memoria ram 4 GB, garantía oficial.",
+    "descSugerida": "El Xiaomi Redmi Note 14 Pro de Xiaomi está pensado para quienes buscan un equipo confiable en smartphones sin complicaciones.\n\nCuenta con sistema operativo Android, memoria ram 4 GB, almacenamiento 128 GB, cámara principal 108 MP, una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "107": {
+   "productId": "107",
+   "name": "Xiaomi Redmi 14C",
+   "title": "Xiaomi Redmi 14C | Compra en Tigo",
+   "metaDescription": "Xiaomi Redmi 14C",
+   "keywords": "",
+   "descriptionShort": "Xiaomi Redmi 14C con garantía oficial.",
+   "description": "Xiaomi Redmi 14C. Equipo con excelente desempeño, buena cámara y batería para todo el día. Ideal para el uso diario.",
+   "descLength": 116,
+   "linkId": "xiaomi-redmi-14c",
+   "ia": {
+    "ok": true,
+    "calidad": 2,
+    "problemas": [
+     "Descripción corta (116 caracteres, recomendado ≥ 300)",
+     "Meta description de 16 caracteres (recomendado 70–160)",
+     "No conecta las especificaciones con beneficios para el cliente"
+    ],
+    "datosFaltantes": [],
+    "titleSugerido": "Xiaomi Redmi 14C | Tigo",
+    "metaSugerida": "Compra Xiaomi Redmi 14C en Tigo: memoria ram 12 GB, almacenamiento 128 GB. Envío a todo Colombia y garantía oficial de Xiaomi.",
+    "descCortaSugerida": "Xiaomi Redmi 14C con memoria ram 12 GB y almacenamiento 128 GB, garantía oficial.",
+    "descSugerida": "El Xiaomi Redmi 14C de Xiaomi está pensado para quienes buscan un equipo confiable en smartphones sin complicaciones.\n\nCuenta con memoria ram 12 GB, almacenamiento 128 GB, pantalla 6,7\", cámara principal 50 MP, una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "108": {
+   "productId": "108",
+   "name": "Apple iPhone 16 128GB",
+   "title": "Apple iPhone 16 128GB | Compra en Tigo",
+   "metaDescription": "",
+   "keywords": "",
+   "descriptionShort": "",
+   "description": "Apple iPhone 16 128GB con gran pantalla y procesador de alto rendimiento para que disfrutes de tus aplicaciones favoritas, fotos y videos durante todo el día.",
+   "descLength": 158,
+   "linkId": "apple-iphone-16-128gb",
+   "ia": {
+    "ok": true,
+    "calidad": 2,
+    "problemas": [
+     "Descripción corta (158 caracteres, recomendado ≥ 300)",
+     "HTML con estilos embebidos (copiado de Word/web)",
+     "Sin descripción corta",
+     "No conecta las especificaciones con beneficios para el cliente"
+    ],
+    "datosFaltantes": [],
+    "titleSugerido": "Apple iPhone 16 128GB | Tigo",
+    "metaSugerida": "Compra Apple iPhone 16 128GB en Tigo: sistema operativo iOS, memoria ram 12 GB. Envío a todo Colombia y garantía oficial de Apple.",
+    "descCortaSugerida": "Apple iPhone 16 128GB con sistema operativo iOS y memoria ram 12 GB, garantía oficial.",
+    "descSugerida": "El Apple iPhone 16 128GB de Apple está pensado para quienes buscan un equipo confiable en smartphones sin complicaciones.\n\nCuenta con sistema operativo iOS, memoria ram 12 GB, almacenamiento 128 GB, pantalla 6,5\", una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "109": {
+   "productId": "109",
+   "name": "Apple iPhone 16 Pro 256GB",
+   "title": "Apple iPhone 16 Pro 256GB | Compra en Tigo",
+   "metaDescription": "Compra el Apple iPhone 16 Pro 256GB en Tigo. Paga con tu plan, recibe envío a todo Colombia y estrena tecnología con garantía oficial.",
+   "keywords": "",
+   "descriptionShort": "Apple iPhone 16 Pro 256GB con garantía oficial.",
+   "description": "Descubre el Apple iPhone 16 Pro 256GB, diseñado para acompañarte todo el día con rendimiento confiable y un diseño moderno.\nSu pantalla ofrece colores vivos y gran nitidez para ver tus series, redes sociales y videollamadas. La batería de larga duración te permite usarlo desde la mañana hasta la noche sin preocuparte por cargarlo.\nRendimiento fluido para apps y juegos.\nCámara para fotos claras incluso de noche.\nConectividad para navegar rápido con tu plan Tigo.\nLlévalo con el plan que mejor se adapte a ti y disfruta la cobertura de Tigo en todo el país.",
+   "descLength": 559,
+   "linkId": "apple-iphone-16-pro-256gb",
+   "ia": null
+  },
+  "110": {
+   "productId": "110",
+   "name": "Honor Magic7 Lite",
+   "title": "Honor Magic7 Lite | Compra en Tigo",
+   "metaDescription": "Honor Magic7 Lite",
+   "keywords": "",
+   "descriptionShort": "",
+   "description": "Honor Magic7 Lite",
+   "descLength": 17,
+   "linkId": "honor-magic7-lite",
+   "ia": {
+    "ok": true,
+    "calidad": 2,
+    "problemas": [
+     "Descripción muy corta (17 caracteres)",
+     "Sin descripción corta",
+     "Meta description de 17 caracteres (recomendado 70–160)",
+     "No conecta las especificaciones con beneficios para el cliente"
+    ],
+    "datosFaltantes": [],
+    "titleSugerido": "Honor Magic7 Lite | Tigo",
+    "metaSugerida": "Compra Honor Magic7 Lite en Tigo: sistema operativo Android, memoria ram 12 GB. Envío a todo Colombia y garantía oficial de Honor.",
+    "descCortaSugerida": "Honor Magic7 Lite con sistema operativo Android y memoria ram 12 GB, garantía oficial.",
+    "descSugerida": "El Honor Magic7 Lite de Honor está pensado para quienes buscan un equipo confiable en smartphones sin complicaciones.\n\nCuenta con sistema operativo Android, memoria ram 12 GB, almacenamiento 128 GB, pantalla 6,7\", una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "111": {
+   "productId": "111",
+   "name": "ZTE Blade A55",
+   "title": "",
+   "metaDescription": "ZTE Blade A55",
+   "keywords": "",
+   "descriptionShort": "ZTE Blade A55 con garantía oficial.",
+   "description": "Descubre el ZTE Blade A55, diseñado para acompañarte todo el día con rendimiento confiable y un diseño moderno.\nSu pantalla ofrece colores vivos y gran nitidez para ver tus series, redes sociales y videollamadas. La batería de larga duración te permite usarlo desde la mañana hasta la noche sin preocuparte por cargarlo.\nRendimiento fluido para apps y juegos.\nCámara para fotos claras incluso de noche.\nConectividad para navegar rápido con tu plan Tigo.\nLlévalo con el plan que mejor se adapte a ti y disfruta la cobertura de Tigo en todo el país.",
+   "descLength": 547,
+   "linkId": "zte-blade-a55",
+   "ia": {
+    "ok": true,
+    "calidad": 5,
+    "problemas": [
+     "Title SEO vacío (VTEX usa el nombre por defecto)",
+     "Meta description de 13 caracteres (recomendado 70–160)"
+    ],
+    "datosFaltantes": [],
+    "titleSugerido": "ZTE Blade A55 | Tigo",
+    "metaSugerida": "Compra ZTE Blade A55 en Tigo: sistema operativo Android, memoria ram 12 GB. Envío a todo Colombia y garantía oficial de ZTE.",
+    "descCortaSugerida": "ZTE Blade A55 con sistema operativo Android y memoria ram 12 GB, garantía oficial.",
+    "descSugerida": "El ZTE Blade A55 de ZTE está pensado para quienes buscan un equipo confiable en smartphones sin complicaciones.\n\nCuenta con sistema operativo Android, memoria ram 12 GB, almacenamiento 128 GB, cámara principal 50 MP, una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "112": {
+   "productId": "112",
+   "name": "Oppo Reno 13 F",
+   "title": "Oppo Reno 13 F | Compra en Tigo",
+   "metaDescription": "Oppo Reno 13 F",
+   "keywords": "",
+   "descriptionShort": "",
+   "description": "Oppo Reno 13 F con gran pantalla y procesador de alto rendimiento para que disfrutes de tus aplicaciones favoritas, fotos y videos durante todo el día.",
+   "descLength": 151,
+   "linkId": "oppo-reno-13-f",
+   "ia": {
+    "ok": true,
+    "calidad": 2,
+    "problemas": [
+     "Descripción corta (151 caracteres, recomendado ≥ 300)",
+     "HTML con estilos embebidos (copiado de Word/web)",
+     "Sin descripción corta",
+     "No conecta las especificaciones con beneficios para el cliente"
+    ],
+    "datosFaltantes": [],
+    "titleSugerido": "Oppo Reno 13 F | Tigo",
+    "metaSugerida": "Compra Oppo Reno 13 F en Tigo: sistema operativo Android, almacenamiento 128 GB. Envío a todo Colombia y garantía oficial de Oppo.",
+    "descCortaSugerida": "Oppo Reno 13 F con sistema operativo Android y almacenamiento 128 GB, garantía oficial.",
+    "descSugerida": "El Oppo Reno 13 F de Oppo está pensado para quienes buscan un equipo confiable en smartphones sin complicaciones.\n\nCuenta con sistema operativo Android, almacenamiento 128 GB, pantalla 6,5\", cámara principal 108 MP, una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "113": {
+   "productId": "113",
+   "name": "Realme C75",
+   "title": "Realme C75 | Compra en Tigo",
+   "metaDescription": "",
+   "keywords": "",
+   "descriptionShort": "Realme C75 con garantía oficial.",
+   "description": "Descubre el Realme C75, diseñado para acompañarte todo el día con rendimiento confiable y un diseño moderno.\nSu pantalla ofrece colores vivos y gran nitidez para ver tus series, redes sociales y videollamadas. La batería de larga duración te permite usarlo desde la mañana hasta la noche sin preocuparte por cargarlo.\nRendimiento fluido para apps y juegos.\nCámara para fotos claras incluso de noche.\nConectividad para navegar rápido con tu plan Tigo.\nLlévalo con el plan que mejor se adapte a ti y disfruta la cobertura de Tigo en todo el país.",
+   "descLength": 544,
+   "linkId": "realme-c75",
+   "ia": {
+    "ok": true,
+    "calidad": 5,
+    "problemas": [
+     "Title de 27 caracteres (recomendado 30–65)",
+     "Meta description vacía"
+    ],
+    "datosFaltantes": [],
+    "titleSugerido": "Realme C75 | Tigo",
+    "metaSugerida": "Compra Realme C75 en Tigo: sistema operativo Android, memoria ram 12 GB. Envío a todo Colombia y garantía oficial de Realme.",
+    "descCortaSugerida": "Realme C75 con sistema operativo Android y memoria ram 12 GB, garantía oficial.",
+    "descSugerida": "El Realme C75 de Realme está pensado para quienes buscan un equipo confiable en smartphones sin complicaciones.\n\nCuenta con sistema operativo Android, memoria ram 12 GB, almacenamiento 128 GB, pantalla 6,1\", una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "114": {
+   "productId": "114",
+   "name": "Samsung Galaxy Z Flip 6",
+   "title": "Samsung Galaxy Z Flip 6 | Compra en Tigo",
+   "metaDescription": "Samsung Galaxy Z Flip 6",
+   "keywords": "",
+   "descriptionShort": "",
+   "description": "Descubre el Samsung Galaxy Z Flip 6, diseñado para acompañarte todo el día con rendimiento confiable y un diseño moderno.\nSu pantalla ofrece colores vivos y gran nitidez para ver tus series, redes sociales y videollamadas. La batería de larga duración te permite usarlo desde la mañana hasta la noche sin preocuparte por cargarlo.\nRendimiento fluido para apps y juegos.\nCámara para fotos claras incluso de noche.\nConectividad para navegar rápido con tu plan Tigo.\nLlévalo con el plan que mejor se adapte a ti y disfruta la cobertura de Tigo en todo el país.",
+   "descLength": 557,
+   "linkId": "samsung-galaxy-z-flip-6",
+   "ia": {
+    "ok": true,
+    "calidad": 5,
+    "problemas": [
+     "Sin descripción corta",
+     "Meta description de 23 caracteres (recomendado 70–160)"
+    ],
+    "datosFaltantes": [],
+    "titleSugerido": "Samsung Galaxy Z Flip 6 | Tigo",
+    "metaSugerida": "Compra Samsung Galaxy Z Flip 6 en Tigo: sistema operativo Android, memoria ram 6 GB. Envío a todo Colombia y garantía oficial de Samsung.",
+    "descCortaSugerida": "Samsung Galaxy Z Flip 6 con sistema operativo Android y memoria ram 6 GB, garantía oficial.",
+    "descSugerida": "El Samsung Galaxy Z Flip 6 de Samsung está pensado para quienes buscan un equipo confiable en smartphones sin complicaciones.\n\nCuenta con sistema operativo Android, memoria ram 6 GB, almacenamiento 128 GB, pantalla 6,1\", una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "115": {
+   "productId": "115",
+   "name": "Motorola Moto E15",
+   "title": "Motorola Moto E15 | Compra en Tigo",
+   "metaDescription": "",
+   "keywords": "",
+   "descriptionShort": "Motorola Moto E15 con garantía oficial.",
+   "description": "Motorola Moto E15. Equipo con excelente desempeño, buena cámara y batería para todo el día. Ideal para el uso diario.",
+   "descLength": 117,
+   "linkId": "motorola-moto-e15",
+   "ia": {
+    "ok": true,
+    "calidad": 2,
+    "problemas": [
+     "Descripción corta (117 caracteres, recomendado ≥ 300)",
+     "Meta description vacía",
+     "No conecta las especificaciones con beneficios para el cliente"
+    ],
+    "datosFaltantes": [],
+    "titleSugerido": "Motorola Moto E15 | Tigo",
+    "metaSugerida": "Compra Motorola Moto E15 en Tigo: sistema operativo Android, memoria ram 6 GB. Envío a todo Colombia y garantía oficial de Motorola.",
+    "descCortaSugerida": "Motorola Moto E15 con sistema operativo Android y memoria ram 6 GB, garantía oficial.",
+    "descSugerida": "El Motorola Moto E15 de Motorola está pensado para quienes buscan un equipo confiable en smartphones sin complicaciones.\n\nCuenta con sistema operativo Android, memoria ram 6 GB, almacenamiento 128 GB, pantalla 6,5\", una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "116": {
+   "productId": "116",
+   "name": "Xiaomi Poco X7",
+   "title": "Xiaomi Poco X7 | Compra en Tigo",
+   "metaDescription": "",
+   "keywords": "",
+   "descriptionShort": "Xiaomi Poco X7 con garantía oficial.",
+   "description": "Xiaomi Poco X7 con gran pantalla y procesador de alto rendimiento para que disfrutes de tus aplicaciones favoritas, fotos y videos durante todo el día.",
+   "descLength": 151,
+   "linkId": "xiaomi-poco-x7",
+   "ia": {
+    "ok": true,
+    "calidad": 2,
+    "problemas": [
+     "Descripción corta (151 caracteres, recomendado ≥ 300)",
+     "HTML con estilos embebidos (copiado de Word/web)",
+     "Meta description vacía",
+     "No conecta las especificaciones con beneficios para el cliente"
+    ],
+    "datosFaltantes": [],
+    "titleSugerido": "Xiaomi Poco X7 | Tigo",
+    "metaSugerida": "Compra Xiaomi Poco X7 en Tigo: memoria ram 12 GB, almacenamiento 128 GB. Envío a todo Colombia y garantía oficial de Xiaomi.",
+    "descCortaSugerida": "Xiaomi Poco X7 con memoria ram 12 GB y almacenamiento 128 GB, garantía oficial.",
+    "descSugerida": "El Xiaomi Poco X7 de Xiaomi está pensado para quienes buscan un equipo confiable en smartphones sin complicaciones.\n\nCuenta con memoria ram 12 GB, almacenamiento 128 GB, pantalla 6,5\", cámara principal 48 MP, una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "117": {
+   "productId": "117",
+   "name": "Apple iPhone 13 Reacondicionado",
+   "title": "Apple iPhone 13 Reacondicionado | Compra en Tigo",
+   "metaDescription": "Compra el Apple iPhone 13 Reacondicionado en Tigo. Paga con tu plan, recibe envío a todo Colombia y estrena tecnología con garantía oficial.",
+   "keywords": "",
+   "descriptionShort": "",
+   "description": "Apple iPhone 13 Reacondicionado",
+   "descLength": 31,
+   "linkId": "apple-iphone-13-reacondicionado",
+   "ia": {
+    "ok": true,
+    "calidad": 2,
+    "problemas": [
+     "Descripción muy corta (31 caracteres)",
+     "Sin descripción corta",
+     "No conecta las especificaciones con beneficios para el cliente"
+    ],
+    "datosFaltantes": [],
+    "titleSugerido": "Apple iPhone 13 Reacondicionado | Tigo",
+    "metaSugerida": "Compra Apple iPhone 13 Reacondicionado en Tigo: sistema operativo iOS, almacenamiento 128 GB. Envío a todo Colombia y garantía oficial de Apple.",
+    "descCortaSugerida": "Apple iPhone 13 Reacondicionado con sistema operativo iOS y almacenamiento 128 GB, garantía oficial.",
+    "descSugerida": "El Apple iPhone 13 Reacondicionado de Apple está pensado para quienes buscan un equipo confiable en equipos reacondicionados sin complicaciones.\n\nCuenta con sistema operativo iOS, almacenamiento 128 GB, estado Grado A, garantía 6 meses, una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "118": {
+   "productId": "118",
+   "name": "Samsung Galaxy S22 Reacondicionado",
+   "title": "",
+   "metaDescription": "Compra el Samsung Galaxy S22 Reacondicionado en Tigo. Paga con tu plan, recibe envío a todo Colombia y estrena tecnología con garantía oficial.",
+   "keywords": "",
+   "descriptionShort": "",
+   "description": "Descubre el Samsung Galaxy S22 Reacondicionado, diseñado para acompañarte todo el día con rendimiento confiable y un diseño moderno.\nSu pantalla ofrece colores vivos y gran nitidez para ver tus series, redes sociales y videollamadas. La batería de larga duración te permite usarlo desde la mañana hasta la noche sin preocuparte por cargarlo.\nRendimiento fluido para apps y juegos.\nCámara para fotos claras incluso de noche.\nConectividad para navegar rápido con tu plan Tigo.\nLlévalo con el plan que mejor se adapte a ti y disfruta la cobertura de Tigo en todo el país.",
+   "descLength": 568,
+   "linkId": "samsung-galaxy-s22-reacondicionado",
+   "ia": {
+    "ok": true,
+    "calidad": 5,
+    "problemas": [
+     "Sin descripción corta",
+     "Title SEO vacío (VTEX usa el nombre por defecto)"
+    ],
+    "datosFaltantes": [],
+    "titleSugerido": "Samsung Galaxy S22 Reacondicionado | Tigo",
+    "metaSugerida": "Compra Samsung Galaxy S22 Reacondicionado en Tigo: sistema operativo Android, almacenamiento 128 GB. Envío a todo Colombia y garantía oficial de Samsung.",
+    "descCortaSugerida": "Samsung Galaxy S22 Reacondicionado con sistema operativo Android y almacenamiento 128 GB, garantía oficial.",
+    "descSugerida": "El Samsung Galaxy S22 Reacondicionado de Samsung está pensado para quienes buscan un equipo confiable en equipos reacondicionados sin complicaciones.\n\nCuenta con sistema operativo Android, almacenamiento 128 GB, estado Grado A, garantía 6 meses, una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "119": {
+   "productId": "119",
+   "name": "Apple iPhone 14 Reacondicionado",
+   "title": "",
+   "metaDescription": "Apple iPhone 14 Reacondicionado",
+   "keywords": "",
+   "descriptionShort": "Apple iPhone 14 Reacondicionado con garantía oficial.",
+   "description": "Apple iPhone 14 Reacondicionado. Equipo con excelente desempeño, buena cámara y batería para todo el día. Ideal para el uso diario.",
+   "descLength": 131,
+   "linkId": "apple-iphone-14-reacondicionado",
+   "ia": {
+    "ok": true,
+    "calidad": 2,
+    "problemas": [
+     "Descripción corta (131 caracteres, recomendado ≥ 300)",
+     "Title SEO vacío (VTEX usa el nombre por defecto)",
+     "Meta description de 31 caracteres (recomendado 70–160)",
+     "No conecta las especificaciones con beneficios para el cliente"
+    ],
+    "datosFaltantes": [],
+    "titleSugerido": "Apple iPhone 14 Reacondicionado | Tigo",
+    "metaSugerida": "Compra Apple iPhone 14 Reacondicionado en Tigo: sistema operativo iOS, almacenamiento 128 GB. Envío a todo Colombia y garantía oficial de Apple.",
+    "descCortaSugerida": "Apple iPhone 14 Reacondicionado con sistema operativo iOS y almacenamiento 128 GB, garantía oficial.",
+    "descSugerida": "El Apple iPhone 14 Reacondicionado de Apple está pensado para quienes buscan un equipo confiable en equipos reacondicionados sin complicaciones.\n\nCuenta con sistema operativo iOS, almacenamiento 128 GB, garantía 6 meses, color Plateado, una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "120": {
+   "productId": "120",
+   "name": "Samsung Galaxy Watch 7 44mm",
+   "title": "Samsung Galaxy Watch 7 44mm | Compra en Tigo",
+   "metaDescription": "Samsung Galaxy Watch 7 44mm",
+   "keywords": "",
+   "descriptionShort": "",
+   "description": "",
+   "descLength": 0,
+   "linkId": "samsung-galaxy-watch-7-44mm",
+   "ia": {
+    "ok": true,
+    "calidad": 2,
+    "problemas": [
+     "Sin descripción",
+     "Sin descripción corta",
+     "Meta description de 27 caracteres (recomendado 70–160)",
+     "No conecta las especificaciones con beneficios para el cliente"
+    ],
+    "datosFaltantes": [],
+    "titleSugerido": "Samsung Galaxy Watch 7 44mm | Tigo",
+    "metaSugerida": "Compra Samsung Galaxy Watch 7 44mm en Tigo: compatibilidad iOS, tamaño de caja 40 mm. Envío a todo Colombia y garantía oficial de Samsung.",
+    "descCortaSugerida": "Samsung Galaxy Watch 7 44mm con compatibilidad iOS y tamaño de caja 40 mm, garantía oficial.",
+    "descSugerida": "El Samsung Galaxy Watch 7 44mm de Samsung está pensado para quienes buscan un equipo confiable en smartwatches sin complicaciones.\n\nCuenta con compatibilidad iOS, tamaño de caja 40 mm, resistencia al agua 5 ATM, color Blanco | Plateado, una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "121": {
+   "productId": "121",
+   "name": "APPLE WATCH SE 40MM",
+   "title": "Apple Watch SE 40mm | Compra en Tigo",
+   "metaDescription": "Compra el Apple Watch SE 40mm en Tigo. Paga con tu plan, recibe envío a todo Colombia y estrena tecnología con garantía oficial.",
+   "keywords": "",
+   "descriptionShort": "Apple Watch SE 40mm con garantía oficial.",
+   "description": "Descubre el Apple Watch SE 40mm, diseñado para acompañarte todo el día con rendimiento confiable y un diseño moderno.\nSu pantalla ofrece colores vivos y gran nitidez para ver tus series, redes sociales y videollamadas. La batería de larga duración te permite usarlo desde la mañana hasta la noche sin preocuparte por cargarlo.\nRendimiento fluido para apps y juegos.\nCámara para fotos claras incluso de noche.\nConectividad para navegar rápido con tu plan Tigo.\nLlévalo con el plan que mejor se adapte a ti y disfruta la cobertura de Tigo en todo el país.",
+   "descLength": 553,
+   "linkId": "apple-watch-se-40mm",
+   "ia": null
+  },
+  "122": {
+   "productId": "122",
+   "name": "XIAOMI REDMI WATCH 5 ACTIVE",
+   "title": "Xiaomi Redmi Watch 5 Active | Compra en Tigo",
+   "metaDescription": "Compra el Xiaomi Redmi Watch 5 Active en Tigo. Paga con tu plan, recibe envío a todo Colombia y estrena tecnología con garantía oficial.",
+   "keywords": "",
+   "descriptionShort": "",
+   "description": "Descubre el Xiaomi Redmi Watch 5 Active, diseñado para acompañarte todo el día con rendimiento confiable y un diseño moderno.\nSu pantalla ofrece colores vivos y gran nitidez para ver tus series, redes sociales y videollamadas. La batería de larga duración te permite usarlo desde la mañana hasta la noche sin preocuparte por cargarlo.\nRendimiento fluido para apps y juegos.\nCámara para fotos claras incluso de noche.\nConectividad para navegar rápido con tu plan Tigo.\nLlévalo con el plan que mejor se adapte a ti y disfruta la cobertura de Tigo en todo el país.",
+   "descLength": 561,
+   "linkId": "xiaomi-redmi-watch-5-active",
+   "ia": {
+    "ok": true,
+    "calidad": 5,
+    "problemas": [
+     "Sin descripción corta"
+    ],
+    "datosFaltantes": [],
+    "titleSugerido": "XIAOMI REDMI WATCH 5 ACTIVE | Tigo",
+    "metaSugerida": "Compra XIAOMI REDMI WATCH 5 ACTIVE en Tigo: compatibilidad iOS, tamaño de caja 40 mm. Envío a todo Colombia y garantía oficial de Xiaomi.",
+    "descCortaSugerida": "XIAOMI REDMI WATCH 5 ACTIVE con compatibilidad iOS y tamaño de caja 40 mm, garantía oficial.",
+    "descSugerida": "El XIAOMI REDMI WATCH 5 ACTIVE de Xiaomi está pensado para quienes buscan un equipo confiable en smartwatches sin complicaciones.\n\nCuenta con compatibilidad iOS, tamaño de caja 40 mm, resistencia al agua 5 ATM, batería Hasta 10 días, una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "123": {
+   "productId": "123",
+   "name": "HUAWEI WATCH FIT 3",
+   "title": "Huawei Watch Fit 3 | Compra en Tigo",
+   "metaDescription": "Huawei Watch Fit 3",
+   "keywords": "",
+   "descriptionShort": "",
+   "description": "Huawei Watch Fit 3. Equipo con excelente desempeño, buena cámara y batería para todo el día. Ideal para el uso diario.",
+   "descLength": 118,
+   "linkId": "huawei-watch-fit-3",
+   "ia": {
+    "ok": true,
+    "calidad": 2,
+    "problemas": [
+     "Descripción corta (118 caracteres, recomendado ≥ 300)",
+     "Sin descripción corta",
+     "Meta description de 18 caracteres (recomendado 70–160)",
+     "No conecta las especificaciones con beneficios para el cliente"
+    ],
+    "datosFaltantes": [],
+    "titleSugerido": "HUAWEI WATCH FIT 3 | Tigo",
+    "metaSugerida": "Compra HUAWEI WATCH FIT 3 en Tigo: compatibilidad Android e iOS, tamaño de caja 40 mm. Envío a todo Colombia y garantía oficial de Huawei.",
+    "descCortaSugerida": "HUAWEI WATCH FIT 3 con compatibilidad Android e iOS y tamaño de caja 40 mm, garantía oficial.",
+    "descSugerida": "El HUAWEI WATCH FIT 3 de Huawei está pensado para quienes buscan un equipo confiable en smartwatches sin complicaciones.\n\nCuenta con compatibilidad Android e iOS, tamaño de caja 40 mm, resistencia al agua 5 ATM, batería Hasta 2 días, una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "124": {
+   "productId": "124",
+   "name": "Samsung Galaxy Tab A9+",
+   "title": "Samsung Galaxy Tab A9+ con el mejor precio, envío gratis y plan Tigo incluido para ti",
+   "metaDescription": "Compra el Samsung Galaxy Tab A9+ en Tigo. Paga con tu plan, recibe envío a todo Colombia y estrena tecnología con garantía oficial.",
+   "keywords": "",
+   "descriptionShort": "",
+   "description": "Samsung Galaxy Tab A9+",
+   "descLength": 22,
+   "linkId": "samsung-galaxy-tab-a9-",
+   "ia": {
+    "ok": true,
+    "calidad": 2,
+    "problemas": [
+     "Descripción muy corta (22 caracteres)",
+     "Sin descripción corta",
+     "Title de 85 caracteres (recomendado 30–65)",
+     "No conecta las especificaciones con beneficios para el cliente"
+    ],
+    "datosFaltantes": [],
+    "titleSugerido": "Samsung Galaxy Tab A9+ | Tigo",
+    "metaSugerida": "Compra Samsung Galaxy Tab A9+ en Tigo: sistema operativo Android, pantalla 10,9\". Envío a todo Colombia y garantía oficial de Samsung.",
+    "descCortaSugerida": "Samsung Galaxy Tab A9+ con sistema operativo Android y pantalla 10,9\", garantía oficial.",
+    "descSugerida": "El Samsung Galaxy Tab A9+ de Samsung está pensado para quienes buscan un equipo confiable en tablets sin complicaciones.\n\nCuenta con sistema operativo Android, pantalla 10,9\", almacenamiento 128 GB, memoria ram 4 GB, una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "125": {
+   "productId": "125",
+   "name": "Apple iPad 10.9",
+   "title": "Apple iPad 10.9 | Compra en Tigo",
+   "metaDescription": "",
+   "keywords": "",
+   "descriptionShort": "Apple iPad 10.9 con garantía oficial.",
+   "description": "Descubre el Apple iPad 10.9, diseñado para acompañarte todo el día con rendimiento confiable y un diseño moderno.\nSu pantalla ofrece colores vivos y gran nitidez para ver tus series, redes sociales y videollamadas. La batería de larga duración te permite usarlo desde la mañana hasta la noche sin preocuparte por cargarlo.\nRendimiento fluido para apps y juegos.\nCámara para fotos claras incluso de noche.\nConectividad para navegar rápido con tu plan Tigo.\nLlévalo con el plan que mejor se adapte a ti y disfruta la cobertura de Tigo en todo el país.",
+   "descLength": 549,
+   "linkId": "apple-ipad-10-9",
+   "ia": {
+    "ok": true,
+    "calidad": 5,
+    "problemas": [
+     "Meta description vacía"
+    ],
+    "datosFaltantes": [],
+    "titleSugerido": "Apple iPad 10.9 | Tigo",
+    "metaSugerida": "Compra Apple iPad 10.9 en Tigo: sistema operativo iPadOS, pantalla 11\". Envío a todo Colombia y garantía oficial de Apple.",
+    "descCortaSugerida": "Apple iPad 10.9 con sistema operativo iPadOS y pantalla 11\", garantía oficial.",
+    "descSugerida": "El Apple iPad 10.9 de Apple está pensado para quienes buscan un equipo confiable en tablets sin complicaciones.\n\nCuenta con sistema operativo iPadOS, pantalla 11\", almacenamiento 64 GB, memoria ram 8 GB, una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "126": {
+   "productId": "126",
+   "name": "Lenovo Tab M11",
+   "title": "Lenovo Tab M11 | Compra en Tigo",
+   "metaDescription": "Lenovo Tab M11",
+   "keywords": "",
+   "descriptionShort": "",
+   "description": "Lenovo Tab M11 con gran pantalla y procesador de alto rendimiento para que disfrutes de tus aplicaciones favoritas, fotos y videos durante todo el día.",
+   "descLength": 151,
+   "linkId": "lenovo-tab-m11",
+   "ia": {
+    "ok": true,
+    "calidad": 2,
+    "problemas": [
+     "Descripción corta (151 caracteres, recomendado ≥ 300)",
+     "HTML con estilos embebidos (copiado de Word/web)",
+     "Sin descripción corta",
+     "No conecta las especificaciones con beneficios para el cliente"
+    ],
+    "datosFaltantes": [],
+    "titleSugerido": "Lenovo Tab M11 | Tigo",
+    "metaSugerida": "Compra Lenovo Tab M11 en Tigo: sistema operativo Android, pantalla 10,9\". Envío a todo Colombia y garantía oficial de Lenovo.",
+    "descCortaSugerida": "Lenovo Tab M11 con sistema operativo Android y pantalla 10,9\", garantía oficial.",
+    "descSugerida": "El Lenovo Tab M11 de Lenovo está pensado para quienes buscan un equipo confiable en tablets sin complicaciones.\n\nCuenta con sistema operativo Android, pantalla 10,9\", almacenamiento 128 GB, memoria ram 8 GB, una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "127": {
+   "productId": "127",
+   "name": "Samsung Galaxy Buds 3",
+   "title": "",
+   "metaDescription": "Compra el Samsung Galaxy Buds 3 en Tigo. Paga con tu plan, recibe envío a todo Colombia y estrena tecnología con garantía oficial.",
+   "keywords": "",
+   "descriptionShort": "",
+   "description": "Descubre el Samsung Galaxy Buds 3, diseñado para acompañarte todo el día con rendimiento confiable y un diseño moderno.\nSu pantalla ofrece colores vivos y gran nitidez para ver tus series, redes sociales y videollamadas. La batería de larga duración te permite usarlo desde la mañana hasta la noche sin preocuparte por cargarlo.\nRendimiento fluido para apps y juegos.\nCámara para fotos claras incluso de noche.\nConectividad para navegar rápido con tu plan Tigo.\nLlévalo con el plan que mejor se adapte a ti y disfruta la cobertura de Tigo en todo el país.",
+   "descLength": 555,
+   "linkId": "samsung-galaxy-buds-3",
+   "ia": {
+    "ok": true,
+    "calidad": 5,
+    "problemas": [
+     "Sin descripción corta",
+     "Title SEO vacío (VTEX usa el nombre por defecto)"
+    ],
+    "datosFaltantes": [],
+    "titleSugerido": "Samsung Galaxy Buds 3 | Tigo",
+    "metaSugerida": "Compra Samsung Galaxy Buds 3 en Tigo: tipo On-ear, conectividad Bluetooth 5.3. Envío a todo Colombia y garantía oficial de Samsung.",
+    "descCortaSugerida": "Samsung Galaxy Buds 3 con tipo On-ear y conectividad Bluetooth 5.3, garantía oficial.",
+    "descSugerida": "El Samsung Galaxy Buds 3 de Samsung está pensado para quienes buscan un equipo confiable en audífonos sin complicaciones.\n\nCuenta con tipo On-ear, conectividad Bluetooth 5.3, cancelación de ruido Sí, autonomía Hasta 30 h, una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "128": {
+   "productId": "128",
+   "name": "Apple AirPods 4",
+   "title": "",
+   "metaDescription": "Apple AirPods 4",
+   "keywords": "",
+   "descriptionShort": "Apple AirPods 4 con garantía oficial.",
+   "description": "Apple AirPods 4 con gran pantalla y procesador de alto rendimiento para que disfrutes de tus aplicaciones favoritas, fotos y videos durante todo el día.",
+   "descLength": 152,
+   "linkId": "apple-airpods-4",
+   "ia": {
+    "ok": true,
+    "calidad": 2,
+    "problemas": [
+     "Descripción corta (152 caracteres, recomendado ≥ 300)",
+     "HTML con estilos embebidos (copiado de Word/web)",
+     "Title SEO vacío (VTEX usa el nombre por defecto)",
+     "No conecta las especificaciones con beneficios para el cliente"
+    ],
+    "datosFaltantes": [],
+    "titleSugerido": "Apple AirPods 4 | Tigo",
+    "metaSugerida": "Compra Apple AirPods 4 en Tigo: tipo In-ear, conectividad Bluetooth 5.3. Envío a todo Colombia y garantía oficial de Apple.",
+    "descCortaSugerida": "Apple AirPods 4 con tipo In-ear y conectividad Bluetooth 5.3, garantía oficial.",
+    "descSugerida": "El Apple AirPods 4 de Apple está pensado para quienes buscan un equipo confiable en audífonos sin complicaciones.\n\nCuenta con tipo In-ear, conectividad Bluetooth 5.3, autonomía Hasta 57 h, color Rosado, una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "129": {
+   "productId": "129",
+   "name": "JBL Tune 520BT",
+   "title": "",
+   "metaDescription": "Compra el JBL Tune 520BT en Tigo. Paga con tu plan, recibe envío a todo Colombia y estrena tecnología con garantía oficial.",
+   "keywords": "",
+   "descriptionShort": "",
+   "description": "JBL Tune 520BT",
+   "descLength": 14,
+   "linkId": "jbl-tune-520bt",
+   "ia": {
+    "ok": true,
+    "calidad": 2,
+    "problemas": [
+     "Descripción muy corta (14 caracteres)",
+     "Sin descripción corta",
+     "Title SEO vacío (VTEX usa el nombre por defecto)",
+     "No conecta las especificaciones con beneficios para el cliente"
+    ],
+    "datosFaltantes": [],
+    "titleSugerido": "JBL Tune 520BT | Tigo",
+    "metaSugerida": "Compra JBL Tune 520BT en Tigo: tipo On-ear, conectividad Bluetooth 5.3. Envío a todo Colombia y garantía oficial de JBL.",
+    "descCortaSugerida": "JBL Tune 520BT con tipo On-ear y conectividad Bluetooth 5.3, garantía oficial.",
+    "descSugerida": "El JBL Tune 520BT de JBL está pensado para quienes buscan un equipo confiable en audífonos sin complicaciones.\n\nCuenta con tipo On-ear, conectividad Bluetooth 5.3, cancelación de ruido Sí, autonomía Hasta 30 h, una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "130": {
+   "productId": "130",
+   "name": "Xiaomi Redmi Buds 6",
+   "title": "",
+   "metaDescription": "",
+   "keywords": "",
+   "descriptionShort": "Xiaomi Redmi Buds 6 con garantía oficial.",
+   "description": "Descubre el Xiaomi Redmi Buds 6, diseñado para acompañarte todo el día con rendimiento confiable y un diseño moderno.\nSu pantalla ofrece colores vivos y gran nitidez para ver tus series, redes sociales y videollamadas. La batería de larga duración te permite usarlo desde la mañana hasta la noche sin preocuparte por cargarlo.\nRendimiento fluido para apps y juegos.\nCámara para fotos claras incluso de noche.\nConectividad para navegar rápido con tu plan Tigo.\nLlévalo con el plan que mejor se adapte a ti y disfruta la cobertura de Tigo en todo el país.",
+   "descLength": 553,
+   "linkId": "xiaomi-redmi-buds-6",
+   "ia": {
+    "ok": true,
+    "calidad": 5,
+    "problemas": [
+     "Title SEO vacío (VTEX usa el nombre por defecto)",
+     "Meta description vacía"
+    ],
+    "datosFaltantes": [],
+    "titleSugerido": "Xiaomi Redmi Buds 6 | Tigo",
+    "metaSugerida": "Compra Xiaomi Redmi Buds 6 en Tigo: tipo In-ear, conectividad Bluetooth 5.3. Envío a todo Colombia y garantía oficial de Xiaomi.",
+    "descCortaSugerida": "Xiaomi Redmi Buds 6 con tipo In-ear y conectividad Bluetooth 5.3, garantía oficial.",
+    "descSugerida": "El Xiaomi Redmi Buds 6 de Xiaomi está pensado para quienes buscan un equipo confiable en audífonos sin complicaciones.\n\nCuenta con tipo In-ear, conectividad Bluetooth 5.3, cancelación de ruido Sí, autonomía Hasta 30 h, una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "131": {
+   "productId": "131",
+   "name": "Samsung Cargador 25W USB-C",
+   "title": "Samsung Cargador 25W USB-C | Compra en Tigo",
+   "metaDescription": "Compra el Samsung Cargador 25W USB-C en Tigo. Paga con tu plan, recibe envío a todo Colombia y estrena tecnología con garantía oficial.",
+   "keywords": "",
+   "descriptionShort": "",
+   "description": "",
+   "descLength": 0,
+   "linkId": "samsung-cargador-25w-usb-c",
+   "ia": {
+    "ok": true,
+    "calidad": 2,
+    "problemas": [
+     "Sin descripción",
+     "Sin descripción corta",
+     "No conecta las especificaciones con beneficios para el cliente"
+    ],
+    "datosFaltantes": [
+     "Ficha técnica incompleta: agregar dimensiones y peso"
+    ],
+    "titleSugerido": "Samsung Cargador 25W USB-C | Tigo",
+    "metaSugerida": "Compra Samsung Cargador 25W USB-C en Tigo: potencia 25 W, conector USB-C. Envío a todo Colombia y garantía oficial de Samsung.",
+    "descCortaSugerida": "Samsung Cargador 25W USB-C con potencia 25 W y conector USB-C, garantía oficial.",
+    "descSugerida": "El Samsung Cargador 25W USB-C de Samsung está pensado para quienes buscan un equipo confiable en cargadores sin complicaciones.\n\nCuenta con potencia 25 W, conector USB-C, compatibilidad Universal, una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "132": {
+   "productId": "132",
+   "name": "Apple Adaptador 20W USB-C",
+   "title": "Apple Adaptador 20W USB-C | Compra en Tigo",
+   "metaDescription": "Compra el Apple Adaptador 20W USB-C en Tigo. Paga con tu plan, recibe envío a todo Colombia y estrena tecnología con garantía oficial.",
+   "keywords": "",
+   "descriptionShort": "",
+   "description": "",
+   "descLength": 0,
+   "linkId": "apple-adaptador-20w-usb-c",
+   "ia": {
+    "ok": true,
+    "calidad": 2,
+    "problemas": [
+     "Sin descripción",
+     "Sin descripción corta",
+     "No conecta las especificaciones con beneficios para el cliente"
+    ],
+    "datosFaltantes": [
+     "Ficha técnica incompleta: agregar dimensiones y peso"
+    ],
+    "titleSugerido": "Apple Adaptador 20W USB-C | Tigo",
+    "metaSugerida": "Compra Apple Adaptador 20W USB-C en Tigo: potencia 20 W, conector USB-C. Envío a todo Colombia y garantía oficial de Apple.",
+    "descCortaSugerida": "Apple Adaptador 20W USB-C con potencia 20 W y conector USB-C, garantía oficial.",
+    "descSugerida": "El Apple Adaptador 20W USB-C de Apple está pensado para quienes buscan un equipo confiable en cargadores sin complicaciones.\n\nCuenta con potencia 20 W, conector USB-C, compatibilidad Universal, una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "133": {
+   "productId": "133",
+   "name": "Genérica Cable USB-C 1m",
+   "title": "Genérica Cable USB-C 1m | Compra en Tigo",
+   "metaDescription": "",
+   "keywords": "",
+   "descriptionShort": "",
+   "description": "Producto original con garantía de fábrica. Compra seguro en la tienda online de Tigo y recíbelo en la puerta de tu casa con envío a todo el país.",
+   "descLength": 145,
+   "linkId": "gen-rica-cable-usb-c-1m",
+   "ia": {
+    "ok": true,
+    "calidad": 2,
+    "problemas": [
+     "Descripción corta (145 caracteres, recomendado ≥ 300)",
+     "Descripción idéntica en 2 productos",
+     "Sin descripción corta",
+     "No conecta las especificaciones con beneficios para el cliente"
+    ],
+    "datosFaltantes": [
+     "Ficha técnica incompleta: agregar dimensiones y peso"
+    ],
+    "titleSugerido": "Genérica Cable USB-C 1m | Tigo",
+    "metaSugerida": "Compra Genérica Cable USB-C 1m en Tigo: conector USB-C, compatibilidad Universal. Envío a todo Colombia y garantía oficial de Genérica.",
+    "descCortaSugerida": "Genérica Cable USB-C 1m con conector USB-C y compatibilidad Universal, garantía oficial.",
+    "descSugerida": "El Genérica Cable USB-C 1m de Genérica está pensado para quienes buscan un equipo confiable en cargadores sin complicaciones.\n\nCuenta con conector USB-C, compatibilidad Universal, una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "134": {
+   "productId": "134",
+   "name": "Samsung Funda Silicone A16",
+   "title": "Samsung Funda Silicone A16 | Compra en Tigo",
+   "metaDescription": "Compra el Samsung Funda Silicone A16 en Tigo. Paga con tu plan, recibe envío a todo Colombia y estrena tecnología con garantía oficial.",
+   "keywords": "",
+   "descriptionShort": "",
+   "description": "Samsung Funda Silicone A16 con gran pantalla y procesador de alto rendimiento para que disfrutes de tus aplicaciones favoritas, fotos y videos durante todo el día.",
+   "descLength": 163,
+   "linkId": "samsung-funda-silicone-a16",
+   "ia": {
+    "ok": true,
+    "calidad": 2,
+    "problemas": [
+     "Descripción corta (163 caracteres, recomendado ≥ 300)",
+     "HTML con estilos embebidos (copiado de Word/web)",
+     "Sin descripción corta",
+     "No conecta las especificaciones con beneficios para el cliente"
+    ],
+    "datosFaltantes": [
+     "Ficha técnica incompleta: agregar dimensiones y peso"
+    ],
+    "titleSugerido": "Samsung Funda Silicone A16 | Tigo",
+    "metaSugerida": "Compra Samsung Funda Silicone A16 en Tigo: material Vidrio templado, compatibilidad A16. Envío a todo Colombia y garantía oficial de Samsung.",
+    "descCortaSugerida": "Samsung Funda Silicone A16 con material Vidrio templado y compatibilidad A16, garantía oficial.",
+    "descSugerida": "El Samsung Funda Silicone A16 de Samsung está pensado para quienes buscan un equipo confiable en fundas y protectores sin complicaciones.\n\nCuenta con material Vidrio templado, compatibilidad A16, una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "135": {
+   "productId": "135",
+   "name": "Genérica Vidrio templado universal",
+   "title": "Genérica Vidrio templado universal | Compra en Tigo",
+   "metaDescription": "Genérica Vidrio templado universal",
+   "keywords": "",
+   "descriptionShort": "Genérica Vidrio templado universal con garantía oficial.",
+   "description": "Genérica Vidrio templado universal con gran pantalla y procesador de alto rendimiento para que disfrutes de tus aplicaciones favoritas, fotos y videos durante todo el día.",
+   "descLength": 171,
+   "linkId": "gen-rica-vidrio-templado-universal",
+   "ia": {
+    "ok": true,
+    "calidad": 2,
+    "problemas": [
+     "Descripción corta (171 caracteres, recomendado ≥ 300)",
+     "HTML con estilos embebidos (copiado de Word/web)",
+     "Meta description de 34 caracteres (recomendado 70–160)",
+     "No conecta las especificaciones con beneficios para el cliente"
+    ],
+    "datosFaltantes": [
+     "Ficha técnica incompleta: agregar dimensiones y peso"
+    ],
+    "titleSugerido": "Genérica Vidrio templado universal | Tigo",
+    "metaSugerida": "Compra Genérica Vidrio templado universal en Tigo: compatibilidad universal, color Verde. Envío a todo Colombia y garantía oficial de Genérica.",
+    "descCortaSugerida": "Genérica Vidrio templado universal con compatibilidad universal y color Verde, garantía oficial.",
+    "descSugerida": "El Genérica Vidrio templado universal de Genérica está pensado para quienes buscan un equipo confiable en fundas y protectores sin complicaciones.\n\nCuenta con compatibilidad universal, color Verde, una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "136": {
+   "productId": "136",
+   "name": "Apple Funda MagSafe iPhone 16",
+   "title": "Apple Funda MagSafe iPhone 16 con el mejor precio, envío gratis y plan Tigo incluido para ti",
+   "metaDescription": "",
+   "keywords": "",
+   "descriptionShort": "Apple Funda MagSafe iPhone 16 con garantía oficial.",
+   "description": "",
+   "descLength": 0,
+   "linkId": "apple-funda-magsafe-iphone-16",
+   "ia": {
+    "ok": true,
+    "calidad": 2,
+    "problemas": [
+     "Sin descripción",
+     "Title de 92 caracteres (recomendado 30–65)",
+     "Meta description vacía",
+     "No conecta las especificaciones con beneficios para el cliente"
+    ],
+    "datosFaltantes": [
+     "Ficha técnica incompleta: agregar dimensiones y peso"
+    ],
+    "titleSugerido": "Apple Funda MagSafe iPhone 16 | Tigo",
+    "metaSugerida": "Compra Apple Funda MagSafe iPhone 16 en Tigo: material Policarbonato, compatibilidad iPhone 16. Envío a todo Colombia y garantía oficial de Apple.",
+    "descCortaSugerida": "Apple Funda MagSafe iPhone 16 con material Policarbonato y compatibilidad iPhone 16, garantía oficial.",
+    "descSugerida": "El Apple Funda MagSafe iPhone 16 de Apple está pensado para quienes buscan un equipo confiable en fundas y protectores sin complicaciones.\n\nCuenta con material Policarbonato, compatibilidad iPhone 16, color Rosado, una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "137": {
+   "productId": "137",
+   "name": "Samsung Smart TV 55\" Crystal UHD",
+   "title": "Samsung Smart TV 55\" Crystal UHD con el mejor precio, envío gratis y plan Tigo incluido para ti",
+   "metaDescription": "",
+   "keywords": "",
+   "descriptionShort": "Samsung Smart TV 55\" Crystal UHD con garantía oficial.",
+   "description": "Descubre el Samsung Smart TV 55\" Crystal UHD, diseñado para acompañarte todo el día con rendimiento confiable y un diseño moderno.\nSu pantalla ofrece colores vivos y gran nitidez para ver tus series, redes sociales y videollamadas. La batería de larga duración te permite usarlo desde la mañana hasta la noche sin preocuparte por cargarlo.\nRendimiento fluido para apps y juegos.\nCámara para fotos claras incluso de noche.\nConectividad para navegar rápido con tu plan Tigo.\nLlévalo con el plan que mejor se adapte a ti y disfruta la cobertura de Tigo en todo el país.",
+   "descLength": 566,
+   "linkId": "samsung-smart-tv-55-crystal-uhd",
+   "ia": {
+    "ok": false,
+    "error": "Anthropic API: overloaded"
+   }
+  },
+  "138": {
+   "productId": "138",
+   "name": "LG Smart TV 50\" UHD ThinQ",
+   "title": "",
+   "metaDescription": "Compra el LG Smart TV 50\" UHD ThinQ en Tigo. Paga con tu plan, recibe envío a todo Colombia y estrena tecnología con garantía oficial.",
+   "keywords": "",
+   "descriptionShort": "LG Smart TV 50\" UHD ThinQ con garantía oficial.",
+   "description": "Descubre el LG Smart TV 50\" UHD ThinQ, diseñado para acompañarte todo el día con rendimiento confiable y un diseño moderno.\nSu pantalla ofrece colores vivos y gran nitidez para ver tus series, redes sociales y videollamadas. La batería de larga duración te permite usarlo desde la mañana hasta la noche sin preocuparte por cargarlo.\nRendimiento fluido para apps y juegos.\nCámara para fotos claras incluso de noche.\nConectividad para navegar rápido con tu plan Tigo.\nLlévalo con el plan que mejor se adapte a ti y disfruta la cobertura de Tigo en todo el país.",
+   "descLength": 559,
+   "linkId": "lg-smart-tv-50-uhd-thinq",
+   "ia": {
+    "ok": true,
+    "calidad": 5,
+    "problemas": [
+     "Title SEO vacío (VTEX usa el nombre por defecto)"
+    ],
+    "datosFaltantes": [],
+    "titleSugerido": "LG Smart TV 50\" UHD ThinQ | Tigo",
+    "metaSugerida": "Compra LG Smart TV 50\" UHD ThinQ en Tigo: tamaño de pantalla 50\", resolución 4K UHD. Envío a todo Colombia y garantía oficial de LG.",
+    "descCortaSugerida": "LG Smart TV 50\" UHD ThinQ con tamaño de pantalla 50\" y resolución 4K UHD, garantía oficial.",
+    "descSugerida": "El LG Smart TV 50\" UHD ThinQ de LG está pensado para quienes buscan un equipo confiable en televisores sin complicaciones.\n\nCuenta con tamaño de pantalla 50\", resolución 4K UHD, sistema operativo Tizen, hdmi 2, una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  },
+  "139": {
+   "productId": "139",
+   "name": "Hisense Smart TV 43\" Full HD",
+   "title": "Hisense Smart TV 43\" Full HD con el mejor precio, envío gratis y plan Tigo incluido para ti",
+   "metaDescription": "",
+   "keywords": "",
+   "descriptionShort": "",
+   "description": "Producto original con garantía de fábrica. Compra seguro en la tienda online de Tigo y recíbelo en la puerta de tu casa con envío a todo el país.",
+   "descLength": 145,
+   "linkId": "hisense-smart-tv-43-full-hd",
+   "ia": {
+    "ok": true,
+    "calidad": 2,
+    "problemas": [
+     "Descripción corta (145 caracteres, recomendado ≥ 300)",
+     "Descripción idéntica en 2 productos",
+     "Sin descripción corta",
+     "No conecta las especificaciones con beneficios para el cliente"
+    ],
+    "datosFaltantes": [],
+    "titleSugerido": "Hisense Smart TV 43\" Full HD | Tigo",
+    "metaSugerida": "Compra Hisense Smart TV 43\" Full HD en Tigo: tamaño de pantalla 43\", resolución Full HD. Envío a todo Colombia y garantía oficial de Hisense.",
+    "descCortaSugerida": "Hisense Smart TV 43\" Full HD con tamaño de pantalla 43\" y resolución Full HD, garantía oficial.",
+    "descSugerida": "El Hisense Smart TV 43\" Full HD de Hisense está pensado para quienes buscan un equipo confiable en televisores sin complicaciones.\n\nCuenta con tamaño de pantalla 43\", resolución Full HD, sistema operativo webOS, hdmi 2, una combinación que se traduce en un uso fluido en el día a día, desde las apps que más usas hasta tus fotos y videos.\n\nCompra en la tienda online de Tigo, recíbelo en tu casa y empieza a disfrutarlo con la cobertura de la red Tigo.",
+    "revisada": false
+   }
+  }
+ },
+ "skus": [
+  {
+   "skuId": "1001",
+   "productId": "101",
+   "refId": "TG-1001",
+   "ean": "7100007926919",
+   "name": "Samsung Galaxy A16 128GB Plateado",
+   "department": "Celulares",
+   "category": "Smartphones",
+   "brand": "Samsung",
+   "url": "https://compras.tigo.com.co/samsung-galaxy-a16-128gb/p",
+   "imageUrl": "",
+   "images": [],
+   "imagesCount": 0,
+   "specs": {
+    "Sistema Operativo": "Android",
+    "Memoria RAM": "6 GB",
+    "Almacenamiento": "128 GB",
+    "Pantalla": "6,1\"",
+    "Cámara principal": "48 MP",
+    "Batería": "5500 mAh",
+    "Red": "4G",
+    "Tipo de equipo": "Full Equipo",
+    "Color": "Plateado"
+   },
+   "missingSpecs": [
+    "eSIM"
+   ],
+   "active": true,
+   "stock": 49,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 1583000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 0,
+    "especificaciones": 0.9,
+    "descripcion": 0.85,
+    "seo": 0.47,
+    "consistencia": 1,
+    "vendibilidad": 1
+   },
+   "score": 67,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "img_0",
+     "dim": "imagenes",
+     "sev": "alta",
+     "label": "Sin imágenes"
+    },
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 1 de 10 especificaciones de su categoría: eSIM"
+    },
+    {
+     "code": "seo_title_len",
+     "dim": "seo",
+     "sev": "baja",
+     "label": "Title de 87 caracteres (recomendado 30–65)"
+    },
+    {
+     "code": "seo_meta_len",
+     "dim": "seo",
+     "sev": "baja",
+     "label": "Meta description de 24 caracteres (recomendado 70–160)"
+    }
+   ],
+   "priority": 50,
+   "warnings": []
+  },
+  {
+   "skuId": "1003",
+   "productId": "101",
+   "error": "Request failed with status code 429",
+   "score": null,
+   "semaforo": "error",
+   "issues": [
+    {
+     "code": "api_error",
+     "dim": "vendibilidad",
+     "sev": "alta",
+     "label": "Error al consultar el SKU: Request failed with status code 429"
+    }
+   ],
+   "dims": {},
+   "priority": 0
+  },
+  {
+   "skuId": "1002",
+   "productId": "102",
+   "refId": "TG-1002",
+   "ean": "7100007934838",
+   "name": "Samsung Galaxy A26 5G 256GB Rosado",
+   "department": "Celulares",
+   "category": "Smartphones",
+   "brand": "Samsung",
+   "url": "https://compras.tigo.com.co/samsung-galaxy-a26-5g-256gb/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10020/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10020/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10021/img.jpg"
+   ],
+   "imagesCount": 2,
+   "specs": {
+    "Sistema Operativo": "Android",
+    "Memoria RAM": "12 GB",
+    "Almacenamiento": "",
+    "Pantalla": "6,5\"",
+    "eSIM": "No",
+    "Red": "5G",
+    "Tipo de equipo": "Equipo libre",
+    "Color": "Rosado"
+   },
+   "missingSpecs": [
+    "Almacenamiento",
+    "Batería",
+    "Cámara principal"
+   ],
+   "active": true,
+   "stock": 0,
+   "unlimited": false,
+   "simAvailability": "withoutStock",
+   "simPrice": 0,
+   "comprable": false,
+   "dims": {
+    "imagenes": 0.7,
+    "especificaciones": 0.7,
+    "descripcion": 0.65,
+    "seo": 1,
+    "consistencia": 1,
+    "vendibilidad": 0.4
+   },
+   "score": 74,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "img_pocas",
+     "dim": "imagenes",
+     "sev": "media",
+     "label": "Solo 2 imágenes (recomendado ≥ 3)"
+    },
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 3 de 10 especificaciones de su categoría: Almacenamiento, Batería, Cámara principal"
+    },
+    {
+     "code": "spec_vacia",
+     "dim": "especificaciones",
+     "sev": "baja",
+     "label": "Campos creados sin valor: Almacenamiento"
+    },
+    {
+     "code": "desc_corta_0",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "Sin descripción corta"
+    },
+    {
+     "code": "sin_stock",
+     "dim": "vendibilidad",
+     "sev": "alta",
+     "label": "Activo sin stock disponible"
+    }
+   ],
+   "priority": 29,
+   "warnings": []
+  },
+  {
+   "skuId": "1004",
+   "productId": "103",
+   "refId": "TG-1004",
+   "ean": "7100007950676",
+   "name": "Samsung Galaxy S25 FE Plateado",
+   "department": "Celulares",
+   "category": "Smartphones",
+   "brand": "Samsung",
+   "url": "https://compras.tigo.com.co/samsung-galaxy-s25-fe/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10040/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10040/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10041/img.jpg"
+   ],
+   "imagesCount": 2,
+   "specs": {
+    "Sistema Operativo": "Android",
+    "Memoria RAM": "6 GB",
+    "Almacenamiento": "128 GB",
+    "Pantalla": "6,5\"",
+    "Cámara principal": "50 MP",
+    "Batería": "5000 mAh",
+    "eSIM": "No",
+    "Red": "4G",
+    "Color": "Plateado"
+   },
+   "missingSpecs": [
+    "Tipo de equipo"
+   ],
+   "active": true,
+   "stock": 11,
+   "unlimited": false,
+   "simAvailability": "cannotBeDelivered",
+   "simPrice": 0,
+   "comprable": false,
+   "dims": {
+    "imagenes": 0.7,
+    "especificaciones": 0.9,
+    "descripcion": 0.65,
+    "seo": 0.73,
+    "consistencia": 1,
+    "vendibilidad": 0.7
+   },
+   "score": 78,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "img_pocas",
+     "dim": "imagenes",
+     "sev": "media",
+     "label": "Solo 2 imágenes (recomendado ≥ 3)"
+    },
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 1 de 10 especificaciones de su categoría: Tipo de equipo"
+    },
+    {
+     "code": "desc_corta_0",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "Sin descripción corta"
+    },
+    {
+     "code": "seo_meta_len",
+     "dim": "seo",
+     "sev": "baja",
+     "label": "Meta description de 21 caracteres (recomendado 70–160)"
+    },
+    {
+     "code": "no_comprable",
+     "dim": "vendibilidad",
+     "sev": "alta",
+     "label": "Con stock pero no comprable en checkout (cannotBeDelivered)"
+    }
+   ],
+   "priority": 24,
+   "warnings": []
+  },
+  {
+   "skuId": "1005",
+   "productId": "104",
+   "refId": "TG-1005",
+   "ean": "",
+   "name": "Motorola Moto G85 5G Azul",
+   "department": "Celulares",
+   "category": "Smartphones",
+   "brand": "Motorola",
+   "url": "https://compras.tigo.com.co/motorola-moto-g85-5g/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10050/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10050/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10051/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10052/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10053/img.jpg"
+   ],
+   "imagesCount": 4,
+   "specs": {
+    "Sistema Operativo": "Android",
+    "Memoria RAM": "4 GB",
+    "Almacenamiento": "128 GB",
+    "Pantalla": "6,1\"",
+    "Cámara principal": "50 MP",
+    "Batería": "5500 mAh",
+    "eSIM": "Sí",
+    "Red": "5G",
+    "Tipo de equipo": "Equipo libre",
+    "Color": ""
+   },
+   "missingSpecs": [
+    "Color"
+   ],
+   "active": true,
+   "stock": 25,
+   "unlimited": false,
+   "simAvailability": "cannotBeDelivered",
+   "simPrice": 0,
+   "comprable": false,
+   "dims": {
+    "imagenes": 1,
+    "especificaciones": 0.9,
+    "descripcion": 0.55,
+    "seo": 0.53,
+    "consistencia": 1,
+    "vendibilidad": 0.7
+   },
+   "score": 79,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 1 de 10 especificaciones de su categoría: Color"
+    },
+    {
+     "code": "spec_vacia",
+     "dim": "especificaciones",
+     "sev": "baja",
+     "label": "Campos creados sin valor: Color"
+    },
+    {
+     "code": "desc_corta",
+     "dim": "descripcion",
+     "sev": "media",
+     "label": "Descripción corta (157 caracteres, recomendado ≥ 300)"
+    },
+    {
+     "code": "desc_html",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "HTML con estilos embebidos (copiado de Word/web)"
+    },
+    {
+     "code": "seo_meta_0",
+     "dim": "seo",
+     "sev": "media",
+     "label": "Meta description vacía"
+    },
+    {
+     "code": "no_comprable",
+     "dim": "vendibilidad",
+     "sev": "alta",
+     "label": "Con stock pero no comprable en checkout (cannotBeDelivered)"
+    }
+   ],
+   "priority": 23,
+   "warnings": []
+  },
+  {
+   "skuId": "1006",
+   "productId": "104",
+   "refId": "TG-1006",
+   "ean": "7100007966514",
+   "name": "Motorola Moto G85 5G Verde",
+   "department": "Celulares",
+   "category": "Smartphones",
+   "brand": "Motorola",
+   "url": "https://compras.tigo.com.co/motorola-moto-g85-5g/p",
+   "imageUrl": "",
+   "images": [],
+   "imagesCount": 0,
+   "specs": {
+    "Sistema Operativo": "Android",
+    "Memoria RAM": "",
+    "Almacenamiento": "128 GB",
+    "Pantalla": "6,1\"",
+    "Cámara principal": "50 MP",
+    "Batería": "5500 mAh",
+    "eSIM": "Sí",
+    "Red": "5G",
+    "Tipo de equipo": "Equipo libre",
+    "Color": "Verde"
+   },
+   "missingSpecs": [
+    "Memoria RAM"
+   ],
+   "active": true,
+   "stock": 42,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 2775000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 0,
+    "especificaciones": 0.9,
+    "descripcion": 0.55,
+    "seo": 0.53,
+    "consistencia": 1,
+    "vendibilidad": 1
+   },
+   "score": 62,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "img_0",
+     "dim": "imagenes",
+     "sev": "alta",
+     "label": "Sin imágenes"
+    },
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 1 de 10 especificaciones de su categoría: Memoria RAM"
+    },
+    {
+     "code": "spec_vacia",
+     "dim": "especificaciones",
+     "sev": "baja",
+     "label": "Campos creados sin valor: Memoria RAM"
+    },
+    {
+     "code": "desc_corta",
+     "dim": "descripcion",
+     "sev": "media",
+     "label": "Descripción corta (157 caracteres, recomendado ≥ 300)"
+    },
+    {
+     "code": "desc_html",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "HTML con estilos embebidos (copiado de Word/web)"
+    },
+    {
+     "code": "seo_meta_0",
+     "dim": "seo",
+     "sev": "media",
+     "label": "Meta description vacía"
+    }
+   ],
+   "priority": 57,
+   "warnings": []
+  },
+  {
+   "skuId": "1007",
+   "productId": "105",
+   "refId": "TG-1007",
+   "ean": "7100007974433",
+   "name": "MOTOROLA EDGE 60 FUSION Azul",
+   "department": "Celulares",
+   "category": "Smartphones",
+   "brand": "Motorola",
+   "url": "https://compras.tigo.com.co/motorola-edge-60-fusion/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10070/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10070/img.jpg"
+   ],
+   "imagesCount": 1,
+   "specs": {
+    "Sistema Operativo": "Android",
+    "Memoria RAM": "8 GB",
+    "Almacenamiento": "128 GB",
+    "Pantalla": "6,1\"",
+    "Cámara principal": "108 MP",
+    "Batería": "5000 mAh",
+    "Red": "4G",
+    "Tipo de equipo": "Equipo libre",
+    "Color": "Azul"
+   },
+   "missingSpecs": [
+    "eSIM"
+   ],
+   "active": true,
+   "stock": 26,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 1668000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 0.4,
+    "especificaciones": 0.9,
+    "descripcion": 0.85,
+    "seo": 1,
+    "consistencia": 0.7,
+    "vendibilidad": 1
+   },
+   "score": 80,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "img_pocas",
+     "dim": "imagenes",
+     "sev": "media",
+     "label": "Solo 1 imagen (recomendado ≥ 3)"
+    },
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 1 de 10 especificaciones de su categoría: eSIM"
+    },
+    {
+     "code": "nombre_mayus",
+     "dim": "consistencia",
+     "sev": "baja",
+     "label": "Nombre en MAYÚSCULAS"
+    }
+   ],
+   "priority": 30,
+   "warnings": []
+  },
+  {
+   "skuId": "1008",
+   "productId": "106",
+   "refId": "TG-1008",
+   "ean": "7100007982352",
+   "name": "Xiaomi Redmi Note 14 Pro Plateado",
+   "department": "Celulares",
+   "category": "Smartphones",
+   "brand": "Xiaomi",
+   "url": "https://compras.tigo.com.co/xiaomi-redmi-note-14-pro/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10080/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10080/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10081/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10082/img.jpg"
+   ],
+   "imagesCount": 3,
+   "specs": {
+    "Sistema Operativo": "Android",
+    "Memoria RAM": "4 GB",
+    "Almacenamiento": "128 GB",
+    "Cámara principal": "108 MP",
+    "Batería": "5500 mAh",
+    "eSIM": "Sí",
+    "Red": "5G",
+    "Color": "Plateado"
+   },
+   "missingSpecs": [
+    "Pantalla",
+    "Tipo de equipo"
+   ],
+   "active": true,
+   "stock": 58,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 839000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 1,
+    "especificaciones": 0.8,
+    "descripcion": 0.2,
+    "seo": 0.2,
+    "consistencia": 1,
+    "vendibilidad": 1
+   },
+   "score": 67,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 2 de 10 especificaciones de su categoría: Pantalla, Tipo de equipo"
+    },
+    {
+     "code": "desc_muy_corta",
+     "dim": "descripcion",
+     "sev": "alta",
+     "label": "Descripción muy corta (24 caracteres)"
+    },
+    {
+     "code": "desc_corta_0",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "Sin descripción corta"
+    },
+    {
+     "code": "seo_title_0",
+     "dim": "seo",
+     "sev": "media",
+     "label": "Title SEO vacío (VTEX usa el nombre por defecto)"
+    },
+    {
+     "code": "seo_meta_len",
+     "dim": "seo",
+     "sev": "baja",
+     "label": "Meta description de 24 caracteres (recomendado 70–160)"
+    }
+   ],
+   "priority": 50,
+   "warnings": []
+  },
+  {
+   "skuId": "1009",
+   "productId": "106",
+   "refId": "TG-1009",
+   "ean": "7100007990271",
+   "name": "Xiaomi Redmi Note 14 Pro Plateado",
+   "department": "Celulares",
+   "category": "Smartphones",
+   "brand": "Xiaomi",
+   "url": "https://compras.tigo.com.co/xiaomi-redmi-note-14-pro/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10090/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10090/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10091/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10092/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10093/img.jpg"
+   ],
+   "imagesCount": 4,
+   "specs": {
+    "Sistema Operativo": "Android",
+    "Memoria RAM": "4 GB",
+    "Almacenamiento": "128 GB",
+    "Pantalla": "6,1\"",
+    "Cámara principal": "108 MP",
+    "Batería": "5500 mAh",
+    "Red": "5G",
+    "Tipo de equipo": "Full Equipo",
+    "Color": "Plateado"
+   },
+   "missingSpecs": [
+    "eSIM"
+   ],
+   "active": true,
+   "stock": 12,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 1062000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 1,
+    "especificaciones": 0.9,
+    "descripcion": 0.2,
+    "seo": 0.2,
+    "consistencia": 1,
+    "vendibilidad": 1
+   },
+   "score": 70,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 1 de 10 especificaciones de su categoría: eSIM"
+    },
+    {
+     "code": "desc_muy_corta",
+     "dim": "descripcion",
+     "sev": "alta",
+     "label": "Descripción muy corta (24 caracteres)"
+    },
+    {
+     "code": "desc_corta_0",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "Sin descripción corta"
+    },
+    {
+     "code": "seo_title_0",
+     "dim": "seo",
+     "sev": "media",
+     "label": "Title SEO vacío (VTEX usa el nombre por defecto)"
+    },
+    {
+     "code": "seo_meta_len",
+     "dim": "seo",
+     "sev": "baja",
+     "label": "Meta description de 24 caracteres (recomendado 70–160)"
+    }
+   ],
+   "priority": 45,
+   "warnings": []
+  },
+  {
+   "skuId": "1010",
+   "productId": "107",
+   "refId": "TG-1010",
+   "ean": "7100007998190",
+   "name": "Xiaomi Redmi 14C Plateado",
+   "department": "Celulares",
+   "category": "Smartphones",
+   "brand": "Xiaomi",
+   "url": "https://compras.tigo.com.co/xiaomi-redmi-14c/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10100/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10100/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10101/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10102/img.jpg"
+   ],
+   "imagesCount": 3,
+   "specs": {
+    "Memoria RAM": "12 GB",
+    "Almacenamiento": "128 GB",
+    "Pantalla": "6,7\"",
+    "Cámara principal": "50 MP",
+    "Batería": "5500 mAh",
+    "eSIM": "Sí",
+    "Red": "4G",
+    "Color": "Plateado"
+   },
+   "missingSpecs": [
+    "Sistema Operativo",
+    "Tipo de equipo"
+   ],
+   "active": true,
+   "stock": 30,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 444000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 1,
+    "especificaciones": 0.8,
+    "descripcion": 0.65,
+    "seo": 0.73,
+    "consistencia": 1,
+    "vendibilidad": 1
+   },
+   "score": 84,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 2 de 10 especificaciones de su categoría: Sistema Operativo, Tipo de equipo"
+    },
+    {
+     "code": "desc_corta",
+     "dim": "descripcion",
+     "sev": "media",
+     "label": "Descripción corta (116 caracteres, recomendado ≥ 300)"
+    },
+    {
+     "code": "seo_meta_len",
+     "dim": "seo",
+     "sev": "baja",
+     "label": "Meta description de 16 caracteres (recomendado 70–160)"
+    }
+   ],
+   "priority": 24,
+   "warnings": []
+  },
+  {
+   "skuId": "1011",
+   "productId": "108",
+   "refId": "TG-1011",
+   "ean": "",
+   "name": "Apple iPhone 16 128GB Verde",
+   "department": "Celulares",
+   "category": "Smartphones",
+   "brand": "Apple",
+   "url": "https://compras.tigo.com.co/apple-iphone-16-128gb/p",
+   "imageUrl": "",
+   "images": [],
+   "imagesCount": 0,
+   "specs": {
+    "Sistema Operativo": "iOS",
+    "Memoria RAM": "12 GB",
+    "Almacenamiento": "128 GB",
+    "Pantalla": "6,5\"",
+    "Cámara principal": "108 MP",
+    "Batería": "5500 mAh",
+    "eSIM": "No",
+    "Red": "4G",
+    "Tipo de equipo": "Equipo libre",
+    "Color": "Verde"
+   },
+   "missingSpecs": [],
+   "active": true,
+   "stock": 41,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 1318000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 0,
+    "especificaciones": 1,
+    "descripcion": 0.35,
+    "seo": 0.53,
+    "consistencia": 1,
+    "vendibilidad": 1
+   },
+   "score": 60,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "img_0",
+     "dim": "imagenes",
+     "sev": "alta",
+     "label": "Sin imágenes"
+    },
+    {
+     "code": "desc_corta",
+     "dim": "descripcion",
+     "sev": "media",
+     "label": "Descripción corta (158 caracteres, recomendado ≥ 300)"
+    },
+    {
+     "code": "desc_html",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "HTML con estilos embebidos (copiado de Word/web)"
+    },
+    {
+     "code": "desc_corta_0",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "Sin descripción corta"
+    },
+    {
+     "code": "seo_meta_0",
+     "dim": "seo",
+     "sev": "media",
+     "label": "Meta description vacía"
+    }
+   ],
+   "priority": 60,
+   "warnings": []
+  },
+  {
+   "skuId": "1012",
+   "productId": "108",
+   "refId": "TG-1012",
+   "ean": "",
+   "name": "Apple iPhone 16 128GB Negro",
+   "department": "Celulares",
+   "category": "Smartphones",
+   "brand": "Apple",
+   "url": "https://compras.tigo.com.co/apple-iphone-16-128gb/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10120/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10120/img.jpg"
+   ],
+   "imagesCount": 1,
+   "specs": {
+    "Sistema Operativo": "iOS",
+    "Almacenamiento": "128 GB",
+    "Pantalla": "6,5\"",
+    "Batería": "5500 mAh",
+    "eSIM": "No",
+    "Tipo de equipo": "Equipo libre",
+    "Color": "Negro"
+   },
+   "missingSpecs": [
+    "Cámara principal",
+    "Memoria RAM",
+    "Red"
+   ],
+   "active": true,
+   "stock": 38,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 2847000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 0.4,
+    "especificaciones": 0.7,
+    "descripcion": 0.35,
+    "seo": 0.53,
+    "consistencia": 1,
+    "vendibilidad": 1
+   },
+   "score": 61,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "img_pocas",
+     "dim": "imagenes",
+     "sev": "media",
+     "label": "Solo 1 imagen (recomendado ≥ 3)"
+    },
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 3 de 10 especificaciones de su categoría: Cámara principal, Memoria RAM, Red"
+    },
+    {
+     "code": "desc_corta",
+     "dim": "descripcion",
+     "sev": "media",
+     "label": "Descripción corta (158 caracteres, recomendado ≥ 300)"
+    },
+    {
+     "code": "desc_html",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "HTML con estilos embebidos (copiado de Word/web)"
+    },
+    {
+     "code": "desc_corta_0",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "Sin descripción corta"
+    },
+    {
+     "code": "seo_meta_0",
+     "dim": "seo",
+     "sev": "media",
+     "label": "Meta description vacía"
+    }
+   ],
+   "priority": 59,
+   "warnings": []
+  },
+  {
+   "skuId": "1013",
+   "productId": "108",
+   "refId": "TG-1013",
+   "ean": "",
+   "name": "Apple iPhone 16 128GB Blanco",
+   "department": "Celulares",
+   "category": "Smartphones",
+   "brand": "Apple",
+   "url": "https://compras.tigo.com.co/apple-iphone-16-128gb/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10130/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10130/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10131/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10132/img.jpg"
+   ],
+   "imagesCount": 3,
+   "specs": {
+    "Sistema Operativo": "iOS",
+    "Memoria RAM": "12 GB",
+    "Almacenamiento": "128 GB",
+    "Pantalla": "",
+    "Cámara principal": "108 MP",
+    "Batería": "5500 mAh",
+    "eSIM": "No",
+    "Red": "4G",
+    "Tipo de equipo": "Equipo libre",
+    "Color": "Blanco"
+   },
+   "missingSpecs": [
+    "Pantalla"
+   ],
+   "active": true,
+   "stock": 33,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 2950000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 1,
+    "especificaciones": 0.9,
+    "descripcion": 0.35,
+    "seo": 0.53,
+    "consistencia": 1,
+    "vendibilidad": 1
+   },
+   "score": 78,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 1 de 10 especificaciones de su categoría: Pantalla"
+    },
+    {
+     "code": "spec_vacia",
+     "dim": "especificaciones",
+     "sev": "baja",
+     "label": "Campos creados sin valor: Pantalla"
+    },
+    {
+     "code": "desc_corta",
+     "dim": "descripcion",
+     "sev": "media",
+     "label": "Descripción corta (158 caracteres, recomendado ≥ 300)"
+    },
+    {
+     "code": "desc_html",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "HTML con estilos embebidos (copiado de Word/web)"
+    },
+    {
+     "code": "desc_corta_0",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "Sin descripción corta"
+    },
+    {
+     "code": "seo_meta_0",
+     "dim": "seo",
+     "sev": "media",
+     "label": "Meta description vacía"
+    }
+   ],
+   "priority": 33,
+   "warnings": []
+  },
+  {
+   "skuId": "1014",
+   "productId": "109",
+   "refId": "TG-1014",
+   "ean": "7100008029866",
+   "name": "Apple iPhone 16 Pro 256GB Rosado",
+   "department": "Celulares",
+   "category": "Smartphones",
+   "brand": "Apple",
+   "url": "https://compras.tigo.com.co/apple-iphone-16-pro-256gb/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10140/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10140/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10141/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10142/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10143/img.jpg"
+   ],
+   "imagesCount": 4,
+   "specs": {
+    "Sistema Operativo": "iOS",
+    "Memoria RAM": "12 GB",
+    "Almacenamiento": "256 GB",
+    "Pantalla": "",
+    "Batería": "5000 mAh",
+    "eSIM": "Sí",
+    "Tipo de equipo": "Equipo libre",
+    "Color": "Rosado"
+   },
+   "missingSpecs": [
+    "Cámara principal",
+    "Pantalla",
+    "Red"
+   ],
+   "active": true,
+   "stock": 46,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 2677000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 1,
+    "especificaciones": 0.7,
+    "descripcion": 0.85,
+    "seo": 1,
+    "consistencia": 1,
+    "vendibilidad": 1
+   },
+   "score": 90,
+   "semaforo": "verde",
+   "issues": [
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 3 de 10 especificaciones de su categoría: Cámara principal, Pantalla, Red"
+    },
+    {
+     "code": "spec_vacia",
+     "dim": "especificaciones",
+     "sev": "baja",
+     "label": "Campos creados sin valor: Pantalla"
+    }
+   ],
+   "priority": 15,
+   "warnings": []
+  },
+  {
+   "skuId": "1015",
+   "productId": "109",
+   "refId": "TG-1015",
+   "ean": "7100008037785",
+   "name": "Apple iPhone 16 Pro 256GB Plateado",
+   "department": "Celulares",
+   "category": "Smartphones",
+   "brand": "Apple",
+   "url": "https://compras.tigo.com.co/apple-iphone-16-pro-256gb/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10150/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10150/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10151/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10152/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10153/img.jpg"
+   ],
+   "imagesCount": 4,
+   "specs": {
+    "Sistema Operativo": "iOS",
+    "Memoria RAM": "12 GB",
+    "Almacenamiento": "",
+    "Cámara principal": "108 MP",
+    "eSIM": "Sí",
+    "Red": "4G",
+    "Color": "Plateado"
+   },
+   "missingSpecs": [
+    "Almacenamiento",
+    "Batería",
+    "Pantalla",
+    "Tipo de equipo"
+   ],
+   "active": true,
+   "stock": 47,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 951000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 1,
+    "especificaciones": 0.6,
+    "descripcion": 0.85,
+    "seo": 1,
+    "consistencia": 1,
+    "vendibilidad": 1
+   },
+   "score": 87,
+   "semaforo": "verde",
+   "issues": [
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "alta",
+     "label": "Faltan 4 de 10 especificaciones de su categoría: Almacenamiento, Batería, Pantalla, Tipo de equipo"
+    },
+    {
+     "code": "spec_vacia",
+     "dim": "especificaciones",
+     "sev": "baja",
+     "label": "Campos creados sin valor: Almacenamiento"
+    }
+   ],
+   "priority": 20,
+   "warnings": []
+  },
+  {
+   "skuId": "1016",
+   "productId": "109",
+   "refId": "TG-1016",
+   "ean": "7100008045704",
+   "name": "Apple iPhone 16 Pro 256GB Azul",
+   "department": "Celulares",
+   "category": "Smartphones",
+   "brand": "Apple",
+   "url": "https://compras.tigo.com.co/apple-iphone-16-pro-256gb/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10160/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10160/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10161/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10162/img.jpg"
+   ],
+   "imagesCount": 3,
+   "specs": {
+    "Sistema Operativo": "iOS",
+    "Memoria RAM": "12 GB",
+    "Pantalla": "6,5\"",
+    "Batería": "5000 mAh",
+    "eSIM": "Sí",
+    "Red": "4G",
+    "Tipo de equipo": "Equipo libre",
+    "Color": "Azul"
+   },
+   "missingSpecs": [
+    "Almacenamiento",
+    "Cámara principal"
+   ],
+   "active": true,
+   "stock": 29,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 1706000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 1,
+    "especificaciones": 0.8,
+    "descripcion": 0.85,
+    "seo": 1,
+    "consistencia": 1,
+    "vendibilidad": 1
+   },
+   "score": 92,
+   "semaforo": "verde",
+   "issues": [
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 2 de 10 especificaciones de su categoría: Almacenamiento, Cámara principal"
+    }
+   ],
+   "priority": 12,
+   "warnings": []
+  },
+  {
+   "skuId": "1017",
+   "productId": "110",
+   "refId": "TG-1017",
+   "ean": "7100008053623",
+   "name": "Honor Magic7 Lite Plateado",
+   "department": "Celulares",
+   "category": "Smartphones",
+   "brand": "Honor",
+   "url": "https://compras.tigo.com.co/honor-magic7-lite/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10170/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10170/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10171/img.jpg"
+   ],
+   "imagesCount": 2,
+   "specs": {
+    "Sistema Operativo": "Android",
+    "Memoria RAM": "12 GB",
+    "Almacenamiento": "128 GB",
+    "Pantalla": "6,7\"",
+    "Cámara principal": "50 MP",
+    "Batería": "4500 mAh",
+    "eSIM": "No",
+    "Tipo de equipo": "Equipo libre",
+    "Color": "Plateado"
+   },
+   "missingSpecs": [
+    "Red"
+   ],
+   "active": true,
+   "stock": 0,
+   "unlimited": false,
+   "simAvailability": "withoutStock",
+   "simPrice": 0,
+   "comprable": false,
+   "dims": {
+    "imagenes": 0.7,
+    "especificaciones": 0.9,
+    "descripcion": 0.2,
+    "seo": 0.73,
+    "consistencia": 1,
+    "vendibilidad": 0.4
+   },
+   "score": 66,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "img_pocas",
+     "dim": "imagenes",
+     "sev": "media",
+     "label": "Solo 2 imágenes (recomendado ≥ 3)"
+    },
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 1 de 10 especificaciones de su categoría: Red"
+    },
+    {
+     "code": "desc_muy_corta",
+     "dim": "descripcion",
+     "sev": "alta",
+     "label": "Descripción muy corta (17 caracteres)"
+    },
+    {
+     "code": "desc_corta_0",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "Sin descripción corta"
+    },
+    {
+     "code": "seo_meta_len",
+     "dim": "seo",
+     "sev": "baja",
+     "label": "Meta description de 17 caracteres (recomendado 70–160)"
+    },
+    {
+     "code": "sin_stock",
+     "dim": "vendibilidad",
+     "sev": "alta",
+     "label": "Activo sin stock disponible"
+    }
+   ],
+   "priority": 37,
+   "warnings": []
+  },
+  {
+   "skuId": "1018",
+   "productId": "111",
+   "refId": "TG-1018",
+   "ean": "7100008061542",
+   "name": "ZTE Blade A55 Negro",
+   "department": "Celulares",
+   "category": "Smartphones",
+   "brand": "ZTE",
+   "url": "https://compras.tigo.com.co/zte-blade-a55/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10180/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10180/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10181/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10182/img.jpg"
+   ],
+   "imagesCount": 3,
+   "specs": {
+    "Sistema Operativo": "Android",
+    "Memoria RAM": "12 GB",
+    "Almacenamiento": "128 GB",
+    "Cámara principal": "50 MP",
+    "Batería": "5500 mAh",
+    "eSIM": "Sí",
+    "Red": "4G",
+    "Tipo de equipo": "Equipo libre",
+    "Color": "Gris"
+   },
+   "missingSpecs": [
+    "Pantalla"
+   ],
+   "active": true,
+   "stock": 54,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 0,
+   "comprable": false,
+   "dims": {
+    "imagenes": 1,
+    "especificaciones": 0.9,
+    "descripcion": 0.85,
+    "seo": 0.2,
+    "consistencia": 0.6,
+    "vendibilidad": 0.7
+   },
+   "score": 76,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 1 de 10 especificaciones de su categoría: Pantalla"
+    },
+    {
+     "code": "seo_title_0",
+     "dim": "seo",
+     "sev": "media",
+     "label": "Title SEO vacío (VTEX usa el nombre por defecto)"
+    },
+    {
+     "code": "seo_meta_len",
+     "dim": "seo",
+     "sev": "baja",
+     "label": "Meta description de 13 caracteres (recomendado 70–160)"
+    },
+    {
+     "code": "color_inconsistente",
+     "dim": "consistencia",
+     "sev": "alta",
+     "label": "El nombre dice \"negro\" pero Color = \"Gris\""
+    },
+    {
+     "code": "precio_0",
+     "dim": "vendibilidad",
+     "sev": "alta",
+     "label": "Checkout devuelve precio $0"
+    }
+   ],
+   "priority": 26,
+   "warnings": []
+  },
+  {
+   "skuId": "1019",
+   "productId": "111",
+   "refId": "TG-1019",
+   "ean": "",
+   "name": "ZTE Blade A55 Negro",
+   "department": "Celulares",
+   "category": "Smartphones",
+   "brand": "ZTE",
+   "url": "https://compras.tigo.com.co/zte-blade-a55/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10190/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10190/img.jpg"
+   ],
+   "imagesCount": 1,
+   "specs": {
+    "Sistema Operativo": "Android",
+    "Memoria RAM": "12 GB",
+    "Almacenamiento": "128 GB",
+    "Pantalla": "6,5\"",
+    "Cámara principal": "50 MP",
+    "eSIM": "Sí",
+    "Red": "4G",
+    "Tipo de equipo": "Equipo libre",
+    "Color": "Negro"
+   },
+   "missingSpecs": [
+    "Batería"
+   ],
+   "active": true,
+   "stock": 58,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 636000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 0.4,
+    "especificaciones": 0.9,
+    "descripcion": 0.85,
+    "seo": 0.2,
+    "consistencia": 1,
+    "vendibilidad": 1
+   },
+   "score": 71,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "img_pocas",
+     "dim": "imagenes",
+     "sev": "media",
+     "label": "Solo 1 imagen (recomendado ≥ 3)"
+    },
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 1 de 10 especificaciones de su categoría: Batería"
+    },
+    {
+     "code": "seo_title_0",
+     "dim": "seo",
+     "sev": "media",
+     "label": "Title SEO vacío (VTEX usa el nombre por defecto)"
+    },
+    {
+     "code": "seo_meta_len",
+     "dim": "seo",
+     "sev": "baja",
+     "label": "Meta description de 13 caracteres (recomendado 70–160)"
+    }
+   ],
+   "priority": 44,
+   "warnings": []
+  },
+  {
+   "skuId": "1020",
+   "productId": "111",
+   "refId": "TG-1020",
+   "ean": "7100008077380",
+   "name": "ZTE Blade A55 Rosado",
+   "department": "Celulares",
+   "category": "Smartphones",
+   "brand": "ZTE",
+   "url": "https://compras.tigo.com.co/zte-blade-a55/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10200/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10200/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10201/img.jpg"
+   ],
+   "imagesCount": 2,
+   "specs": {
+    "Sistema Operativo": "Android",
+    "Memoria RAM": "12 GB",
+    "Almacenamiento": "128 GB",
+    "Pantalla": "6,5\"",
+    "Batería": "5500 mAh",
+    "eSIM": "Sí",
+    "Red": "4G",
+    "Tipo de equipo": "Equipo libre",
+    "Color": "Rosado"
+   },
+   "missingSpecs": [
+    "Cámara principal"
+   ],
+   "active": true,
+   "stock": 0,
+   "unlimited": false,
+   "simAvailability": "withoutStock",
+   "simPrice": 0,
+   "comprable": false,
+   "dims": {
+    "imagenes": 0.7,
+    "especificaciones": 0.9,
+    "descripcion": 0.85,
+    "seo": 0.2,
+    "consistencia": 1,
+    "vendibilidad": 0.4
+   },
+   "score": 71,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "img_pocas",
+     "dim": "imagenes",
+     "sev": "media",
+     "label": "Solo 2 imágenes (recomendado ≥ 3)"
+    },
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 1 de 10 especificaciones de su categoría: Cámara principal"
+    },
+    {
+     "code": "seo_title_0",
+     "dim": "seo",
+     "sev": "media",
+     "label": "Title SEO vacío (VTEX usa el nombre por defecto)"
+    },
+    {
+     "code": "seo_meta_len",
+     "dim": "seo",
+     "sev": "baja",
+     "label": "Meta description de 13 caracteres (recomendado 70–160)"
+    },
+    {
+     "code": "sin_stock",
+     "dim": "vendibilidad",
+     "sev": "alta",
+     "label": "Activo sin stock disponible"
+    }
+   ],
+   "priority": 32,
+   "warnings": []
+  },
+  {
+   "skuId": "1021",
+   "productId": "112",
+   "refId": "TG-1021",
+   "ean": "",
+   "name": "Oppo Reno 13 F Plateado",
+   "department": "Celulares",
+   "category": "Smartphones",
+   "brand": "Oppo",
+   "url": "https://compras.tigo.com.co/oppo-reno-13-f/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10210/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10210/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10211/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10212/img.jpg"
+   ],
+   "imagesCount": 3,
+   "specs": {
+    "Sistema Operativo": "Android",
+    "Almacenamiento": "128 GB",
+    "Pantalla": "6,5\"",
+    "Cámara principal": "108 MP",
+    "Batería": "4500 mAh",
+    "eSIM": "Sí",
+    "Red": "4G",
+    "Tipo de equipo": "Full Equipo",
+    "Color": "Negro"
+   },
+   "missingSpecs": [
+    "Memoria RAM"
+   ],
+   "active": true,
+   "stock": 30,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 2233000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 1,
+    "especificaciones": 0.9,
+    "descripcion": 0.35,
+    "seo": 0.73,
+    "consistencia": 0.6,
+    "vendibilidad": 1
+   },
+   "score": 77,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 1 de 10 especificaciones de su categoría: Memoria RAM"
+    },
+    {
+     "code": "desc_corta",
+     "dim": "descripcion",
+     "sev": "media",
+     "label": "Descripción corta (151 caracteres, recomendado ≥ 300)"
+    },
+    {
+     "code": "desc_html",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "HTML con estilos embebidos (copiado de Word/web)"
+    },
+    {
+     "code": "desc_corta_0",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "Sin descripción corta"
+    },
+    {
+     "code": "seo_meta_len",
+     "dim": "seo",
+     "sev": "baja",
+     "label": "Meta description de 14 caracteres (recomendado 70–160)"
+    },
+    {
+     "code": "color_inconsistente",
+     "dim": "consistencia",
+     "sev": "alta",
+     "label": "El nombre dice \"plateado\" pero Color = \"Negro\""
+    }
+   ],
+   "priority": 35,
+   "warnings": []
+  },
+  {
+   "skuId": "1022",
+   "productId": "113",
+   "refId": "TG-1022",
+   "ean": "",
+   "name": "Realme C75 Negro",
+   "department": "Celulares",
+   "category": "Smartphones",
+   "brand": "Realme",
+   "url": "https://compras.tigo.com.co/realme-c75/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10220/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10220/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10221/img.jpg"
+   ],
+   "imagesCount": 2,
+   "specs": {
+    "Sistema Operativo": "Android",
+    "Memoria RAM": "12 GB",
+    "Almacenamiento": "128 GB",
+    "Pantalla": "6,1\"",
+    "Cámara principal": "108 MP",
+    "Batería": "5000 mAh",
+    "Red": "4G",
+    "Tipo de equipo": "",
+    "Color": "Negro"
+   },
+   "missingSpecs": [
+    "Tipo de equipo",
+    "eSIM"
+   ],
+   "active": true,
+   "stock": 59,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 1246000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 0.7,
+    "especificaciones": 0.8,
+    "descripcion": 0.85,
+    "seo": 0.27,
+    "consistencia": 1,
+    "vendibilidad": 1
+   },
+   "score": 75,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "img_pocas",
+     "dim": "imagenes",
+     "sev": "media",
+     "label": "Solo 2 imágenes (recomendado ≥ 3)"
+    },
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 2 de 10 especificaciones de su categoría: Tipo de equipo, eSIM"
+    },
+    {
+     "code": "spec_vacia",
+     "dim": "especificaciones",
+     "sev": "baja",
+     "label": "Campos creados sin valor: Tipo de equipo"
+    },
+    {
+     "code": "seo_title_len",
+     "dim": "seo",
+     "sev": "baja",
+     "label": "Title de 27 caracteres (recomendado 30–65)"
+    },
+    {
+     "code": "seo_meta_0",
+     "dim": "seo",
+     "sev": "media",
+     "label": "Meta description vacía"
+    }
+   ],
+   "priority": 38,
+   "warnings": []
+  },
+  {
+   "skuId": "1023",
+   "productId": "113",
+   "refId": "TG-1023",
+   "ean": "7100008101137",
+   "name": "Realme C75 Plateado",
+   "department": "Celulares",
+   "category": "Smartphones",
+   "brand": "Realme",
+   "url": "https://compras.tigo.com.co/realme-c75/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10230/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10230/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10231/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10232/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10233/img.jpg"
+   ],
+   "imagesCount": 4,
+   "specs": {
+    "Sistema Operativo": "Android",
+    "Memoria RAM": "12 GB",
+    "Almacenamiento": "128 GB",
+    "Pantalla": "6,1\"",
+    "Cámara principal": "108 MP",
+    "eSIM": "Sí",
+    "Red": "4G",
+    "Tipo de equipo": "Equipo libre",
+    "Color": "Plateado"
+   },
+   "missingSpecs": [
+    "Batería"
+   ],
+   "active": true,
+   "stock": 41,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 501000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 1,
+    "especificaciones": 0.9,
+    "descripcion": 0.85,
+    "seo": 0.27,
+    "consistencia": 1,
+    "vendibilidad": 1
+   },
+   "score": 84,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 1 de 10 especificaciones de su categoría: Batería"
+    },
+    {
+     "code": "seo_title_len",
+     "dim": "seo",
+     "sev": "baja",
+     "label": "Title de 27 caracteres (recomendado 30–65)"
+    },
+    {
+     "code": "seo_meta_0",
+     "dim": "seo",
+     "sev": "media",
+     "label": "Meta description vacía"
+    }
+   ],
+   "priority": 24,
+   "warnings": []
+  },
+  {
+   "skuId": "1024",
+   "productId": "114",
+   "refId": "TG-1024",
+   "ean": "7100008109056",
+   "name": "Samsung Galaxy Z Flip 6 Blanco",
+   "department": "Celulares",
+   "category": "Smartphones",
+   "brand": "Samsung",
+   "url": "https://compras.tigo.com.co/samsung-galaxy-z-flip-6/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10240/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10240/img.jpg"
+   ],
+   "imagesCount": 1,
+   "specs": {
+    "Sistema Operativo": "Android",
+    "Memoria RAM": "6 GB",
+    "Almacenamiento": "128 GB",
+    "Pantalla": "6,1\"",
+    "Cámara principal": "108 MP",
+    "Batería": "5000 mAh",
+    "eSIM": "No",
+    "Red": "4G",
+    "Tipo de equipo": "Full Equipo",
+    "Color": "Blanco"
+   },
+   "missingSpecs": [],
+   "active": true,
+   "stock": 0,
+   "unlimited": false,
+   "simAvailability": "withoutStock",
+   "simPrice": 0,
+   "comprable": false,
+   "dims": {
+    "imagenes": 0.4,
+    "especificaciones": 1,
+    "descripcion": 0.65,
+    "seo": 0.73,
+    "consistencia": 1,
+    "vendibilidad": 0.4
+   },
+   "score": 71,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "img_pocas",
+     "dim": "imagenes",
+     "sev": "media",
+     "label": "Solo 1 imagen (recomendado ≥ 3)"
+    },
+    {
+     "code": "desc_corta_0",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "Sin descripción corta"
+    },
+    {
+     "code": "seo_meta_len",
+     "dim": "seo",
+     "sev": "baja",
+     "label": "Meta description de 23 caracteres (recomendado 70–160)"
+    },
+    {
+     "code": "sin_stock",
+     "dim": "vendibilidad",
+     "sev": "alta",
+     "label": "Activo sin stock disponible"
+    }
+   ],
+   "priority": 32,
+   "warnings": []
+  },
+  {
+   "skuId": "1025",
+   "productId": "115",
+   "refId": "TG-1025",
+   "ean": "",
+   "name": "Motorola Moto E15 Verde",
+   "department": "Celulares",
+   "category": "Smartphones",
+   "brand": "Motorola",
+   "url": "https://compras.tigo.com.co/motorola-moto-e15/p",
+   "imageUrl": "",
+   "images": [],
+   "imagesCount": 0,
+   "specs": {
+    "Sistema Operativo": "Android",
+    "Memoria RAM": "6 GB",
+    "Almacenamiento": "128 GB",
+    "Pantalla": "6,5\"",
+    "Cámara principal": "108 MP",
+    "eSIM": "Sí",
+    "Red": "4G",
+    "Tipo de equipo": "Equipo libre",
+    "Color": "Verde"
+   },
+   "missingSpecs": [
+    "Batería"
+   ],
+   "active": true,
+   "stock": 0,
+   "unlimited": false,
+   "simAvailability": "withoutStock",
+   "simPrice": 0,
+   "comprable": false,
+   "dims": {
+    "imagenes": 0,
+    "especificaciones": 0.9,
+    "descripcion": 0.65,
+    "seo": 0.53,
+    "consistencia": 1,
+    "vendibilidad": 0.4
+   },
+   "score": 58,
+   "semaforo": "rojo",
+   "issues": [
+    {
+     "code": "img_0",
+     "dim": "imagenes",
+     "sev": "alta",
+     "label": "Sin imágenes"
+    },
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 1 de 10 especificaciones de su categoría: Batería"
+    },
+    {
+     "code": "desc_corta",
+     "dim": "descripcion",
+     "sev": "media",
+     "label": "Descripción corta (117 caracteres, recomendado ≥ 300)"
+    },
+    {
+     "code": "seo_meta_0",
+     "dim": "seo",
+     "sev": "media",
+     "label": "Meta description vacía"
+    },
+    {
+     "code": "sin_stock",
+     "dim": "vendibilidad",
+     "sev": "alta",
+     "label": "Activo sin stock disponible"
+    }
+   ],
+   "priority": 46,
+   "warnings": []
+  },
+  {
+   "skuId": "1026",
+   "productId": "116",
+   "refId": "TG-1026",
+   "ean": "7100008124894",
+   "name": "Xiaomi Poco X7 Rosado",
+   "department": "Celulares",
+   "category": "Smartphones",
+   "brand": "Xiaomi",
+   "url": "https://compras.tigo.com.co/xiaomi-poco-x7/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10260/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10260/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10261/img.jpg"
+   ],
+   "imagesCount": 2,
+   "specs": {
+    "Sistema Operativo": "",
+    "Memoria RAM": "12 GB",
+    "Almacenamiento": "128 GB",
+    "Pantalla": "6,5\"",
+    "Cámara principal": "48 MP",
+    "Batería": "4500 mAh",
+    "eSIM": "No",
+    "Tipo de equipo": "Full Equipo",
+    "Color": "Rosado"
+   },
+   "missingSpecs": [
+    "Red",
+    "Sistema Operativo"
+   ],
+   "active": true,
+   "stock": 19,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 1892000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 0.7,
+    "especificaciones": 0.8,
+    "descripcion": 0.55,
+    "seo": 0.53,
+    "consistencia": 1,
+    "vendibilidad": 1
+   },
+   "score": 73,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "img_pocas",
+     "dim": "imagenes",
+     "sev": "media",
+     "label": "Solo 2 imágenes (recomendado ≥ 3)"
+    },
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 2 de 10 especificaciones de su categoría: Red, Sistema Operativo"
+    },
+    {
+     "code": "spec_vacia",
+     "dim": "especificaciones",
+     "sev": "baja",
+     "label": "Campos creados sin valor: Sistema Operativo"
+    },
+    {
+     "code": "desc_corta",
+     "dim": "descripcion",
+     "sev": "media",
+     "label": "Descripción corta (151 caracteres, recomendado ≥ 300)"
+    },
+    {
+     "code": "desc_html",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "HTML con estilos embebidos (copiado de Word/web)"
+    },
+    {
+     "code": "seo_meta_0",
+     "dim": "seo",
+     "sev": "media",
+     "label": "Meta description vacía"
+    }
+   ],
+   "priority": 41,
+   "warnings": []
+  },
+  {
+   "skuId": "1027",
+   "productId": "116",
+   "refId": "TG-1027",
+   "ean": "",
+   "name": "Xiaomi Poco X7 Azul",
+   "department": "Celulares",
+   "category": "Smartphones",
+   "brand": "Xiaomi",
+   "url": "https://compras.tigo.com.co/xiaomi-poco-x7/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10270/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10270/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10271/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10272/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10273/img.jpg"
+   ],
+   "imagesCount": 4,
+   "specs": {
+    "Sistema Operativo": "Android",
+    "Almacenamiento": "128 GB",
+    "Pantalla": "6,5\"",
+    "Cámara principal": "48 MP",
+    "Batería": "4500 mAh",
+    "eSIM": "No",
+    "Red": "4G",
+    "Tipo de equipo": "Full Equipo",
+    "Color": ""
+   },
+   "missingSpecs": [
+    "Color",
+    "Memoria RAM"
+   ],
+   "active": true,
+   "stock": 0,
+   "unlimited": false,
+   "simAvailability": "withoutStock",
+   "simPrice": 0,
+   "comprable": false,
+   "dims": {
+    "imagenes": 1,
+    "especificaciones": 0.8,
+    "descripcion": 0.55,
+    "seo": 0.53,
+    "consistencia": 1,
+    "vendibilidad": 0.4
+   },
+   "score": 73,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 2 de 10 especificaciones de su categoría: Color, Memoria RAM"
+    },
+    {
+     "code": "spec_vacia",
+     "dim": "especificaciones",
+     "sev": "baja",
+     "label": "Campos creados sin valor: Color"
+    },
+    {
+     "code": "desc_corta",
+     "dim": "descripcion",
+     "sev": "media",
+     "label": "Descripción corta (151 caracteres, recomendado ≥ 300)"
+    },
+    {
+     "code": "desc_html",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "HTML con estilos embebidos (copiado de Word/web)"
+    },
+    {
+     "code": "seo_meta_0",
+     "dim": "seo",
+     "sev": "media",
+     "label": "Meta description vacía"
+    },
+    {
+     "code": "sin_stock",
+     "dim": "vendibilidad",
+     "sev": "alta",
+     "label": "Activo sin stock disponible"
+    }
+   ],
+   "priority": 30,
+   "warnings": []
+  },
+  {
+   "skuId": "1028",
+   "productId": "117",
+   "refId": "TG-1028",
+   "ean": "7100008140732",
+   "name": "Apple iPhone 13 Reacondicionado Rosado",
+   "department": "Celulares",
+   "category": "Equipos reacondicionados",
+   "brand": "Apple",
+   "url": "https://compras.tigo.com.co/apple-iphone-13-reacondicionado/p",
+   "imageUrl": "",
+   "images": [],
+   "imagesCount": 0,
+   "specs": {
+    "Sistema Operativo": "iOS",
+    "Almacenamiento": "128 GB",
+    "Estado": "Grado A",
+    "Garantía": "6 meses",
+    "Color": "Rosado"
+   },
+   "missingSpecs": [],
+   "active": true,
+   "stock": 0,
+   "unlimited": false,
+   "simAvailability": "withoutStock",
+   "simPrice": 0,
+   "comprable": false,
+   "dims": {
+    "imagenes": 0,
+    "especificaciones": 1,
+    "descripcion": 0.2,
+    "seo": 1,
+    "consistencia": 1,
+    "vendibilidad": 0.4
+   },
+   "score": 58,
+   "semaforo": "rojo",
+   "issues": [
+    {
+     "code": "img_0",
+     "dim": "imagenes",
+     "sev": "alta",
+     "label": "Sin imágenes"
+    },
+    {
+     "code": "desc_muy_corta",
+     "dim": "descripcion",
+     "sev": "alta",
+     "label": "Descripción muy corta (31 caracteres)"
+    },
+    {
+     "code": "desc_corta_0",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "Sin descripción corta"
+    },
+    {
+     "code": "sin_stock",
+     "dim": "vendibilidad",
+     "sev": "alta",
+     "label": "Activo sin stock disponible"
+    }
+   ],
+   "priority": 46,
+   "warnings": []
+  },
+  {
+   "skuId": "1029",
+   "productId": "118",
+   "refId": "TG-1029",
+   "ean": "7100008148651",
+   "name": "Samsung Galaxy S22 Reacondicionado Gris",
+   "department": "Celulares",
+   "category": "Equipos reacondicionados",
+   "brand": "Samsung",
+   "url": "https://compras.tigo.com.co/samsung-galaxy-s22-reacondicionado/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10290/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10290/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10291/img.jpg"
+   ],
+   "imagesCount": 2,
+   "specs": {
+    "Sistema Operativo": "Android",
+    "Almacenamiento": "128 GB",
+    "Estado": "Grado A",
+    "Garantía": "6 meses",
+    "Color": "Gris"
+   },
+   "missingSpecs": [],
+   "active": false,
+   "stock": 15,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 2570000,
+   "comprable": false,
+   "dims": {
+    "imagenes": 0.7,
+    "especificaciones": 1,
+    "descripcion": 0.65,
+    "seo": 0.47,
+    "consistencia": 1,
+    "vendibilidad": 0.6
+   },
+   "score": 75,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "img_pocas",
+     "dim": "imagenes",
+     "sev": "media",
+     "label": "Solo 2 imágenes (recomendado ≥ 3)"
+    },
+    {
+     "code": "desc_corta_0",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "Sin descripción corta"
+    },
+    {
+     "code": "seo_title_0",
+     "dim": "seo",
+     "sev": "media",
+     "label": "Title SEO vacío (VTEX usa el nombre por defecto)"
+    },
+    {
+     "code": "inactivo",
+     "dim": "vendibilidad",
+     "sev": "media",
+     "label": "SKU o producto inactivo"
+    }
+   ],
+   "priority": 15,
+   "warnings": []
+  },
+  {
+   "skuId": "1030",
+   "productId": "119",
+   "refId": "TG-1030",
+   "ean": "7100008156570",
+   "name": "Apple iPhone 14 Reacondicionado Plateado",
+   "department": "Celulares",
+   "category": "Equipos reacondicionados",
+   "brand": "Apple",
+   "url": "https://compras.tigo.com.co/apple-iphone-14-reacondicionado/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10300/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10300/img.jpg"
+   ],
+   "imagesCount": 1,
+   "specs": {
+    "Sistema Operativo": "iOS",
+    "Almacenamiento": "128 GB",
+    "Estado": "",
+    "Garantía": "6 meses",
+    "Color": "Plateado"
+   },
+   "missingSpecs": [
+    "Estado"
+   ],
+   "active": true,
+   "stock": 48,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 1577000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 0.4,
+    "especificaciones": 0.8,
+    "descripcion": 0.65,
+    "seo": 0.2,
+    "consistencia": 1,
+    "vendibilidad": 1
+   },
+   "score": 64,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "img_pocas",
+     "dim": "imagenes",
+     "sev": "media",
+     "label": "Solo 1 imagen (recomendado ≥ 3)"
+    },
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 1 de 5 especificaciones de su categoría: Estado"
+    },
+    {
+     "code": "spec_vacia",
+     "dim": "especificaciones",
+     "sev": "baja",
+     "label": "Campos creados sin valor: Estado"
+    },
+    {
+     "code": "desc_corta",
+     "dim": "descripcion",
+     "sev": "media",
+     "label": "Descripción corta (131 caracteres, recomendado ≥ 300)"
+    },
+    {
+     "code": "seo_title_0",
+     "dim": "seo",
+     "sev": "media",
+     "label": "Title SEO vacío (VTEX usa el nombre por defecto)"
+    },
+    {
+     "code": "seo_meta_len",
+     "dim": "seo",
+     "sev": "baja",
+     "label": "Meta description de 31 caracteres (recomendado 70–160)"
+    }
+   ],
+   "priority": 54,
+   "warnings": []
+  },
+  {
+   "skuId": "1031",
+   "productId": "120",
+   "refId": "TG-1031",
+   "ean": "7100008164489",
+   "name": "Samsung Galaxy Watch 7 44mm Rosado",
+   "department": "Tecnología",
+   "category": "Smartwatches",
+   "brand": "Samsung",
+   "url": "https://compras.tigo.com.co/samsung-galaxy-watch-7-44mm/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10310/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10310/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10311/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10312/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10313/img.jpg"
+   ],
+   "imagesCount": 4,
+   "specs": {
+    "Compatibilidad": "iOS",
+    "Tamaño de caja": "40 mm",
+    "Resistencia al agua": "5 ATM",
+    "Batería": "",
+    "Color": "Blanco"
+   },
+   "missingSpecs": [
+    "Batería"
+   ],
+   "active": true,
+   "stock": 19,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 1316000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 1,
+    "especificaciones": 0.8,
+    "descripcion": 0,
+    "seo": 0.73,
+    "consistencia": 0.6,
+    "vendibilidad": 1
+   },
+   "score": 67,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 1 de 5 especificaciones de su categoría: Batería"
+    },
+    {
+     "code": "spec_vacia",
+     "dim": "especificaciones",
+     "sev": "baja",
+     "label": "Campos creados sin valor: Batería"
+    },
+    {
+     "code": "desc_0",
+     "dim": "descripcion",
+     "sev": "alta",
+     "label": "Sin descripción"
+    },
+    {
+     "code": "desc_corta_0",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "Sin descripción corta"
+    },
+    {
+     "code": "seo_meta_len",
+     "dim": "seo",
+     "sev": "baja",
+     "label": "Meta description de 27 caracteres (recomendado 70–160)"
+    },
+    {
+     "code": "color_inconsistente",
+     "dim": "consistencia",
+     "sev": "alta",
+     "label": "El nombre dice \"rosado\" pero Color = \"Blanco\""
+    }
+   ],
+   "priority": 50,
+   "warnings": []
+  },
+  {
+   "skuId": "1032",
+   "productId": "120",
+   "refId": "TG-1032",
+   "ean": "",
+   "name": "Samsung Galaxy Watch 7 44mm Plateado",
+   "department": "Tecnología",
+   "category": "Smartwatches",
+   "brand": "Samsung",
+   "url": "https://compras.tigo.com.co/samsung-galaxy-watch-7-44mm/p",
+   "imageUrl": "",
+   "images": [],
+   "imagesCount": 0,
+   "specs": {
+    "Compatibilidad": "iOS",
+    "Tamaño de caja": "40 mm",
+    "Resistencia al agua": "5 ATM",
+    "Batería": "Hasta 2 días",
+    "Color": "Plateado"
+   },
+   "missingSpecs": [],
+   "active": true,
+   "stock": 46,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 2892000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 0,
+    "especificaciones": 1,
+    "descripcion": 0,
+    "seo": 0.73,
+    "consistencia": 1,
+    "vendibilidad": 1
+   },
+   "score": 56,
+   "semaforo": "rojo",
+   "issues": [
+    {
+     "code": "img_0",
+     "dim": "imagenes",
+     "sev": "alta",
+     "label": "Sin imágenes"
+    },
+    {
+     "code": "desc_0",
+     "dim": "descripcion",
+     "sev": "alta",
+     "label": "Sin descripción"
+    },
+    {
+     "code": "desc_corta_0",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "Sin descripción corta"
+    },
+    {
+     "code": "seo_meta_len",
+     "dim": "seo",
+     "sev": "baja",
+     "label": "Meta description de 27 caracteres (recomendado 70–160)"
+    }
+   ],
+   "priority": 66,
+   "warnings": []
+  },
+  {
+   "skuId": "1033",
+   "productId": "121",
+   "refId": "TG-1033",
+   "ean": "",
+   "name": "APPLE WATCH SE 40MM Blanco",
+   "department": "Tecnología",
+   "category": "Smartwatches",
+   "brand": "Apple",
+   "url": "https://compras.tigo.com.co/apple-watch-se-40mm/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10330/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10330/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10331/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10332/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10333/img.jpg"
+   ],
+   "imagesCount": 4,
+   "specs": {
+    "Tamaño de caja": "40 mm",
+    "Resistencia al agua": "5 ATM",
+    "Batería": "Hasta 10 días",
+    "Color": "Blanco"
+   },
+   "missingSpecs": [
+    "Compatibilidad"
+   ],
+   "active": false,
+   "stock": 3,
+   "unlimited": false,
+   "simAvailability": "cannotBeDelivered",
+   "simPrice": 0,
+   "comprable": false,
+   "dims": {
+    "imagenes": 1,
+    "especificaciones": 0.8,
+    "descripcion": 0.85,
+    "seo": 1,
+    "consistencia": 1,
+    "vendibilidad": 0.3
+   },
+   "score": 85,
+   "semaforo": "verde",
+   "issues": [
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 1 de 5 especificaciones de su categoría: Compatibilidad"
+    },
+    {
+     "code": "inactivo",
+     "dim": "vendibilidad",
+     "sev": "media",
+     "label": "SKU o producto inactivo"
+    }
+   ],
+   "priority": 9,
+   "warnings": []
+  },
+  {
+   "skuId": "1034",
+   "productId": "121",
+   "refId": "TG-1034",
+   "ean": "",
+   "name": "APPLE WATCH SE 40MM Azul",
+   "department": "Tecnología",
+   "category": "Smartwatches",
+   "brand": "Apple",
+   "url": "https://compras.tigo.com.co/apple-watch-se-40mm/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10340/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10340/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10341/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10342/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10343/img.jpg"
+   ],
+   "imagesCount": 4,
+   "specs": {
+    "Tamaño de caja": "40 mm",
+    "Resistencia al agua": "5 ATM",
+    "Batería": "Hasta 10 días",
+    "Color": "Azul"
+   },
+   "missingSpecs": [
+    "Compatibilidad"
+   ],
+   "active": true,
+   "stock": 6,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 863000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 1,
+    "especificaciones": 0.8,
+    "descripcion": 0.85,
+    "seo": 1,
+    "consistencia": 0.7,
+    "vendibilidad": 1
+   },
+   "score": 89,
+   "semaforo": "verde",
+   "issues": [
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 1 de 5 especificaciones de su categoría: Compatibilidad"
+    },
+    {
+     "code": "nombre_mayus",
+     "dim": "consistencia",
+     "sev": "baja",
+     "label": "Nombre en MAYÚSCULAS"
+    }
+   ],
+   "priority": 17,
+   "warnings": []
+  },
+  {
+   "skuId": "1035",
+   "productId": "122",
+   "refId": "TG-1035",
+   "ean": "7100008196165",
+   "name": "XIAOMI REDMI WATCH 5 ACTIVE Azul",
+   "department": "Tecnología",
+   "category": "Smartwatches",
+   "brand": "Xiaomi",
+   "url": "https://compras.tigo.com.co/xiaomi-redmi-watch-5-active/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10350/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10350/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10351/img.jpg"
+   ],
+   "imagesCount": 2,
+   "specs": {
+    "Compatibilidad": "iOS",
+    "Tamaño de caja": "40 mm",
+    "Resistencia al agua": "5 ATM",
+    "Batería": "Hasta 10 días",
+    "Color": "Rosado"
+   },
+   "missingSpecs": [],
+   "active": true,
+   "stock": 53,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 2068000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 0.7,
+    "especificaciones": 1,
+    "descripcion": 0.65,
+    "seo": 1,
+    "consistencia": 0.3,
+    "vendibilidad": 1
+   },
+   "score": 80,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "img_pocas",
+     "dim": "imagenes",
+     "sev": "media",
+     "label": "Solo 2 imágenes (recomendado ≥ 3)"
+    },
+    {
+     "code": "desc_corta_0",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "Sin descripción corta"
+    },
+    {
+     "code": "color_inconsistente",
+     "dim": "consistencia",
+     "sev": "alta",
+     "label": "El nombre dice \"azul\" pero Color = \"Rosado\""
+    },
+    {
+     "code": "nombre_mayus",
+     "dim": "consistencia",
+     "sev": "baja",
+     "label": "Nombre en MAYÚSCULAS"
+    }
+   ],
+   "priority": 30,
+   "warnings": []
+  },
+  {
+   "skuId": "1036",
+   "productId": "122",
+   "refId": "TG-1036",
+   "ean": "7100008204084",
+   "name": "XIAOMI REDMI WATCH 5 ACTIVE Azul",
+   "department": "Tecnología",
+   "category": "Smartwatches",
+   "brand": "Xiaomi",
+   "url": "https://compras.tigo.com.co/xiaomi-redmi-watch-5-active/p",
+   "imageUrl": "",
+   "images": [],
+   "imagesCount": 0,
+   "specs": {
+    "Compatibilidad": "iOS",
+    "Tamaño de caja": "40 mm",
+    "Resistencia al agua": "5 ATM",
+    "Batería": "",
+    "Color": "Azul"
+   },
+   "missingSpecs": [
+    "Batería"
+   ],
+   "active": false,
+   "stock": 0,
+   "unlimited": false,
+   "simAvailability": "withoutStock",
+   "simPrice": 0,
+   "comprable": false,
+   "dims": {
+    "imagenes": 0,
+    "especificaciones": 0.8,
+    "descripcion": 0.65,
+    "seo": 1,
+    "consistencia": 0.7,
+    "vendibilidad": 0
+   },
+   "score": 55,
+   "semaforo": "rojo",
+   "issues": [
+    {
+     "code": "img_0",
+     "dim": "imagenes",
+     "sev": "alta",
+     "label": "Sin imágenes"
+    },
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 1 de 5 especificaciones de su categoría: Batería"
+    },
+    {
+     "code": "spec_vacia",
+     "dim": "especificaciones",
+     "sev": "baja",
+     "label": "Campos creados sin valor: Batería"
+    },
+    {
+     "code": "desc_corta_0",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "Sin descripción corta"
+    },
+    {
+     "code": "nombre_mayus",
+     "dim": "consistencia",
+     "sev": "baja",
+     "label": "Nombre en MAYÚSCULAS"
+    },
+    {
+     "code": "inactivo",
+     "dim": "vendibilidad",
+     "sev": "media",
+     "label": "SKU o producto inactivo"
+    }
+   ],
+   "priority": 27,
+   "warnings": []
+  },
+  {
+   "skuId": "1037",
+   "productId": "123",
+   "refId": "TG-1037",
+   "ean": "7100008212003",
+   "name": "HUAWEI WATCH FIT 3 Plateado",
+   "department": "Tecnología",
+   "category": "Smartwatches",
+   "brand": "Huawei",
+   "url": "https://compras.tigo.com.co/huawei-watch-fit-3/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10370/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10370/img.jpg"
+   ],
+   "imagesCount": 1,
+   "specs": {
+    "Compatibilidad": "Android e iOS",
+    "Tamaño de caja": "40 mm",
+    "Resistencia al agua": "5 ATM",
+    "Batería": "Hasta 2 días",
+    "Color": "Plateado"
+   },
+   "missingSpecs": [],
+   "active": false,
+   "stock": 12,
+   "unlimited": false,
+   "simAvailability": "cannotBeDelivered",
+   "simPrice": 0,
+   "comprable": false,
+   "dims": {
+    "imagenes": 0.4,
+    "especificaciones": 1,
+    "descripcion": 0.45,
+    "seo": 0.73,
+    "consistencia": 1,
+    "vendibilidad": 0.3
+   },
+   "score": 66,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "img_pocas",
+     "dim": "imagenes",
+     "sev": "media",
+     "label": "Solo 1 imagen (recomendado ≥ 3)"
+    },
+    {
+     "code": "desc_corta",
+     "dim": "descripcion",
+     "sev": "media",
+     "label": "Descripción corta (118 caracteres, recomendado ≥ 300)"
+    },
+    {
+     "code": "desc_corta_0",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "Sin descripción corta"
+    },
+    {
+     "code": "seo_meta_len",
+     "dim": "seo",
+     "sev": "baja",
+     "label": "Meta description de 18 caracteres (recomendado 70–160)"
+    },
+    {
+     "code": "inactivo",
+     "dim": "vendibilidad",
+     "sev": "media",
+     "label": "SKU o producto inactivo"
+    }
+   ],
+   "priority": 20,
+   "warnings": []
+  },
+  {
+   "skuId": "1038",
+   "productId": "124",
+   "refId": "TG-1038",
+   "ean": "7100008219922",
+   "name": "Samsung Galaxy Tab A9+ Gris",
+   "department": "Tecnología",
+   "category": "Tablets",
+   "brand": "Samsung",
+   "url": "https://compras.tigo.com.co/samsung-galaxy-tab-a9-/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10380/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10380/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10381/img.jpg"
+   ],
+   "imagesCount": 2,
+   "specs": {
+    "Sistema Operativo": "Android",
+    "Pantalla": "10,9\"",
+    "Almacenamiento": "128 GB",
+    "Memoria RAM": "4 GB",
+    "Conectividad": "Wi-Fi",
+    "Color": "Gris"
+   },
+   "missingSpecs": [],
+   "active": true,
+   "stock": 42,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 1212000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 0.7,
+    "especificaciones": 1,
+    "descripcion": 0.2,
+    "seo": 0.73,
+    "consistencia": 1,
+    "vendibilidad": 1
+   },
+   "score": 74,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "img_pocas",
+     "dim": "imagenes",
+     "sev": "media",
+     "label": "Solo 2 imágenes (recomendado ≥ 3)"
+    },
+    {
+     "code": "desc_muy_corta",
+     "dim": "descripcion",
+     "sev": "alta",
+     "label": "Descripción muy corta (22 caracteres)"
+    },
+    {
+     "code": "desc_corta_0",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "Sin descripción corta"
+    },
+    {
+     "code": "seo_title_len",
+     "dim": "seo",
+     "sev": "baja",
+     "label": "Title de 85 caracteres (recomendado 30–65)"
+    }
+   ],
+   "priority": 39,
+   "warnings": []
+  },
+  {
+   "skuId": "1039",
+   "productId": "125",
+   "refId": "TG-1039",
+   "ean": "7100008227841",
+   "name": "Apple iPad 10.9 Verde",
+   "department": "Tecnología",
+   "category": "Tablets",
+   "brand": "Apple",
+   "url": "https://compras.tigo.com.co/apple-ipad-10-9/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10390/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10390/img.jpg"
+   ],
+   "imagesCount": 1,
+   "specs": {
+    "Sistema Operativo": "iPadOS",
+    "Pantalla": "11\"",
+    "Almacenamiento": "64 GB",
+    "Memoria RAM": "8 GB",
+    "Color": "Verde"
+   },
+   "missingSpecs": [
+    "Conectividad"
+   ],
+   "active": true,
+   "stock": 41,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 1351000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 0.4,
+    "especificaciones": 0.83,
+    "descripcion": 0.85,
+    "seo": 0.53,
+    "consistencia": 1,
+    "vendibilidad": 1
+   },
+   "score": 74,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "img_pocas",
+     "dim": "imagenes",
+     "sev": "media",
+     "label": "Solo 1 imagen (recomendado ≥ 3)"
+    },
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 1 de 6 especificaciones de su categoría: Conectividad"
+    },
+    {
+     "code": "seo_meta_0",
+     "dim": "seo",
+     "sev": "media",
+     "label": "Meta description vacía"
+    }
+   ],
+   "priority": 39,
+   "warnings": []
+  },
+  {
+   "skuId": "1040",
+   "productId": "126",
+   "refId": "TG-1040",
+   "ean": "7100008235760",
+   "name": "Lenovo Tab M11 Gris",
+   "department": "Tecnología",
+   "category": "Tablets",
+   "brand": "Lenovo",
+   "url": "https://compras.tigo.com.co/lenovo-tab-m11/p",
+   "imageUrl": "",
+   "images": [],
+   "imagesCount": 0,
+   "specs": {
+    "Sistema Operativo": "Android",
+    "Pantalla": "10,9\"",
+    "Almacenamiento": "128 GB",
+    "Memoria RAM": "8 GB",
+    "Conectividad": "Wi-Fi + LTE",
+    "Color": "Gris"
+   },
+   "missingSpecs": [],
+   "active": true,
+   "stock": 19,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 2583000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 0,
+    "especificaciones": 1,
+    "descripcion": 0.35,
+    "seo": 0.73,
+    "consistencia": 1,
+    "vendibilidad": 1
+   },
+   "score": 63,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "img_0",
+     "dim": "imagenes",
+     "sev": "alta",
+     "label": "Sin imágenes"
+    },
+    {
+     "code": "desc_corta",
+     "dim": "descripcion",
+     "sev": "media",
+     "label": "Descripción corta (151 caracteres, recomendado ≥ 300)"
+    },
+    {
+     "code": "desc_html",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "HTML con estilos embebidos (copiado de Word/web)"
+    },
+    {
+     "code": "desc_corta_0",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "Sin descripción corta"
+    },
+    {
+     "code": "seo_meta_len",
+     "dim": "seo",
+     "sev": "baja",
+     "label": "Meta description de 14 caracteres (recomendado 70–160)"
+    }
+   ],
+   "priority": 56,
+   "warnings": []
+  },
+  {
+   "skuId": "1041",
+   "productId": "127",
+   "refId": "TG-1041",
+   "ean": "7100008243679",
+   "name": "Samsung Galaxy Buds 3 Blanco",
+   "department": "Tecnología",
+   "category": "Audífonos",
+   "brand": "Samsung",
+   "url": "https://compras.tigo.com.co/samsung-galaxy-buds-3/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10410/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10410/img.jpg"
+   ],
+   "imagesCount": 1,
+   "specs": {
+    "Tipo": "On-ear",
+    "Conectividad": "Bluetooth 5.3",
+    "Cancelación de ruido": "Sí",
+    "Autonomía": "Hasta 30 h",
+    "Color": "Blanco"
+   },
+   "missingSpecs": [],
+   "active": true,
+   "stock": 39,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 2348000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 0.4,
+    "especificaciones": 1,
+    "descripcion": 0.65,
+    "seo": 0.47,
+    "consistencia": 1,
+    "vendibilidad": 1
+   },
+   "score": 73,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "img_pocas",
+     "dim": "imagenes",
+     "sev": "media",
+     "label": "Solo 1 imagen (recomendado ≥ 3)"
+    },
+    {
+     "code": "desc_corta_0",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "Sin descripción corta"
+    },
+    {
+     "code": "seo_title_0",
+     "dim": "seo",
+     "sev": "media",
+     "label": "Title SEO vacío (VTEX usa el nombre por defecto)"
+    }
+   ],
+   "priority": 41,
+   "warnings": []
+  },
+  {
+   "skuId": "1042",
+   "productId": "128",
+   "refId": "TG-1042",
+   "ean": "7100008251598",
+   "name": "Apple AirPods 4 Rosado",
+   "department": "Tecnología",
+   "category": "Audífonos",
+   "brand": "Apple",
+   "url": "https://compras.tigo.com.co/apple-airpods-4/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10420/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10420/img.jpg"
+   ],
+   "imagesCount": 1,
+   "specs": {
+    "Tipo": "In-ear",
+    "Conectividad": "Bluetooth 5.3",
+    "Cancelación de ruido": "",
+    "Autonomía": "Hasta 57 h",
+    "Color": "Rosado"
+   },
+   "missingSpecs": [
+    "Cancelación de ruido"
+   ],
+   "active": true,
+   "stock": 42,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 2744000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 0.4,
+    "especificaciones": 0.8,
+    "descripcion": 0.55,
+    "seo": 0.2,
+    "consistencia": 1,
+    "vendibilidad": 1
+   },
+   "score": 62,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "img_pocas",
+     "dim": "imagenes",
+     "sev": "media",
+     "label": "Solo 1 imagen (recomendado ≥ 3)"
+    },
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 1 de 5 especificaciones de su categoría: Cancelación de ruido"
+    },
+    {
+     "code": "spec_vacia",
+     "dim": "especificaciones",
+     "sev": "baja",
+     "label": "Campos creados sin valor: Cancelación de ruido"
+    },
+    {
+     "code": "desc_corta",
+     "dim": "descripcion",
+     "sev": "media",
+     "label": "Descripción corta (152 caracteres, recomendado ≥ 300)"
+    },
+    {
+     "code": "desc_html",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "HTML con estilos embebidos (copiado de Word/web)"
+    },
+    {
+     "code": "seo_title_0",
+     "dim": "seo",
+     "sev": "media",
+     "label": "Title SEO vacío (VTEX usa el nombre por defecto)"
+    },
+    {
+     "code": "seo_meta_len",
+     "dim": "seo",
+     "sev": "baja",
+     "label": "Meta description de 15 caracteres (recomendado 70–160)"
+    }
+   ],
+   "priority": 57,
+   "warnings": []
+  },
+  {
+   "skuId": "1043",
+   "productId": "129",
+   "refId": "TG-1043",
+   "ean": "7100008259517",
+   "name": "JBL Tune 520BT Plateado",
+   "department": "Tecnología",
+   "category": "Audífonos",
+   "brand": "JBL",
+   "url": "https://compras.tigo.com.co/jbl-tune-520bt/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10430/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10430/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10431/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10432/img.jpg"
+   ],
+   "imagesCount": 3,
+   "specs": {
+    "Tipo": "On-ear",
+    "Conectividad": "Bluetooth 5.3",
+    "Cancelación de ruido": "Sí",
+    "Autonomía": "Hasta 30 h",
+    "Color": "Plateado"
+   },
+   "missingSpecs": [],
+   "active": true,
+   "stock": 15,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 2753000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 1,
+    "especificaciones": 1,
+    "descripcion": 0.2,
+    "seo": 0.47,
+    "consistencia": 1,
+    "vendibilidad": 1
+   },
+   "score": 76,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "desc_muy_corta",
+     "dim": "descripcion",
+     "sev": "alta",
+     "label": "Descripción muy corta (14 caracteres)"
+    },
+    {
+     "code": "desc_corta_0",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "Sin descripción corta"
+    },
+    {
+     "code": "seo_title_0",
+     "dim": "seo",
+     "sev": "media",
+     "label": "Title SEO vacío (VTEX usa el nombre por defecto)"
+    }
+   ],
+   "priority": 36,
+   "warnings": []
+  },
+  {
+   "skuId": "1044",
+   "productId": "130",
+   "refId": "TG-1044",
+   "ean": "7100008267436",
+   "name": "Xiaomi Redmi Buds 6 Negro",
+   "department": "Tecnología",
+   "category": "Audífonos",
+   "brand": "Xiaomi",
+   "url": "https://compras.tigo.com.co/xiaomi-redmi-buds-6/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10440/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10440/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10441/img.jpg"
+   ],
+   "imagesCount": 2,
+   "specs": {
+    "Tipo": "In-ear",
+    "Conectividad": "Bluetooth 5.3",
+    "Cancelación de ruido": "Sí",
+    "Autonomía": "Hasta 30 h",
+    "Color": "Negro"
+   },
+   "missingSpecs": [],
+   "active": false,
+   "stock": 60,
+   "unlimited": false,
+   "simAvailability": "cannotBeDelivered",
+   "simPrice": 0,
+   "comprable": false,
+   "dims": {
+    "imagenes": 0.7,
+    "especificaciones": 1,
+    "descripcion": 0.85,
+    "seo": 0,
+    "consistencia": 1,
+    "vendibilidad": 0.3
+   },
+   "score": 69,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "img_pocas",
+     "dim": "imagenes",
+     "sev": "media",
+     "label": "Solo 2 imágenes (recomendado ≥ 3)"
+    },
+    {
+     "code": "seo_title_0",
+     "dim": "seo",
+     "sev": "media",
+     "label": "Title SEO vacío (VTEX usa el nombre por defecto)"
+    },
+    {
+     "code": "seo_meta_0",
+     "dim": "seo",
+     "sev": "media",
+     "label": "Meta description vacía"
+    },
+    {
+     "code": "inactivo",
+     "dim": "vendibilidad",
+     "sev": "media",
+     "label": "SKU o producto inactivo"
+    }
+   ],
+   "priority": 19,
+   "warnings": []
+  },
+  {
+   "skuId": "1045",
+   "productId": "131",
+   "refId": "TG-1045",
+   "ean": "7100008275355",
+   "name": "Samsung Cargador 25W USB-C",
+   "department": "Accesorios",
+   "category": "Cargadores",
+   "brand": "Samsung",
+   "url": "https://compras.tigo.com.co/samsung-cargador-25w-usb-c/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10450/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10450/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10451/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10452/img.jpg"
+   ],
+   "imagesCount": 3,
+   "specs": {
+    "Potencia": "25 W",
+    "Conector": "USB-C",
+    "Compatibilidad": "Universal"
+   },
+   "missingSpecs": [],
+   "active": true,
+   "stock": 0,
+   "unlimited": false,
+   "simAvailability": "withoutStock",
+   "simPrice": 0,
+   "comprable": false,
+   "dims": {
+    "imagenes": 1,
+    "especificaciones": 1,
+    "descripcion": 0,
+    "seo": 1,
+    "consistencia": 1,
+    "vendibilidad": 0.4
+   },
+   "score": 74,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "desc_0",
+     "dim": "descripcion",
+     "sev": "alta",
+     "label": "Sin descripción"
+    },
+    {
+     "code": "desc_corta_0",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "Sin descripción corta"
+    },
+    {
+     "code": "sin_stock",
+     "dim": "vendibilidad",
+     "sev": "alta",
+     "label": "Activo sin stock disponible"
+    }
+   ],
+   "priority": 29,
+   "warnings": []
+  },
+  {
+   "skuId": "1046",
+   "productId": "132",
+   "refId": "TG-1046",
+   "ean": "7100008283274",
+   "name": "Apple Adaptador 20W USB-C",
+   "department": "Accesorios",
+   "category": "Cargadores",
+   "brand": "Apple",
+   "url": "https://compras.tigo.com.co/apple-adaptador-20w-usb-c/p",
+   "imageUrl": "",
+   "images": [],
+   "imagesCount": 0,
+   "specs": {
+    "Potencia": "20 W",
+    "Conector": "USB-C",
+    "Compatibilidad": "Universal"
+   },
+   "missingSpecs": [],
+   "active": true,
+   "stock": 30,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 837000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 0,
+    "especificaciones": 1,
+    "descripcion": 0,
+    "seo": 1,
+    "consistencia": 1,
+    "vendibilidad": 1
+   },
+   "score": 60,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "img_0",
+     "dim": "imagenes",
+     "sev": "alta",
+     "label": "Sin imágenes"
+    },
+    {
+     "code": "desc_0",
+     "dim": "descripcion",
+     "sev": "alta",
+     "label": "Sin descripción"
+    },
+    {
+     "code": "desc_corta_0",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "Sin descripción corta"
+    }
+   ],
+   "priority": 60,
+   "warnings": []
+  },
+  {
+   "skuId": "1047",
+   "productId": "133",
+   "refId": "TG-1047",
+   "ean": "7100008291193",
+   "name": "Genérica Cable USB-C 1m",
+   "department": "Accesorios",
+   "category": "Cargadores",
+   "brand": "Genérica",
+   "url": "https://compras.tigo.com.co/gen-rica-cable-usb-c-1m/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10470/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10470/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10471/img.jpg"
+   ],
+   "imagesCount": 2,
+   "specs": {
+    "Conector": "USB-C",
+    "Compatibilidad": "Universal"
+   },
+   "missingSpecs": [
+    "Potencia"
+   ],
+   "active": true,
+   "stock": 55,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 665000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 0.7,
+    "especificaciones": 0.67,
+    "descripcion": 0.25,
+    "seo": 0.53,
+    "consistencia": 0.7,
+    "vendibilidad": 1
+   },
+   "score": 61,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "img_pocas",
+     "dim": "imagenes",
+     "sev": "media",
+     "label": "Solo 2 imágenes (recomendado ≥ 3)"
+    },
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 1 de 3 especificaciones de su categoría: Potencia"
+    },
+    {
+     "code": "desc_corta",
+     "dim": "descripcion",
+     "sev": "media",
+     "label": "Descripción corta (145 caracteres, recomendado ≥ 300)"
+    },
+    {
+     "code": "desc_duplicada",
+     "dim": "descripcion",
+     "sev": "media",
+     "label": "Descripción idéntica en 2 productos"
+    },
+    {
+     "code": "desc_corta_0",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "Sin descripción corta"
+    },
+    {
+     "code": "seo_meta_0",
+     "dim": "seo",
+     "sev": "media",
+     "label": "Meta description vacía"
+    },
+    {
+     "code": "marca",
+     "dim": "consistencia",
+     "sev": "media",
+     "label": "Sin marca o marca genérica"
+    }
+   ],
+   "priority": 59,
+   "warnings": []
+  },
+  {
+   "skuId": "1048",
+   "productId": "134",
+   "refId": "TG-1048",
+   "ean": "7100008299112",
+   "name": "Samsung Funda Silicone A16 Gris",
+   "department": "Accesorios",
+   "category": "Fundas y protectores",
+   "brand": "Samsung",
+   "url": "https://compras.tigo.com.co/samsung-funda-silicone-a16/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10480/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10480/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10481/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10482/img.jpg"
+   ],
+   "imagesCount": 3,
+   "specs": {
+    "Material": "Vidrio templado",
+    "Compatibilidad": "A16",
+    "Color": ""
+   },
+   "missingSpecs": [
+    "Color"
+   ],
+   "active": true,
+   "stock": 29,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 516000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 1,
+    "especificaciones": 0.67,
+    "descripcion": 0.35,
+    "seo": 1,
+    "consistencia": 1,
+    "vendibilidad": 1
+   },
+   "score": 79,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 1 de 3 especificaciones de su categoría: Color"
+    },
+    {
+     "code": "spec_vacia",
+     "dim": "especificaciones",
+     "sev": "baja",
+     "label": "Campos creados sin valor: Color"
+    },
+    {
+     "code": "desc_corta",
+     "dim": "descripcion",
+     "sev": "media",
+     "label": "Descripción corta (163 caracteres, recomendado ≥ 300)"
+    },
+    {
+     "code": "desc_html",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "HTML con estilos embebidos (copiado de Word/web)"
+    },
+    {
+     "code": "desc_corta_0",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "Sin descripción corta"
+    }
+   ],
+   "priority": 32,
+   "warnings": []
+  },
+  {
+   "skuId": "1049",
+   "productId": "135",
+   "refId": "TG-1049",
+   "ean": "7100008307031",
+   "name": "Genérica Vidrio templado universal Verde",
+   "department": "Accesorios",
+   "category": "Fundas y protectores",
+   "brand": "Genérica",
+   "url": "https://compras.tigo.com.co/gen-rica-vidrio-templado-universal/p",
+   "imageUrl": "",
+   "images": [],
+   "imagesCount": 0,
+   "specs": {
+    "Compatibilidad": "universal",
+    "Color": "Verde"
+   },
+   "missingSpecs": [
+    "Material"
+   ],
+   "active": true,
+   "stock": 11,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 2686000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 0,
+    "especificaciones": 0.67,
+    "descripcion": 0.55,
+    "seo": 0.73,
+    "consistencia": 0.7,
+    "vendibilidad": 1
+   },
+   "score": 56,
+   "semaforo": "rojo",
+   "issues": [
+    {
+     "code": "img_0",
+     "dim": "imagenes",
+     "sev": "alta",
+     "label": "Sin imágenes"
+    },
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 1 de 3 especificaciones de su categoría: Material"
+    },
+    {
+     "code": "desc_corta",
+     "dim": "descripcion",
+     "sev": "media",
+     "label": "Descripción corta (171 caracteres, recomendado ≥ 300)"
+    },
+    {
+     "code": "desc_html",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "HTML con estilos embebidos (copiado de Word/web)"
+    },
+    {
+     "code": "seo_meta_len",
+     "dim": "seo",
+     "sev": "baja",
+     "label": "Meta description de 34 caracteres (recomendado 70–160)"
+    },
+    {
+     "code": "marca",
+     "dim": "consistencia",
+     "sev": "media",
+     "label": "Sin marca o marca genérica"
+    }
+   ],
+   "priority": 66,
+   "warnings": []
+  },
+  {
+   "skuId": "1050",
+   "productId": "136",
+   "refId": "TG-1050",
+   "ean": "7100008314950",
+   "name": "Apple Funda MagSafe iPhone 16 Rosado",
+   "department": "Accesorios",
+   "category": "Fundas y protectores",
+   "brand": "Apple",
+   "url": "https://compras.tigo.com.co/apple-funda-magsafe-iphone-16/p",
+   "imageUrl": "https://tigocolombia.vteximg.com.br/arquivos/ids/10500/img.jpg",
+   "images": [
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10500/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10501/img.jpg",
+    "https://tigocolombia.vteximg.com.br/arquivos/ids/10502/img.jpg"
+   ],
+   "imagesCount": 3,
+   "specs": {
+    "Material": "Policarbonato",
+    "Compatibilidad": "iPhone 16",
+    "Color": "Rosado"
+   },
+   "missingSpecs": [],
+   "active": true,
+   "stock": 3,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 1040000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 1,
+    "especificaciones": 1,
+    "descripcion": 0.2,
+    "seo": 0.27,
+    "consistencia": 1,
+    "vendibilidad": 1
+   },
+   "score": 73,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "desc_0",
+     "dim": "descripcion",
+     "sev": "alta",
+     "label": "Sin descripción"
+    },
+    {
+     "code": "seo_title_len",
+     "dim": "seo",
+     "sev": "baja",
+     "label": "Title de 92 caracteres (recomendado 30–65)"
+    },
+    {
+     "code": "seo_meta_0",
+     "dim": "seo",
+     "sev": "media",
+     "label": "Meta description vacía"
+    }
+   ],
+   "priority": 41,
+   "warnings": []
+  },
+  {
+   "skuId": "1051",
+   "productId": "137",
+   "refId": "TG-1051",
+   "ean": "7100008322869",
+   "name": "Samsung Smart TV 55\" Crystal UHD",
+   "department": "Hogar",
+   "category": "Televisores",
+   "brand": "Samsung",
+   "url": "https://compras.tigo.com.co/samsung-smart-tv-55-crystal-uhd/p",
+   "imageUrl": "",
+   "images": [],
+   "imagesCount": 0,
+   "specs": {
+    "Tamaño de pantalla": "55\"",
+    "Resolución": "",
+    "Sistema Operativo": "webOS",
+    "HDMI": "2"
+   },
+   "missingSpecs": [
+    "Resolución"
+   ],
+   "active": true,
+   "stock": 58,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 1340000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 0,
+    "especificaciones": 0.75,
+    "descripcion": 0.85,
+    "seo": 0.27,
+    "consistencia": 1,
+    "vendibilidad": 1
+   },
+   "score": 60,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "img_0",
+     "dim": "imagenes",
+     "sev": "alta",
+     "label": "Sin imágenes"
+    },
+    {
+     "code": "spec_faltante",
+     "dim": "especificaciones",
+     "sev": "media",
+     "label": "Faltan 1 de 4 especificaciones de su categoría: Resolución"
+    },
+    {
+     "code": "spec_vacia",
+     "dim": "especificaciones",
+     "sev": "baja",
+     "label": "Campos creados sin valor: Resolución"
+    },
+    {
+     "code": "seo_title_len",
+     "dim": "seo",
+     "sev": "baja",
+     "label": "Title de 95 caracteres (recomendado 30–65)"
+    },
+    {
+     "code": "seo_meta_0",
+     "dim": "seo",
+     "sev": "media",
+     "label": "Meta description vacía"
+    }
+   ],
+   "priority": 60,
+   "warnings": []
+  },
+  {
+   "skuId": "1052",
+   "productId": "138",
+   "refId": "TG-1052",
+   "ean": "7100008330788",
+   "name": "LG Smart TV 50\" UHD ThinQ",
+   "department": "Hogar",
+   "category": "Televisores",
+   "brand": "LG",
+   "url": "https://compras.tigo.com.co/lg-smart-tv-50-uhd-thinq/p",
+   "imageUrl": "",
+   "images": [],
+   "imagesCount": 0,
+   "specs": {
+    "Tamaño de pantalla": "50\"",
+    "Resolución": "4K UHD",
+    "Sistema Operativo": "Tizen",
+    "HDMI": "2"
+   },
+   "missingSpecs": [],
+   "active": true,
+   "stock": 0,
+   "unlimited": false,
+   "simAvailability": "withoutStock",
+   "simPrice": 0,
+   "comprable": false,
+   "dims": {
+    "imagenes": 0,
+    "especificaciones": 1,
+    "descripcion": 0.85,
+    "seo": 0.47,
+    "consistencia": 1,
+    "vendibilidad": 0.4
+   },
+   "score": 63,
+   "semaforo": "amarillo",
+   "issues": [
+    {
+     "code": "img_0",
+     "dim": "imagenes",
+     "sev": "alta",
+     "label": "Sin imágenes"
+    },
+    {
+     "code": "seo_title_0",
+     "dim": "seo",
+     "sev": "media",
+     "label": "Title SEO vacío (VTEX usa el nombre por defecto)"
+    },
+    {
+     "code": "sin_stock",
+     "dim": "vendibilidad",
+     "sev": "alta",
+     "label": "Activo sin stock disponible"
+    }
+   ],
+   "priority": 41,
+   "warnings": []
+  },
+  {
+   "skuId": "1053",
+   "productId": "139",
+   "refId": "TG-1053",
+   "ean": "7100008338707",
+   "name": "Hisense Smart TV 43\" Full HD",
+   "department": "Hogar",
+   "category": "Televisores",
+   "brand": "Hisense",
+   "url": "https://compras.tigo.com.co/hisense-smart-tv-43-full-hd/p",
+   "imageUrl": "",
+   "images": [],
+   "imagesCount": 0,
+   "specs": {
+    "Tamaño de pantalla": "43\"",
+    "Resolución": "Full HD",
+    "Sistema Operativo": "webOS",
+    "HDMI": "2"
+   },
+   "missingSpecs": [],
+   "active": true,
+   "stock": 29,
+   "unlimited": false,
+   "simAvailability": "available",
+   "simPrice": 2153000,
+   "comprable": true,
+   "dims": {
+    "imagenes": 0,
+    "especificaciones": 1,
+    "descripcion": 0.25,
+    "seo": 0.27,
+    "consistencia": 1,
+    "vendibilidad": 1
+   },
+   "score": 54,
+   "semaforo": "rojo",
+   "issues": [
+    {
+     "code": "img_0",
+     "dim": "imagenes",
+     "sev": "alta",
+     "label": "Sin imágenes"
+    },
+    {
+     "code": "desc_corta",
+     "dim": "descripcion",
+     "sev": "media",
+     "label": "Descripción corta (145 caracteres, recomendado ≥ 300)"
+    },
+    {
+     "code": "desc_duplicada",
+     "dim": "descripcion",
+     "sev": "media",
+     "label": "Descripción idéntica en 2 productos"
+    },
+    {
+     "code": "desc_corta_0",
+     "dim": "descripcion",
+     "sev": "baja",
+     "label": "Sin descripción corta"
+    },
+    {
+     "code": "seo_title_len",
+     "dim": "seo",
+     "sev": "baja",
+     "label": "Title de 91 caracteres (recomendado 30–65)"
+    },
+    {
+     "code": "seo_meta_0",
+     "dim": "seo",
+     "sev": "media",
+     "label": "Meta description vacía"
+    }
+   ],
+   "priority": 69,
+   "warnings": []
+  }
+ ],
+ "demo": true
+}
