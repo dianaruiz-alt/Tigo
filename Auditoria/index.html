@@ -288,7 +288,9 @@ footer{color:var(--muted);font-size:12px;padding:24px 0 40px}
     </nav>
 
     <section class="filters" aria-label="Filtros">
-      <label>Árbol de categorías<select id="fPath" class="wide"></select></label>
+      <label>Departamento<select id="fDep"></select></label>
+      <label>Categoría<select id="fCat"></select></label>
+      <label id="lSub">Subcategoría<select id="fSub"></select></label>
       <label>Visibilidad<select id="fVis"></select></label>
       <label>Calidad
         <div class="seg" id="fSem">
@@ -428,6 +430,8 @@ function normSku(s) {
   path = path.filter((x, i) => x && x !== path[i - 1]);
   if (!path.length) path = ['Sin categoría'];
   s.path = path; s.pathKey = path.join(SEP);
+  const ids = Array.isArray(s.categoryIds) ? s.categoryIds.map(String) : [];
+  s.pathIds = ids.length === path.length ? ids : path.map(() => '');
   s.legacy = s.skuActive === undefined;
   s.fSku = s.skuActive ?? !!s.active;
   s.fProd = s.productActive ?? !!s.active;
@@ -465,11 +469,11 @@ function buildProduct(pid, skus) {
   const P = {
     productId: String(pid), c, skus, s0,
     name: c.name || (s0.name || '').replace(new RegExp('\\s*' + (s0.skuName || '§') + '$'), '') || 'Producto ' + pid,
-    brand: s0.brand || '', path: s0.path, pathKey: s0.pathKey, url: s0.url || '', imageUrl: (ok.find(s => s.imageUrl) || {}).imageUrl || '',
+    brand: s0.brand || '', path: s0.path, pathKey: s0.pathKey, pathIds: s0.pathIds, perfil: s0.perfil || null, url: s0.url || '', imageUrl: (ok.find(s => s.imageUrl) || {}).imageUrl || '',
     stock: ok.reduce((a, s) => a + (s.unlimited ? 0 : Number(s.stock) || 0), 0), unlimited: ok.some(s => s.unlimited),
     score: ok.length ? Math.round(ok.reduce((a, s) => a + s.score, 0) / ok.length) : null,
     minScore: ok.length ? Math.min(...ok.map(s => s.score)) : null,
-    descOk: (c.descLength || 0) >= 300,
+    descOk: (c.descLength || 0) >= ((s0.perfil && s0.perfil.descMin) || 300),
   };
   P.pSpecs = c.specs || (s0 && s0.productSpecs) || null;
   P.missP = c.missingSpecs || (s0 && s0.missingProductSpecs) || null;
@@ -504,9 +508,9 @@ function blockers(P) {
 function expFor(key, leaf) {
   const all = A.expectedByCategory || {};
   const e = all[key] ?? all[leaf];
-  if (!e) return { producto: [], sku: [], legacy: null };
-  if (Array.isArray(e)) return { producto: [], sku: [], legacy: e };
-  return { producto: e.producto || [], sku: e.sku || [], legacy: null };
+  if (!e) return { producto: [], sku: [], reqP: [], reqS: [], legacy: null };
+  if (Array.isArray(e)) return { producto: [], sku: [], reqP: [], reqS: [], legacy: e };
+  return { producto: e.producto || [], sku: e.sku || [], reqP: e.requeridosProducto || [], reqS: e.requeridosSku || [], fuente: e.fuente || 'inferido', legacy: null };
 }
 /* En audits anteriores las especificaciones venían mezcladas: un campo que falta en
    TODOS los SKUs del producto se trata como especificación de producto. */
@@ -540,18 +544,21 @@ function pendientes(P) {
     if (ok.every(s => !s.fVisible)) add('Producto', null, 'Mostrar en el sitio (IsVisible)', 'Activación', 'Producto oculto', 'alta', 'No', 'Marcar visible si debe venderse');
   }
   const common = P.missP ? null : legacyCommon(P);
-  for (const f of (P.missP || common)) add('Producto', null, f, 'Especificación de producto', 'Falta (la tienen la mayoría de productos de su categoría)', 'media');
+  const E = expFor(P.pathKey, P.path[P.path.length - 1]);
+  const why = (req, nivel) => req ? 'Obligatoria en VTEX (IsRequired)' : `Recomendada: la tiene la mayoría de ${nivel} de su categoría`;
+  for (const f of (P.missP || common)) { const req = E.reqP.includes(f); add('Producto', null, f, 'Especificación de producto', why(req, 'productos'), req ? 'alta' : 'media'); }
   // SKUs
   for (const s of P.skus) {
     if (s.error) { add('SKU', s, 'Consulta VTEX', 'Error', s.error, 'alta'); continue; }
     const missS = s.missingSkuSpecs || (s.missingSpecs || []).filter(f => !common.includes(f));
-    for (const f of missS) add('SKU', s, f, 'Especificación de SKU', 'Falta (la tienen la mayoría de SKUs de su categoría)', 'media');
-    if ((s.imagesCount || 0) < 3) add('SKU', s, 'Imágenes', 'Imagen', `Tiene ${s.imagesCount || 0}, mínimo recomendado 3`, s.imagesCount ? 'media' : 'alta', String(s.imagesCount || 0), `Subir ${3 - (s.imagesCount || 0)} más`);
+    for (const f of missS) { const req = E.reqS.includes(f); add('SKU', s, f, 'Especificación de SKU', why(req, 'SKUs'), req ? 'alta' : 'media'); }
+    const minImg = (s.perfil && s.perfil.minImagenes) || 3, nImg = s.imagesCount || 0;
+    if (nImg < minImg) add('SKU', s, 'Imágenes', 'Imagen', `Tiene ${nImg}, mínimo ${minImg}${s.perfil ? ' para ' + s.perfil.nombre : ''}`, nImg ? 'media' : 'alta', String(nImg), `Subir ${minImg - nImg} más`);
     const col = s.issues.find(i => i.code === 'color_inconsistente');
     if (col && !/#[0-9a-f]{3,8}/i.test(col.label)) add('SKU', s, 'Color', 'Especificación de SKU', col.label, 'alta', (Object.entries(s.specs || {}).find(([k]) => /color/i.test(k)) || [])[1] || '');
     if (s.legacy ? !s.fSku : !s.fSku) add('SKU', s, 'SKU activo (IsActive)', 'Activación', s.legacy ? 'Producto o SKU inactivo' : 'SKU inactivo', 'alta', 'No', 'Activar si debe venderse');
     if (!s.hasStock) add('SKU', s, 'Inventario', 'Stock', 'Sin stock en la bodega auditada', s.flagsOk ? 'alta' : 'media', String(s.stock ?? 0));
-    if (!s.ean) add('SKU', s, 'EAN', 'Identificación', 'Vacío', 'baja');
+    if (!s.ean && !(s.perfil && s.perfil.nombre === 'Servicios')) add('SKU', s, 'EAN', 'Identificación', 'Vacío', 'baja');
   }
   return out;
 }
@@ -560,7 +567,7 @@ function buildTree(products) {
   for (const p of products) {
     for (let i = 1; i <= p.path.length; i++) {
       const k = p.path.slice(0, i).join(SEP), parent = p.path.slice(0, i - 1).join(SEP);
-      t[k] = t[k] || { key: k, name: p.path[i - 1], depth: i, children: new Set(), parent };
+      t[k] = t[k] || { key: k, name: p.path[i - 1], id: p.pathIds[i - 1] || '', depth: i, children: new Set(), parent };
       t[parent].children.add(k);
     }
   }
@@ -577,10 +584,6 @@ $('#file').addEventListener('change', e => {
 
 /* ================= filtros ================= */
 function buildFilterOptions() {
-  const count = k => PRODUCTS.filter(p => inPath(p, k)).length;
-  const walk = (k, out) => { [...TREE[k].children].sort((a, b) => TREE[a].name.localeCompare(TREE[b].name, 'es')).forEach(c => { out.push(c); walk(c, out); }); return out; };
-  $('#fPath').innerHTML = `<option value="">Todas las categorías (${fmt(PRODUCTS.length)})</option>` + walk('', []).map(k => {
-    const n = TREE[k]; return `<option value="${esc(k)}">${'    '.repeat(n.depth - 1)}${n.depth > 1 ? '└ ' : ''}${esc(n.name)} (${fmt(count(k))})</option>`; }).join('');
   $('#fVis').innerHTML = `<option value="">Todos los estados</option>` + VIS_ORDER.map(v => `<option value="${v}">${VIS[v].i} ${VIS[v].l}</option>`).join('');
   const counts = {};
   A.skus.forEach(s => s._codes.forEach(c => counts[c] = (counts[c] || 0) + 1));
@@ -588,11 +591,27 @@ function buildFilterOptions() {
     .map(([c, n]) => `<option value="${c}">${esc(ISSUE_LABEL[c] || c)} (${n} SKUs)</option>`).join('');
   syncControls();
 }
+const nodeLabel = k => { const n = TREE[k]; return `${n.name}${n.id ? ` · ID ${n.id}` : ''}`; };
+const kidsOf = k => [...((TREE[k] || {}).children || [])].sort((a, b) => TREE[a].name.localeCompare(TREE[b].name, 'es'));
+function fillLevel(sel, parentKey, selected, allLabel) {
+  const kids = parentKey == null ? [] : kidsOf(parentKey);
+  const count = k => PRODUCTS.filter(p => inPath(p, k)).length;
+  sel.innerHTML = `<option value="">${allLabel}</option>` + kids.map(k => `<option value="${esc(k)}">${esc(nodeLabel(k))} (${fmt(count(k))})</option>`).join('');
+  sel.value = kids.includes(selected) ? selected : '';
+  sel.disabled = !kids.length;
+  return kids.length;
+}
 function syncControls() {
-  $('#fPath').value = state.path; $('#fVis').value = state.vis; $('#fIssue').value = state.issue; $('#fQ').value = state.q;
+  const parts = state.path ? state.path.split(SEP) : [];
+  const lvl = i => parts.slice(0, i).join(SEP);
+  fillLevel($('#fDep'), '', lvl(1), `Todos (${fmt(PRODUCTS.length)})`);
+  fillLevel($('#fCat'), parts.length >= 1 ? lvl(1) : null, lvl(2), 'Todas');
+  const nSub = fillLevel($('#fSub'), parts.length >= 2 ? lvl(2) : null, lvl(3), 'Todas');
+  $('#lSub').classList.toggle('hidden', parts.length >= 2 && !nSub);
+  $('#fVis').value = state.vis; $('#fIssue').value = state.issue; $('#fQ').value = state.q;
   $$('#fSem button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === state.sem)));
   const chips = [];
-  if (state.path) chips.push(['path', state.path]);
+  if (state.path) chips.push(['path', state.path.split(SEP).map((n, i, arr) => nodeLabel(arr.slice(0, i + 1).join(SEP))).join(' › ')]);
   if (state.vis) chips.push(['vis', VIS[state.vis].l]);
   if (state.sem) chips.push(['sem', 'Calidad: ' + SEM[state.sem][0]]);
   if (state.issue) chips.push(['issue', ISSUE_LABEL[state.issue] || state.issue]);
@@ -601,7 +620,9 @@ function syncControls() {
   $$('#activeFilters [data-clear]').forEach(el => el.onclick = () => set({ [el.dataset.clear]: '' }));
 }
 const set = patch => { Object.assign(state, patch, { page: 0 }); syncControls(); render(); };
-$('#fPath').onchange = e => set({ path: e.target.value });
+$('#fDep').onchange = e => set({ path: e.target.value });
+$('#fCat').onchange = e => set({ path: e.target.value || state.path.split(SEP).slice(0, 1).join(SEP) });
+$('#fSub').onchange = e => set({ path: e.target.value || state.path.split(SEP).slice(0, 2).join(SEP) });
 $('#fVis').onchange = e => set({ vis: e.target.value });
 $('#fIssue').onchange = e => set({ issue: e.target.value });
 let qT; $('#fQ').oninput = e => { clearTimeout(qT); qT = setTimeout(() => set({ q: e.target.value.trim() }), 180); };
@@ -678,7 +699,7 @@ function renderTreeCards() {
   const rows = kids.map(k => ({ k, ps: all.filter(p => inPath(p, k)) })).filter(r => r.ps.length).sort((a, b) => b.ps.length - a.ps.length);
   $('#nodes').innerHTML = rows.length ? rows.map(({ k, ps }) => {
     const vc = visCounts(ps), n = ps.length, sub = TREE[k].children.size, nSku = ps.reduce((a, p) => a + p.skus.length, 0);
-    return `<button class="node" data-k="${esc(k)}"><div class="nm"><span>${esc(TREE[k].name)}</span>${sub ? `<span class="go">${sub} sub ›</span>` : ''}</div>
+    return `<button class="node" data-k="${esc(k)}"><div class="nm"><span>${esc(TREE[k].name)}${TREE[k].id ? ` <span style="color:var(--muted);font-weight:500;font-size:12px">ID ${esc(TREE[k].id)}</span>` : ''}</span>${sub ? `<span class="go">${sub} sub ›</span>` : ''}</div>
       <div class="meta">${fmt(n)} productos · ${fmt(nSku)} SKUs</div>
       <div class="vbar">${VIS_ORDER.map(v => vc[v] ? `<span style="width:${vc[v] / n * 100}%;background:${VIS[v].c}" data-tip="<b>${esc(TREE[k].name)}</b><br>${VIS[v].l}: ${fmt(vc[v])} (${pct(vc[v], n)} %)"></span>` : '').join('')}</div>
       <div class="nums"><span>Visibles</span><b>${fmt(vc.visible)} <span style="color:var(--muted);font-weight:500">· ${pct(vc.visible, n)} %</span></b></div></button>`;
@@ -704,7 +725,7 @@ function renderQuality(prods) {
       <div class="legend">${['verde','amarillo','rojo'].map(k => `<span><i style="background:${SEM[k][2]}"></i>${SEM[k][0]} ${fmt(c(k))}</span>`).join('')}</div></div>
     ${kpi('SKUs auditados', fmt(n), `${fmt(prods.length)} productos`)}
     ${kpi('Campos por diligenciar', fmt(pend), `${fmt(pendProd)} de producto · ${fmt(pend - pendProd)} de SKU`)}
-    ${kpi('Productos sin descripción completa', fmt(noDesc), `${pct(noDesc, prods.length)} % · menos de 300 caracteres`)}
+    ${kpi('Productos sin descripción completa', fmt(noDesc), `${pct(noDesc, prods.length)} % · bajo el mínimo de su perfil`)}
     ${kpi('Sugerencias IA', fmt(ia), 'productos con propuesta de contenido')}`;
 }
 const kpi = (l, v, f) => `<div class="panel kpi"><div class="lbl">${l}</div><div class="val">${v}</div><div class="foot">${f}</div></div>`;
@@ -782,14 +803,15 @@ function renderProducts(prods) {
 }
 $('#btnExpandAll').onclick = () => { filtered().forEach(p => state.open.add(p.productId)); renderProducts(filtered()); };
 $('#btnCollapseAll').onclick = () => { state.open.clear(); renderProducts(filtered()); };
-const pathCell = path => `<div class="path">${path.slice(0, -1).map(esc).join(' › ')}${path.length > 1 ? ' › ' : ''}<span class="leaf">${esc(path[path.length - 1])}</span></div>`;
+const pathCell = (path, ids = []) => { const lab = (n, i) => esc(n) + (ids[i] ? `<span style="color:var(--muted);font-size:11px"> ·${esc(ids[i])}</span>` : '');
+  return `<div class="path">${path.slice(0, -1).map(lab).join(' › ')}${path.length > 1 ? ' › ' : ''}<span class="leaf">${lab(path[path.length - 1], path.length - 1)}</span></div>`; };
 const pendTag = p => `<span class="pend ${p.pend.some(x => x.prioridad === 'alta') ? 'hi' : ''}" data-tip="${fmt(p.pend.length)} campos por diligenciar${p.pend.some(x => x.prioridad === 'alta') ? '<br>Incluye prioridad alta' : ''}">${fmt(p.pend.length)}</span>`;
 const flagI = (v, l) => v ? `<span class="yes flag" data-tip="${l}: sí">✓</span>` : `<span class="no flag" data-tip="${l}: no">✕</span>`;
 function productRow(p) {
   const open = state.open.has(p.productId);
   let html = `<tr class="prow ${open ? 'open' : ''}" data-pid="${esc(p.productId)}">
     <td><div style="display:flex;align-items:center;gap:6px"><span class="tog">${open ? '▾' : '▸'}</span>${prodCell(p)}</div></td>
-    <td>${pathCell(p.path)}</td>
+    <td>${pathCell(p.path, p.pathIds)}</td>
     <td class="num-c">${p.skus.length}</td>
     <td class="num-c">${p.unlimited ? '∞' : fmt(p.stock)}</td>
     <td>${chipVis(p.vis)}</td>
@@ -840,9 +862,10 @@ function renderSpecs() {
   $('#tSpecs').innerHTML = `<thead><tr><th>Categoría</th><th class="num-c">Productos</th><th class="num-c">SKUs</th><th class="num-c">Esperadas producto</th><th class="num-c">Esperadas SKU</th>
     <th>Completitud promedio</th><th class="num-c">Productos completos</th><th class="num-c">Visibles</th><th class="num-c">No visibles</th><th>Campos que más faltan · productos</th></tr></thead><tbody>
     ${rows.map(r => { const [bg, fg] = seqColor(r.comp); return `<tr class="prow" data-k="${esc(r.k)}">
-      <td>${pathCell(r.path)}</td><td class="num-c">${fmt(r.ps.length)}</td><td class="num-c">${fmt(r.ss.length)}</td>
+      <td>${pathCell(r.path, r.ps[0].pathIds)}</td><td class="num-c">${fmt(r.ps.length)}</td><td class="num-c">${fmt(r.ss.length)}</td>
       ${r.E.legacy ? `<td class="num-c" colspan="2" data-tip="${esc(r.E.legacy.join(', ') || 'Sin campos inferidos')}">${r.E.legacy.length} (mezcladas)</td>` :
-        `<td class="num-c" data-tip="${esc(r.E.producto.join(', ') || 'Sin campos inferidos (menos de 3 productos)')}">${r.E.producto.length}</td><td class="num-c" data-tip="${esc(r.E.sku.join(', ') || 'Sin campos inferidos')}">${r.E.sku.length}</td>`}
+        `<td class="num-c" data-tip="Obligatorias: ${esc(r.E.reqP.join(', ') || 'ninguna')}<br>Recomendadas: ${esc(r.E.producto.filter(f => !r.E.reqP.includes(f)).join(', ') || 'ninguna')}">${r.E.producto.length}${r.E.reqP.length ? ` <span style="color:var(--muted);font-size:11px">(${r.E.reqP.length} oblig.)</span>` : ''}</td>
+         <td class="num-c" data-tip="Obligatorias: ${esc(r.E.reqS.join(', ') || 'ninguna')}<br>Recomendadas: ${esc(r.E.sku.filter(f => !r.E.reqS.includes(f)).join(', ') || 'ninguna')}">${r.E.sku.length}${r.E.reqS.length ? ` <span style="color:var(--muted);font-size:11px">(${r.E.reqS.length} oblig.)</span>` : ''}</td>`}
       <td><div class="scorecell"><b style="width:38px">${Math.round(r.comp * 100)}%</b><div class="track"><div class="fill" style="width:${r.comp * 100}%;background:${bg}"></div></div></div></td>
       <td class="num-c">${fmt(r.complete)}</td><td class="num-c">${fmt(r.vis)}</td><td class="num-c">${fmt(r.ps.length - r.vis)}</td>
       <td style="font-size:12px">${r.top.map(([f, n]) => `<span class="chip neutral" style="margin:1px 2px">${esc(f)} · ${n}</span>`).join('') || '<span class="yes">Completa</span>'}</td></tr>`; }).join('')
@@ -862,7 +885,7 @@ function openProduct(pid, skuId) {
       <div style="flex:1;min-width:0"><div class="t">${esc(p.name)}</div>
         <div class="s">Producto ${esc(p.productId)} · ${esc(p.path.join(' › '))}${p.brand ? ' · ' + esc(p.brand) : ''}</div>
         <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">${chipVis(p.vis)}${p.score == null ? '' : `<span class="chip neutral">Score promedio ${p.score}/100</span>`}
-          <span class="chip neutral">${fmt(p.pend.length)} campos por diligenciar</span>${p.url ? `<a class="btn sm" href="${esc(p.url)}" target="_blank" rel="noopener">Ver en tienda ↗</a>` : ''}</div>
+          <span class="chip neutral">${fmt(p.pend.length)} campos por diligenciar</span>${p.perfil ? `<span class="chip neutral" data-tip="Perfil de exigencia: mínimo ${p.perfil.minImagenes} imágenes, descripción ≥ ${p.perfil.descMin} caracteres${p.perfil.specs === 'requeridos' ? ', solo especificaciones obligatorias' : ', obligatorias + recomendadas'}">Perfil ${esc(p.perfil.nombre)}</span>` : ''}${p.url ? `<a class="btn sm" href="${esc(p.url)}" target="_blank" rel="noopener">Ver en tienda ↗</a>` : ''}</div>
       </div><button class="btn sm" id="drClose" aria-label="Cerrar">✕</button>
     </div>
     <div class="dr-b">
@@ -911,17 +934,19 @@ function specSections(p, ok) {
   const E = expFor(p.pathKey, leaf);
   const mx = ok.slice(0, 8);
   const cell = (v, expected) => v ? `<td>${esc(v)}</td>` : expected ? '<td class="miss">Falta</td>' : '<td class="na">—</td>';
-  const extra = '<span style="color:var(--muted);font-size:11px">(adicional)</span>';
-  const matrix = (fields, expected, get) => `<div class="tbl-wrap"><table class="matrix"><thead><tr><th>Campo</th>${mx.map(s => `<th>${esc(s.skuName || 'SKU ' + s.skuId)}<div style="font-weight:400;color:var(--muted)">${esc(s.skuId)}</div></th>`).join('')}</tr></thead><tbody>
-      ${fields.map(f => `<tr><td><b>${esc(f)}</b> ${expected.includes(f) ? '' : extra}</td>${mx.map(s => cell(get(s)[f], expected.includes(f))).join('')}</tr>`).join('')}
+  const extra = '<span style="color:var(--muted);font-size:11px">(opcional)</span>';
+  const tag = (f, req, exp) => req.includes(f) ? '<span class="sev alta" style="margin-left:4px">obligatoria</span>' : exp.includes(f) ? '<span class="sev media" style="margin-left:4px">recomendada</span>' : extra;
+  const matrix = (fields, expected, get, req) => `<div class="tbl-wrap"><table class="matrix"><thead><tr><th>Campo</th>${mx.map(s => `<th>${esc(s.skuName || 'SKU ' + s.skuId)}<div style="font-weight:400;color:var(--muted)">${esc(s.skuId)}</div></th>`).join('')}</tr></thead><tbody>
+      ${fields.map(f => `<tr><td><b>${esc(f)}</b> ${tag(f, req || [], expected)}</td>${mx.map(s => cell(get(s)[f], expected.includes(f))).join('')}</tr>`).join('')}
     </tbody></table></div>${ok.length > 8 ? `<p style="font-size:12px;color:var(--muted)">Se muestran 8 de ${ok.length} SKUs.</p>` : ''}`;
   if (p.pSpecs) {
     const pf = [...new Set([...E.producto, ...Object.keys(p.pSpecs)])];
     const sf = [...new Set([...E.sku, ...ok.flatMap(s => Object.keys(s.skuSpecs || {}))])];
-    return `<h3>Especificaciones del producto <span class="n">· ${E.producto.length} esperadas en ${esc(leaf)} · se diligencian una vez para todos los SKUs</span></h3>
-      ${pf.length ? `<table class="matrix"><tbody>${pf.map(f => `<tr><td style="width:42%"><b>${esc(f)}</b> ${E.producto.includes(f) ? '' : extra}</td>${cell(p.pSpecs[f], E.producto.includes(f))}</tr>`).join('')}</tbody></table>` : '<p style="color:var(--muted)">Sin especificaciones de producto.</p>'}
+    return `<h3>Especificaciones del producto <span class="n">· ${E.reqP.length} obligatorias, ${E.producto.length - E.reqP.length} recomendadas · se diligencian una vez para todos los SKUs</span></h3>
+      ${pf.length ? `<table class="matrix"><tbody>${pf.map(f => `<tr><td style="width:42%"><b>${esc(f)}</b> ${tag(f, E.reqP, E.producto)}</td>${cell(p.pSpecs[f], E.producto.includes(f))}</tr>`).join('')}</tbody></table>` : '<p style="color:var(--muted)">Sin especificaciones de producto.</p>'}
       <h3>Especificaciones de SKU <span class="n">${E.sku.length ? `· ${E.sku.length} esperadas por SKU` : ''}</span></h3>
-      ${sf.length && mx.length ? matrix(sf, E.sku, s => s.skuSpecs || {}) : '<p style="color:var(--muted)">Sin especificaciones de SKU.</p>'}`;
+      ${sf.length && mx.length ? matrix(sf, E.sku, s => s.skuSpecs || {}, E.reqS) : '<p style="color:var(--muted)">Sin especificaciones de SKU.</p>'}
+      <p style="font-size:12px;color:var(--muted)">${E.fuente === 'vtex' ? 'Campos y obligatoriedad tomados de la configuración de la categoría en VTEX.' : 'Campos esperados inferidos del catálogo (no se pudo leer la configuración de VTEX).'}</p>`;
   }
   const exp = E.legacy || [];
   const fields = [...new Set([...exp, ...ok.flatMap(s => Object.keys(s.specs || {}))])];
@@ -993,10 +1018,11 @@ function loadXlsx() {
     s.onload = () => window.XLSX ? res(window.XLSX) : rej(new Error('XLSX no cargó')); s.onerror = () => rej(new Error('No se pudo cargar la librería de Excel')); document.head.appendChild(s); });
 }
 const yn = v => v ? 'Sí' : 'No';
+const lvlCols = p => ({ 'Departamento': p.path[0] || '', 'ID departamento': p.pathIds[0] || '', 'Categoría': p.path[1] || '', 'ID categoría': p.pathIds[1] || '',
+  'Subcategoría': p.path.slice(2).join(' › '), 'ID subcategoría': p.pathIds.slice(2).join(' › ') });
 function exportRows(prods) {
   const productos = prods.map(p => ({
-    'ID producto': p.productId, 'Producto': p.name, 'Marca': p.brand,
-    'Departamento': p.path[0], 'Ruta de categoría': p.path.join(' › '), 'Categoría hoja': p.path[p.path.length - 1],
+    'ID producto': p.productId, 'Producto': p.name, 'Marca': p.brand, ...lvlCols(p), 'Perfil': p.perfil ? p.perfil.nombre : '',
     'SKUs': p.skus.length, 'Stock total': p.unlimited ? 'Ilimitado' : p.stock,
     'Estado en tienda': VIS[p.vis].l, 'Motivos de no visibilidad': p.reasons.join(' | '),
     'Score promedio': p.score ?? '', 'Calidad': SEM[p.semAvg] ? SEM[p.semAvg][0] : '',
@@ -1007,14 +1033,14 @@ function exportRows(prods) {
   }));
   const skus = prods.flatMap(p => p.skus.map(s => ({
     'ID SKU': s.skuId, 'ID producto': p.productId, 'RefId': s.refId || '', 'EAN': s.ean || '', 'Nombre SKU': s.name || '', 'Variación': s.skuName || '',
-    'Producto': p.name, 'Ruta de categoría': p.path.join(' › '),
+    'Producto': p.name, ...lvlCols(p),
     'Producto activo': s.error ? '' : yn(s.fProd), 'Producto visible': s.error || s.legacy ? '' : yn(s.fVisible), 'SKU activo': s.error ? '' : yn(s.fSku),
     'Stock': s.unlimited ? 'Ilimitado' : (s.stock ?? ''), 'Estado en tienda': VIS[s.vis].l, 'Checkout': s.simAvailability || '',
     'Score': s.score ?? '', 'Calidad': SEM[s.semaforo] ? SEM[s.semaforo][0] : '', 'Imágenes': s.imagesCount ?? '',
     'Especificaciones de SKU faltantes': (s.missingSkuSpecs || s.missingSpecs || []).join(' | '), 'Problemas': s.issues.map(i => i.label).join(' | '), 'URL': s.url || '',
   })));
   const pend = prods.flatMap(p => p.pend.map(x => ({
-    'Prioridad': x.prioridad, 'Estado en tienda': VIS[p.vis].l, 'ID producto': p.productId, 'Producto': p.name, 'Ruta de categoría': p.path.join(' › '),
+    'Prioridad': x.prioridad, 'Estado en tienda': VIS[p.vis].l, 'ID producto': p.productId, 'Producto': p.name, ...lvlCols(p),
     'Nivel': x.nivel, 'ID SKU': x.skuId, 'RefId': x.refId, 'Nombre SKU': x.skuName, 'Tipo': x.tipo, 'Campo': x.campo, 'Situación': x.situacion,
     'Valor actual': x.actual, 'Sugerencia IA': x.sugerencia, 'Valor a diligenciar': '',
   }))).sort((a, b) => ({ alta: 0, media: 1, baja: 2 }[a.Prioridad] - { alta: 0, media: 1, baja: 2 }[b.Prioridad]) || String(a['ID producto']).localeCompare(String(b['ID producto']), 'es', { numeric: true }));
@@ -1063,7 +1089,7 @@ async function exportXlsx() {
     for (let r = 7; r <= 11; r++) { const a = 'C' + r; if (wsR[a]) wsR[a].z = '0.0%'; }
     X.utils.book_append_sheet(wb, wsR, 'Resumen');
     // Pendientes por diligenciar
-    sheet(pend, 'Pendientes por diligenciar', [9, 22, 11, 36, 34, 9, 10, 12, 30, 14, 26, 36, 36, 46, 30], (ws, ref) => {
+    sheet(pend, 'Pendientes por diligenciar', [9, 22, 11, 36, 18, 10, 20, 10, 22, 12, 9, 10, 12, 30, 22, 26, 40, 36, 46, 30], (ws, ref) => {
       const hdr = Object.keys(pend[0] || {});
       const iVal = hdr.indexOf('Valor a diligenciar'), iPrio = hdr.indexOf('Prioridad');
       for (let r = 1; r <= ref.e.r; r++) {
@@ -1071,8 +1097,8 @@ async function exportXlsx() {
         const p = ws[X.utils.encode_cell({ r, c: iPrio })]; if (p && PRIO[p.v]) p.s = PRIO[p.v];
       }
     });
-    sheet(productos, 'Productos', [11, 36, 16, 16, 40, 22, 6, 10, 22, 40, 9, 11, 10, 10, 10, 9, 10, 9, 44]);
-    sheet(skus, 'SKUs', [9, 11, 12, 15, 40, 20, 32, 40, 9, 9, 9, 9, 22, 16, 7, 11, 9, 40, 60, 44]);
+    sheet(productos, 'Productos', [11, 36, 16, 18, 10, 20, 10, 22, 12, 14, 6, 10, 22, 40, 9, 11, 40, 10, 10, 10, 9, 10, 9, 44]);
+    sheet(skus, 'SKUs', [9, 11, 12, 15, 40, 20, 32, 18, 10, 20, 10, 22, 12, 9, 9, 9, 9, 22, 16, 7, 11, 9, 40, 60, 44]);
     // Matrices de especificaciones: producto (una fila por producto) y SKU (una fila por SKU)
     const markMiss = startCol => (ws, ref) => { for (let r = 1; r <= ref.e.r; r++) for (let c = startCol; c <= ref.e.c; c++) {
       const cell = ws[X.utils.encode_cell({ r, c })]; if (cell && cell.v === 'FALTA') cell.s = MISS; } };
@@ -1080,15 +1106,15 @@ async function exportXlsx() {
     if (v3) {
       const pCols = [...new Set(prods.flatMap(p => expFor(p.pathKey, p.path[p.path.length - 1]).producto))].sort((a, b) => a.localeCompare(b, 'es'));
       const pRows = prods.map(p => { const E = expFor(p.pathKey, p.path[p.path.length - 1]).producto; const sp = p.pSpecs || {};
-        const row = { 'ID producto': p.productId, 'Producto': p.name, 'Ruta de categoría': p.path.join(' › '), 'Estado en tienda': VIS[p.vis].l, 'Faltantes': (p.missP || []).length };
+        const row = { 'ID producto': p.productId, 'Producto': p.name, ...lvlCols(p), 'Estado en tienda': VIS[p.vis].l, 'Faltantes': (p.missP || []).length };
         pCols.forEach(f => { row[f] = sp[f] ? sp[f] : E.includes(f) ? 'FALTA' : ''; }); return row; });
-      if (pCols.length) sheet(pRows, 'Specs de producto', [11, 36, 40, 20, 9, ...pCols.map(() => 18)], markMiss(5));
+      if (pCols.length) sheet(pRows, 'Specs de producto', [11, 36, 18, 10, 20, 10, 22, 12, 20, 9, ...pCols.map(() => 18)], markMiss(10));
       const okS = prods.flatMap(p => p.skus.filter(s => !s.error).map(s => [p, s]));
       const sCols = [...new Set(okS.flatMap(([p]) => expFor(p.pathKey, p.path[p.path.length - 1]).sku))].sort((a, b) => a.localeCompare(b, 'es'));
       const sRows = okS.map(([p, s]) => { const E = expFor(p.pathKey, p.path[p.path.length - 1]).sku; const sp = s.skuSpecs || {};
-        const row = { 'ID SKU': s.skuId, 'ID producto': p.productId, 'RefId': s.refId || '', 'Nombre SKU': s.name || '', 'Ruta de categoría': p.path.join(' › '), 'Faltantes': (s.missingSkuSpecs || []).length };
+        const row = { 'ID SKU': s.skuId, 'ID producto': p.productId, 'RefId': s.refId || '', 'Nombre SKU': s.name || '', ...lvlCols(p), 'Faltantes': (s.missingSkuSpecs || []).length };
         sCols.forEach(f => { row[f] = sp[f] ? sp[f] : E.includes(f) ? 'FALTA' : ''; }); return row; });
-      if (sCols.length) sheet(sRows, 'Specs de SKU', [9, 11, 12, 40, 40, 9, ...sCols.map(() => 18)], markMiss(6));
+      if (sCols.length) sheet(sRows, 'Specs de SKU', [9, 11, 12, 40, 18, 10, 20, 10, 22, 12, 9, ...sCols.map(() => 18)], markMiss(11));
     } else {
       const okS = prods.flatMap(p => p.skus.filter(s => !s.error).map(s => [p, s]));
       const cols = [...new Set(okS.flatMap(([p, s]) => [...(expFor(p.pathKey).legacy || []), ...(s.missingSpecs || [])]))].sort((a, b) => a.localeCompare(b, 'es'));
