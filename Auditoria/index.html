@@ -241,6 +241,9 @@ details.skud[open] summary{border-bottom:1px solid var(--line)}
 details.skud .in{padding:10px 12px}
 details.skud.hl{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
 .imgs{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.swatch-wrap{display:inline-flex;align-items:center;gap:8px;margin-right:8px}
+.swatch{display:inline-block;width:26px;height:26px;border-radius:6px;border:1px solid var(--line-2);box-shadow:inset 0 0 0 1px rgba(255,255,255,.25);flex:none}
+.swatch-wrap code{font-size:12.5px;color:var(--text-2)}
 .imgs .thumb{width:60px;height:60px}
 .empty-state{padding:80px 20px;text-align:center;color:var(--text-2)}
 .empty-state h2{color:var(--text);margin:0 0 8px}
@@ -947,11 +950,21 @@ function openProduct(pid, skuId) {
   $('#drawer').scrollTop = 0;
   if (skuId) { const el = document.getElementById('sk-' + skuId); if (el) setTimeout(() => el.scrollIntoView({ block: 'center' }), 60); }
 }
+/* Valores hexadecimales (#8A9598): muestra una muestra del color junto al código */
+const HEX = /^#?([0-9a-f]{3}|[0-9a-f]{6})$/i;
+const hexNorm = v => { const h = String(v).trim().replace('#', ''); return '#' + (h.length === 3 ? h.split('').map(c => c + c).join('') : h).toUpperCase(); };
+function specVal(v) {
+  const parts = String(v).split(/\s*,\s*/);
+  if (!parts.some(x => HEX.test(x.trim()))) return esc(v);
+  return parts.map(x => HEX.test(x.trim())
+    ? `<span class="swatch-wrap"><span class="swatch" style="background:${hexNorm(x)}" title="${hexNorm(x)}"></span><code>${esc(hexNorm(x))}</code></span>`
+    : esc(x)).join(' ');
+}
 function specSections(p, ok) {
   const leaf = p.path[p.path.length - 1];
   const E = expFor(p.pathKey, leaf);
   const mx = ok.slice(0, 8);
-  const cell = (v, expected) => v ? `<td>${esc(v)}</td>` : expected ? '<td class="miss">Falta</td>' : '<td class="na">—</td>';
+  const cell = (v, expected) => v ? `<td>${specVal(v)}</td>` : expected ? '<td class="miss">Falta</td>' : '<td class="na">—</td>';
   const extra = '<span style="color:var(--muted);font-size:11px">(opcional)</span>';
   const soloOblig = (p.perfil || {}).specs === 'requeridos';
   const tag = (f, req, exp) => req.includes(f) ? '<span class="sev alta" style="margin-left:4px">obligatoria</span>'
@@ -1135,7 +1148,17 @@ async function exportXlsx() {
       const sRows = okS.map(([p, s]) => { const E = expFor(p.pathKey, p.path[p.path.length - 1]).sku; const sp = s.skuSpecs || {};
         const row = { 'ID SKU': s.skuId, 'ID producto': p.productId, 'RefId': s.refId || '', 'Nombre SKU': s.name || '', ...lvlCols(p), 'Faltantes': (s.missingSkuSpecs || []).length };
         sCols.forEach(f => { row[f] = sp[f] ? sp[f] : E.includes(f) ? 'FALTA' : ''; }); return row; });
-      if (sCols.length) sheet(sRows, 'Specs de SKU', [9, 11, 12, 40, 18, 10, 20, 10, 22, 12, 9, ...sCols.map(() => 18)], markMiss(11));
+      if (sCols.length) sheet(sRows, 'Specs de SKU', [9, 11, 12, 40, 18, 10, 20, 10, 22, 12, 9, ...sCols.map(() => 18)], (ws, ref) => {
+        markMiss(11)(ws, ref);
+        for (let r = 1; r <= ref.e.r; r++) for (let c = 11; c <= ref.e.c; c++) {
+          const cell = ws[X.utils.encode_cell({ r, c })];
+          if (cell && typeof cell.v === 'string' && HEX.test(cell.v.trim())) {
+            const rgb = hexNorm(cell.v).slice(1);
+            const lum = (parseInt(rgb.slice(0, 2), 16) * 299 + parseInt(rgb.slice(2, 4), 16) * 587 + parseInt(rgb.slice(4, 6), 16) * 114) / 1000;
+            cell.s = { fill: { fgColor: { rgb } }, font: { color: { rgb: lum > 140 ? '000000' : 'FFFFFF' } } };
+          }
+        }
+      });
     } else {
       const okS = prods.flatMap(p => p.skus.filter(s => !s.error).map(s => [p, s]));
       const cols = [...new Set(okS.flatMap(([p, s]) => [...(expFor(p.pathKey).legacy || []), ...(s.missingSpecs || [])]))].sort((a, b) => a.localeCompare(b, 'es'));
