@@ -430,6 +430,7 @@ function normSku(s) {
   path = path.filter((x, i) => x && x !== path[i - 1]);
   if (!path.length) path = ['Sin categoría'];
   s.path = path; s.pathKey = path.join(SEP);
+  s.perfil = perfilOf(s);
   const ids = Array.isArray(s.categoryIds) ? s.categoryIds.map(String) : [];
   s.pathIds = ids.length === path.length ? ids : path.map(() => '');
   s.legacy = s.skuActive === undefined;
@@ -475,6 +476,7 @@ function buildProduct(pid, skus) {
     minScore: ok.length ? Math.min(...ok.map(s => s.score)) : null,
     descOk: (c.descLength || 0) >= ((s0.perfil && s0.perfil.descMin) || 300),
   };
+  P.perfil = s0.perfil;
   P.pSpecs = c.specs || (s0 && s0.productSpecs) || null;
   P.missP = c.missingSpecs || (s0 && s0.missingProductSpecs) || null;
   P.vis = VIS_ORDER.find(v => skus.some(s => s.vis === v)) || 'inactivo_sin_stock';
@@ -520,6 +522,14 @@ function legacyCommon(P) {
   return (ok[0].missingSpecs || []).filter(f => ok.every(s => (s.missingSpecs || []).includes(f)));
 }
 const isSpec = x => x.tipo.startsWith('Especificación');
+const PERFIL_DEF = {
+  default:   { nombre: 'General',   minImagenes: 3, descMin: 300, descCorta: true,  specs: 'requeridos+recomendados' },
+  servicios: { nombre: 'Servicios', minImagenes: 1, descMin: 100, descCorta: false, specs: 'requeridos' },
+  celulares: { nombre: 'Celulares', minImagenes: 4, descMin: 400, descCorta: true,  specs: 'requeridos+recomendados' },
+  'equipos venta libre': { nombre: 'Equipos venta libre', minImagenes: 4, descMin: 400, descCorta: true, specs: 'requeridos+recomendados' },
+};
+const normKey = t => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, ' ').trim();
+const perfilOf = s => s.perfil || PERFIL_DEF[normKey(s.path ? s.path[0] : s.department)] || PERFIL_DEF.default;
 const PROD_LEVEL = i => ['descripcion', 'seo'].includes(i.dim) || ['spec_prod_faltante', 'marca'].includes(i.code);
 
 /* Campos a diligenciar: los de producto se listan una sola vez; los de SKU, por cada SKU */
@@ -530,9 +540,13 @@ function pendientes(P) {
     out.push({ nivel, skuId: s ? s.skuId : '', refId: s ? s.refId || '' : '', skuName: s ? s.name : '', campo, tipo, situacion, prioridad, actual, sugerencia });
   const has = code => P.codes.has(code);
   // Producto
-  const descIssue = P.skus.flatMap(s => s.issues).find(i => ['desc_0','desc_muy_corta','desc_corta','desc_relleno','desc_igual_nombre','desc_duplicada','desc_html'].includes(i.code));
-  if (descIssue) add('Producto', null, 'Descripción', 'Contenido', descIssue.label, descIssue.sev, (c.description || '').slice(0, 300), ia.descSugerida || '');
-  if (has('desc_corta_0')) add('Producto', null, 'Descripción corta', 'Contenido', 'Vacía', 'baja', '', ia.descCortaSugerida || '');
+  const perf = P.perfil || PERFIL_DEF.default, L = c.descLength || 0;
+  const descIssue = P.skus.flatMap(s => s.issues).find(i => ['desc_0','desc_muy_corta','desc_corta','desc_relleno','desc_igual_nombre','desc_duplicada','desc_html'].includes(i.code)
+    && !(['desc_corta', 'desc_muy_corta'].includes(i.code) && L >= perf.descMin));
+  if (descIssue) add('Producto', null, 'Descripción', 'Contenido',
+    ['desc_corta', 'desc_muy_corta'].includes(descIssue.code) ? `Descripción con ${L} caracteres (mínimo ${perf.descMin} para ${perf.nombre})` : descIssue.label,
+    descIssue.sev, (c.description || '').slice(0, 300), ia.descSugerida || '');
+  if (has('desc_corta_0') && perf.descCorta) add('Producto', null, 'Descripción corta', 'Contenido', 'Vacía', 'baja', '', ia.descCortaSugerida || '');
   const t = P.skus.flatMap(s => s.issues).find(i => i.code === 'seo_title_0' || i.code === 'seo_title_len');
   if (t) add('Producto', null, 'Title (SEO)', 'SEO', t.label, t.code === 'seo_title_0' ? 'media' : 'baja', c.title || '', ia.titleSugerido || '');
   const m = P.skus.flatMap(s => s.issues).find(i => i.code === 'seo_meta_0' || i.code === 'seo_meta_len');
@@ -545,15 +559,19 @@ function pendientes(P) {
   }
   const common = P.missP ? null : legacyCommon(P);
   const E = expFor(P.pathKey, P.path[P.path.length - 1]);
-  const why = (req, nivel) => req ? 'Obligatoria en VTEX (IsRequired)' : `Recomendada: la tiene la mayoría de ${nivel} de su categoría`;
-  for (const f of (P.missP || common)) { const req = E.reqP.includes(f); add('Producto', null, f, 'Especificación de producto', why(req, 'productos'), req ? 'alta' : 'media'); }
+  const vtex = E.fuente === 'vtex';
+  const soloOblig = perf.specs === 'requeridos';
+  const why = (req, nivel) => req ? 'Obligatoria en VTEX (IsRequired)' : vtex ? `Recomendada: la tiene la mayoría de ${nivel} de su categoría` : `Inferida: la tiene la mayoría de ${nivel} de su categoría`;
+  // Perfil "solo obligatorias" (Servicios): no se piden campos recomendados ni inferidos
+  const pideCampo = req => req || !soloOblig;
+  for (const f of (P.missP || common)) { const req = E.reqP.includes(f); if (pideCampo(req)) add('Producto', null, f, 'Especificación de producto', why(req, 'productos'), req ? 'alta' : 'media'); }
   // SKUs
   for (const s of P.skus) {
     if (s.error) { add('SKU', s, 'Consulta VTEX', 'Error', s.error, 'alta'); continue; }
     const missS = s.missingSkuSpecs || (s.missingSpecs || []).filter(f => !common.includes(f));
-    for (const f of missS) { const req = E.reqS.includes(f); add('SKU', s, f, 'Especificación de SKU', why(req, 'SKUs'), req ? 'alta' : 'media'); }
-    const minImg = (s.perfil && s.perfil.minImagenes) || 3, nImg = s.imagesCount || 0;
-    if (nImg < minImg) add('SKU', s, 'Imágenes', 'Imagen', `Tiene ${nImg}, mínimo ${minImg}${s.perfil ? ' para ' + s.perfil.nombre : ''}`, nImg ? 'media' : 'alta', String(nImg), `Subir ${minImg - nImg} más`);
+    for (const f of missS) { const req = E.reqS.includes(f); if (pideCampo(req)) add('SKU', s, f, 'Especificación de SKU', why(req, 'SKUs'), req ? 'alta' : 'media'); }
+    const minImg = s.perfil.minImagenes, nImg = s.imagesCount || 0;
+    if (nImg < minImg) add('SKU', s, 'Imágenes', 'Imagen', `Tiene ${nImg}, mínimo ${minImg} para ${s.perfil.nombre}`, nImg ? 'media' : 'alta', String(nImg), `Subir ${minImg - nImg} más`);
     const col = s.issues.find(i => i.code === 'color_inconsistente');
     if (col && !/#[0-9a-f]{3,8}/i.test(col.label)) add('SKU', s, 'Color', 'Especificación de SKU', col.label, 'alta', (Object.entries(s.specs || {}).find(([k]) => /color/i.test(k)) || [])[1] || '');
     if (s.legacy ? !s.fSku : !s.fSku) add('SKU', s, 'SKU activo (IsActive)', 'Activación', s.legacy ? 'Producto o SKU inactivo' : 'SKU inactivo', 'alta', 'No', 'Activar si debe venderse');
@@ -935,15 +953,18 @@ function specSections(p, ok) {
   const mx = ok.slice(0, 8);
   const cell = (v, expected) => v ? `<td>${esc(v)}</td>` : expected ? '<td class="miss">Falta</td>' : '<td class="na">—</td>';
   const extra = '<span style="color:var(--muted);font-size:11px">(opcional)</span>';
-  const tag = (f, req, exp) => req.includes(f) ? '<span class="sev alta" style="margin-left:4px">obligatoria</span>' : exp.includes(f) ? '<span class="sev media" style="margin-left:4px">recomendada</span>' : extra;
+  const soloOblig = (p.perfil || {}).specs === 'requeridos';
+  const tag = (f, req, exp) => req.includes(f) ? '<span class="sev alta" style="margin-left:4px">obligatoria</span>'
+    : exp.includes(f) && !soloOblig ? `<span class="sev media" style="margin-left:4px">${E.fuente === 'vtex' ? 'recomendada' : 'inferida'}</span>` : extra;
+  const esperado = (f, req, exp) => req.includes(f) || (exp.includes(f) && !soloOblig);
   const matrix = (fields, expected, get, req) => `<div class="tbl-wrap"><table class="matrix"><thead><tr><th>Campo</th>${mx.map(s => `<th>${esc(s.skuName || 'SKU ' + s.skuId)}<div style="font-weight:400;color:var(--muted)">${esc(s.skuId)}</div></th>`).join('')}</tr></thead><tbody>
-      ${fields.map(f => `<tr><td><b>${esc(f)}</b> ${tag(f, req || [], expected)}</td>${mx.map(s => cell(get(s)[f], expected.includes(f))).join('')}</tr>`).join('')}
+      ${fields.map(f => `<tr><td><b>${esc(f)}</b> ${tag(f, req || [], expected)}</td>${mx.map(s => cell(get(s)[f], esperado(f, req || [], expected))).join('')}</tr>`).join('')}
     </tbody></table></div>${ok.length > 8 ? `<p style="font-size:12px;color:var(--muted)">Se muestran 8 de ${ok.length} SKUs.</p>` : ''}`;
   if (p.pSpecs) {
     const pf = [...new Set([...E.producto, ...Object.keys(p.pSpecs)])];
     const sf = [...new Set([...E.sku, ...ok.flatMap(s => Object.keys(s.skuSpecs || {}))])];
-    return `<h3>Especificaciones del producto <span class="n">· ${E.reqP.length} obligatorias, ${E.producto.length - E.reqP.length} recomendadas · se diligencian una vez para todos los SKUs</span></h3>
-      ${pf.length ? `<table class="matrix"><tbody>${pf.map(f => `<tr><td style="width:42%"><b>${esc(f)}</b> ${tag(f, E.reqP, E.producto)}</td>${cell(p.pSpecs[f], E.producto.includes(f))}</tr>`).join('')}</tbody></table>` : '<p style="color:var(--muted)">Sin especificaciones de producto.</p>'}
+    return `<h3>Especificaciones del producto <span class="n">· ${E.reqP.length} obligatorias${soloOblig ? ' · perfil ' + esc(p.perfil.nombre) + ': solo se exigen las obligatorias' : `, ${E.producto.length - E.reqP.length} ${E.fuente === 'vtex' ? 'recomendadas' : 'inferidas'}`} · se diligencian una vez para todos los SKUs</span></h3>
+      ${pf.length ? `<table class="matrix"><tbody>${pf.map(f => `<tr><td style="width:42%"><b>${esc(f)}</b> ${tag(f, E.reqP, E.producto)}</td>${cell(p.pSpecs[f], esperado(f, E.reqP, E.producto))}</tr>`).join('')}</tbody></table>` : '<p style="color:var(--muted)">Sin especificaciones de producto.</p>'}
       <h3>Especificaciones de SKU <span class="n">${E.sku.length ? `· ${E.sku.length} esperadas por SKU` : ''}</span></h3>
       ${sf.length && mx.length ? matrix(sf, E.sku, s => s.skuSpecs || {}, E.reqS) : '<p style="color:var(--muted)">Sin especificaciones de SKU.</p>'}
       <p style="font-size:12px;color:var(--muted)">${E.fuente === 'vtex' ? 'Campos y obligatoriedad tomados de la configuración de la categoría en VTEX.' : 'Campos esperados inferidos del catálogo (no se pudo leer la configuración de VTEX).'}</p>`;
@@ -978,8 +999,8 @@ function contentCompare(c) {
       ${fieldHtml('Descripción corta', ia.descCortaSugerida, '', false, true)}
       ${fieldHtml('Descripción', ia.descSugerida, `<span class="len">${(ia.descSugerida || '').length} car.</span>`, true, true)}</div>`;
   const tags = ia && ia.ok && ((ia.problemas || []).length || (ia.datosFaltantes || []).length) ? `<div class="tags">
-      ${(ia.problemas || []).length ? `<span class="lbl">Problemas:</span>${ia.problemas.map(x => `<span class="chip neutral" style="white-space:normal">${esc(x)}</span>`).join('')}` : ''}
-      ${(ia.datosFaltantes || []).length ? `<span class="lbl" style="margin-left:8px">Datos a completar:</span>${ia.datosFaltantes.map(x => `<span class="chip amarillo" style="white-space:normal">${esc(x)}</span>`).join('')}` : ''}</div>` : '';
+      ${(ia.problemas || []).length ? `<span class="lbl">Observaciones de la IA (no son campos obligatorios):</span>${ia.problemas.map(x => `<span class="chip neutral" style="white-space:normal">${esc(x)}</span>`).join('')}` : ''}
+      ${(ia.datosFaltantes || []).length ? `<span class="lbl" style="margin-left:8px">La IA sugiere completar:</span>${ia.datosFaltantes.map(x => `<span class="chip amarillo" style="white-space:normal">${esc(x)}</span>`).join('')}` : ''}</div>` : '';
   return `<div class="panel" style="box-shadow:none;overflow:hidden"><div class="compare">${actual}${sug}</div>${tags}</div>`;
 }
 function bindCopy(root) {
