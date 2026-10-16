@@ -395,7 +395,7 @@ const DIMS_SHORT = { imagenes:'Imágenes', especificaciones:'Especif.', descripc
 const DIMS = [['imagenes','Imágenes'],['especificaciones','Especificaciones'],['descripcion','Descripción'],['seo','SEO'],['consistencia','Consistencia'],['vendibilidad','Vendibilidad']];
 const SEM = { verde:['Óptimo','●','var(--good)'], amarillo:['Mejorable','▲','var(--warn)'], rojo:['Crítico','■','var(--crit)'], error:['Error API','✕','var(--muted)'] };
 const VIS = {
-  visible:            { l:'Visible en tienda',        k:'Visibles en sitio web',     i:'●', c:'var(--good)',    ci:'var(--good-ink)',    d:'Activo, visible y con stock' },
+  visible:            { l:'Visible en tienda',        k:'Visibles en sitio web',     i:'●', c:'var(--good)',    ci:'var(--good-ink)',    d:'Activo y visible, con stock o "mostrar sin stock"' },
   sin_stock:          { l:'Bloqueado solo por stock', k:'Bloqueados solo por stock', i:'▲', c:'var(--warn)',    ci:'var(--warn-ink)',    d:'Activos y listos, sin inventario' },
   inactivo_con_stock: { l:'Inactivo con stock',       k:'Inactivos con stock',       i:'◆', c:'var(--serious)', ci:'var(--serious-ink)', d:'Tienen inventario pero algún flag los bloquea' },
   inactivo_sin_stock: { l:'Inactivo sin stock',       k:'Inactivos sin stock',       i:'■', c:'var(--crit)',    ci:'var(--crit-ink)',    d:'Doble bloqueo: flags y sin inventario' },
@@ -442,7 +442,9 @@ function normSku(s) {
   s.fVisible = s.productVisible ?? true;
   s.hasStock = !!s.unlimited || (Number(s.stock) || 0) > 0;
   s.flagsOk = !s.error && s.fSku && s.fProd && s.fVisible;
-  s.vis = s.error ? 'inactivo_sin_stock' : s.flagsOk ? (s.hasStock ? 'visible' : 'sin_stock') : (s.hasStock ? 'inactivo_con_stock' : 'inactivo_sin_stock');
+  s.showNoStock = s.showWithoutStock === true;
+  // Visible = flags activos + (stock o "Mostrar sin stock" activo)
+  s.vis = s.error ? 'inactivo_sin_stock' : s.flagsOk ? (s.hasStock || s.showNoStock ? 'visible' : 'sin_stock') : (s.hasStock ? 'inactivo_con_stock' : 'inactivo_sin_stock');
 }
 function load(data, source) {
   if (!data || !Array.isArray(data.skus)) { toast('El archivo no tiene el formato de auditoría'); return; }
@@ -463,7 +465,7 @@ function load(data, source) {
   $('#meta').innerHTML = `Tigo Colombia · ${esc(A.account || 'VTEX')} <span class="chip ${isQA ? 'amarillo' : 'visible'}" style="font-size:11px;padding:1px 7px">${isQA ? 'QA' : 'Producción'}</span> · actualizado ${esc(d.toLocaleString('es-CO', { dateStyle:'medium', timeStyle:'short' }))}`;
   $('#envBanner').classList.toggle('hidden', !isQA);
   $('#envText').innerHTML = isQA ? `Estos datos vienen de la cuenta <b>${esc(A.account)}</b> (QA). Los IDs y nombres de producto no coinciden con producción. Revisa el nodo <b>Config</b> del flujo que ejecutaste.` : '';
-  $('#foot').textContent = `Fuente: ${source} · ${fmt(PRODUCTS.length)} productos · ${fmt(A.skus.length)} SKUs · Visible = producto activo + producto visible + SKU activo + stock en la bodega auditada · Calidad: óptimo ≥ ${A.thresholds?.verde ?? 85}, mejorable ≥ ${A.thresholds?.amarillo ?? 60}`;
+  $('#foot').textContent = `Fuente: ${source} · ${fmt(PRODUCTS.length)} productos · ${fmt(A.skus.length)} SKUs · Visible = producto activo + producto visible + SKU activo + (stock en la bodega auditada o "Mostrar sin stock") · Calidad: óptimo ≥ ${A.thresholds?.verde ?? 85}, mejorable ≥ ${A.thresholds?.amarillo ?? 60}`;
   buildFilterOptions(); render();
 }
 function buildProduct(pid, skus) {
@@ -505,7 +507,7 @@ function blockers(P) {
     if (ok.length && ok.every(s => !s.fSku)) r.push('Todos los SKUs inactivos');
     else if (ok.some(s => !s.fSku)) r.push('Algunos SKUs inactivos');
   }
-  if (ok.length && ok.every(s => !s.hasStock)) r.push('Sin stock en la bodega auditada');
+  if (ok.length && ok.every(s => !s.hasStock && !s.showNoStock)) r.push('Sin stock en la bodega auditada');
   return r;
 }
 
@@ -578,7 +580,8 @@ function pendientes(P) {
     const col = s.issues.find(i => i.code === 'color_inconsistente');
     if (col && !/#[0-9a-f]{3,8}/i.test(col.label)) add('SKU', s, 'Color', 'Especificación de SKU', col.label, 'alta', (Object.entries(s.specs || {}).find(([k]) => /color/i.test(k)) || [])[1] || '');
     if (s.legacy ? !s.fSku : !s.fSku) add('SKU', s, 'SKU activo (IsActive)', 'Activación', s.legacy ? 'Producto o SKU inactivo' : 'SKU inactivo', 'alta', 'No', 'Activar si debe venderse');
-    if (!s.hasStock) add('SKU', s, 'Inventario', 'Stock', 'Sin stock en la bodega auditada', s.flagsOk ? 'alta' : 'media', String(s.stock ?? 0));
+    if (!s.hasStock) add('SKU', s, 'Inventario', 'Stock', s.showNoStock ? 'Sin stock: se muestra como agotado ("Mostrar sin stock")' : 'Sin stock en la bodega auditada',
+      s.flagsOk && !s.showNoStock ? 'alta' : 'media', String(s.stock ?? 0));
     if (!s.ean && !(s.perfil && s.perfil.nombre === 'Servicios')) add('SKU', s, 'EAN', 'Identificación', 'Vacío', 'baja');
   }
   return out;
@@ -747,7 +750,7 @@ function renderQuality(prods) {
     ${kpi('SKUs auditados', fmt(n), `${fmt(prods.length)} productos`)}
     ${kpi('Campos por diligenciar', fmt(pend), `${fmt(pendProd)} de producto · ${fmt(pend - pendProd)} de SKU`)}
     ${kpi('Productos sin descripción completa', fmt(noDesc), `${pct(noDesc, prods.length)} % · bajo el mínimo de su perfil`)}
-    ${kpi('Sugerencias IA', fmt(ia), 'productos con propuesta de contenido')}`;
+    ${kpi('Sugerencias IA', fmt(ia), `${fmt(prods.filter(p => validadoHoy(p.c.ia)).length)} validados hoy${A.iaUltimaCorrida ? ' · última corrida ' + esc(fechaIA({ fecha: A.iaUltimaCorrida })) : ''}`)}`;
 }
 const kpi = (l, v, f) => `<div class="panel kpi"><div class="lbl">${l}</div><div class="val">${v}</div><div class="foot">${f}</div></div>`;
 
@@ -834,7 +837,7 @@ function productRow(p) {
     <td><div style="display:flex;align-items:center;gap:6px"><span class="tog">${open ? '▾' : '▸'}</span>${prodCell(p)}</div></td>
     <td>${pathCell(p.path, p.pathIds)}</td>
     <td class="num-c">${p.skus.length}</td>
-    <td class="num-c">${p.unlimited ? '∞' : fmt(p.stock)}</td>
+    <td class="num-c">${p.unlimited ? '∞' : fmt(p.stock)}${!p.stock && !p.unlimited && p.skus.some(s => s.showNoStock) ? '<div style="font-size:11px;color:var(--muted)">mostrar sin stock</div>' : ''}</td>
     <td>${chipVis(p.vis)}</td>
     <td>${p.score == null ? '—' : scoreCell(p.score, p.semAvg)}</td>
     <td class="num-c">${pendTag(p)}</td>
@@ -847,7 +850,7 @@ function productRow(p) {
       <th>Estado en tienda</th><th>Score</th><th class="num-c">Problemas</th></tr></thead><tbody>
       ${p.skus.map(s => s.error ? `<tr><td>${esc(s.skuId)}</td><td colspan="8" class="no">${esc(s.error)}</td></tr>` : `<tr class="sk" data-pid="${esc(p.productId)}" data-sku="${esc(s.skuId)}">
         <td>${esc(s.skuId)}</td><td>${esc(s.skuName || s.name)}</td><td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${esc(s.refId || '')}">${esc(s.refId || '—')}</td>
-        <td class="num-c">${s.unlimited ? '∞' : fmt(s.stock)}</td>
+        <td class="num-c">${s.unlimited ? '∞' : fmt(s.stock)}${!s.hasStock && s.showNoStock ? '<div style="font-size:11px;color:var(--muted)">mostrar sin stock</div>' : ''}</td>
         ${legacy ? `<td class="ctr">${flagI(s.fSku, 'Activo')}</td>` : `<td class="ctr">${flagI(s.fProd, 'Producto activo')}</td><td class="ctr">${flagI(s.fVisible, 'Producto visible')}</td><td class="ctr">${flagI(s.fSku, 'SKU activo')}</td>`}
         <td>${chipVis(s.vis)}</td><td>${scoreCell(s.score, s.semaforo)}</td><td class="num-c">${s.issues.length}</td></tr>`).join('')}
       </tbody></table></td></tr>`;
@@ -992,6 +995,9 @@ $('#scrim').onclick = closeDrawer;
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
 
 /* ================= contenido actual vs IA ================= */
+const fechaIA = ia => ia && ia.fecha ? new Date(ia.fecha).toLocaleString('es-CO', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'America/Bogota' }) : '';
+const diaBog = d => new Date(new Date(d).getTime() - 5 * 3600e3).toISOString().slice(0, 10);
+const validadoHoy = ia => !!(ia && ia.ok && ia.fecha && diaBog(ia.fecha) === diaBog(Date.now()));
 const lenTag = (s, lo, hi) => { const n = (s || '').length; return `<span class="len ${n && n >= lo && n <= hi ? '' : 'bad'}">${n} car.</span>`; };
 const copyBtn = txt => `<button class="btn sm" data-copy="${esc(txt)}">Copiar</button>`;
 const fieldHtml = (k, v, extra = '', long = false, copy = false) =>
@@ -1006,7 +1012,7 @@ function contentCompare(c) {
   let sug;
   if (!ia) sug = `<div><h4>Sugerencia IA</h4><p style="color:var(--muted)">Este producto no entró en la corrida de IA (fuera del top <code>aiMaxProductos</code> o sin problemas de contenido).</p></div>`;
   else if (!ia.ok) sug = `<div><h4>Sugerencia IA</h4><p class="no">La IA no respondió: ${esc(ia.error)}</p></div>`;
-  else sug = `<div><h4><span>Sugerencia IA</span><span class="quality">Calidad actual <span class="dots">${Array.from({ length: 10 }, (_, i) => `<i class="${i < ia.calidad ? 'on' : ''}"></i>`).join('')}</span> ${ia.calidad}/10</span></h4>
+  else sug = `<div><h4><span>Sugerencia IA${ia.fecha ? ` <span style="text-transform:none;letter-spacing:0;font-weight:500;color:var(--text-2)">· validado ${esc(fechaIA(ia))}${validadoHoy(ia) ? ' <span class="chip visible" style="font-size:10.5px;padding:0 6px">hoy</span>' : ''}</span>` : ''}</span><span class="quality">Calidad actual <span class="dots">${Array.from({ length: 10 }, (_, i) => `<i class="${i < ia.calidad ? 'on' : ''}"></i>`).join('')}</span> ${ia.calidad}/10</span></h4>
       ${fieldHtml('Title', ia.titleSugerido, lenTag(ia.titleSugerido, 30, 65), false, true)}
       ${fieldHtml('Meta description', ia.metaSugerida, lenTag(ia.metaSugerida, 70, 160), false, true)}
       ${fieldHtml('Descripción corta', ia.descCortaSugerida, '', false, true)}
@@ -1031,7 +1037,7 @@ function renderContent() {
   $('#contentList').innerHTML = list.length ? list.map(p => `<div class="panel pcard ${reviewed[p.productId] ? 'reviewed' : ''}">
       <div class="pcard-h">${img(p.imageUrl, p)}
         <div class="meta"><div class="t">${esc(p.name)}</div>
-          <div class="s">Producto ${esc(p.productId)} · ${esc(p.path.join(' › '))} · ${p.skus.length} SKU${p.skus.length > 1 ? 's' : ''}</div></div>
+          <div class="s">Producto ${esc(p.productId)} · ${esc(p.path.join(' › '))} · ${p.skus.length} SKU${p.skus.length > 1 ? 's' : ''}${p.c.ia && p.c.ia.fecha ? ` · validado por IA ${esc(fechaIA(p.c.ia))}` : ''}</div></div>
         <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">${chipVis(p.vis)}
           <button class="btn sm" data-open="${esc(p.productId)}">Ficha</button>
           <button class="btn sm ${reviewed[p.productId] ? '' : 'primary'}" data-rev="${esc(p.productId)}">${reviewed[p.productId] ? 'Revisado ✓' : 'Marcar revisado'}</button></div>
@@ -1063,7 +1069,7 @@ function exportRows(prods) {
     'Especificaciones de producto faltantes': (p.missP || legacyCommon(p)).join(' | '),
     'Campos por diligenciar': p.pend.length, 'Pendientes prioridad alta': p.pend.filter(x => x.prioridad === 'alta').length,
     'Descripción (car.)': p.c.descLength || 0, 'Title (car.)': (p.c.title || '').length, 'Meta description (car.)': (p.c.metaDescription || '').length,
-    'Sugerencia IA': p.c.ia?.ok ? 'Sí' : '', 'URL': p.url,
+    'Sugerencia IA': p.c.ia?.ok ? 'Sí' : '', 'Validado por IA': fechaIA(p.c.ia), 'URL': p.url,
   }));
   const skus = prods.flatMap(p => p.skus.map(s => ({
     'ID SKU': s.skuId, 'ID producto': p.productId, 'RefId': s.refId || '', 'EAN': s.ean || '', 'Nombre SKU': s.name || '', 'Variación': s.skuName || '',
