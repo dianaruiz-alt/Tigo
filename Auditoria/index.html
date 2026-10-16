@@ -113,7 +113,7 @@ nav.tabs .count{font-weight:500;color:var(--muted);margin-left:4px}
 .node .nums b{color:var(--text);font-variant-numeric:tabular-nums}
 .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--text-2);margin-top:10px}
 .legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
-.kpis{display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:12px}
+.kpis{display:grid;grid-template-columns:1.4fr repeat(5,1fr);gap:12px}
 .kpi{padding:16px 18px}
 .kpi .lbl{font-size:12px;color:var(--text-2);font-weight:500}
 .kpi .val{font-size:28px;font-weight:700;letter-spacing:-.02em;margin-top:4px;font-variant-numeric:tabular-nums}
@@ -245,6 +245,19 @@ details.skud.hl{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-sof
 .swatch{display:inline-block;width:26px;height:26px;border-radius:6px;border:1px solid var(--line-2);box-shadow:inset 0 0 0 1px rgba(255,255,255,.25);flex:none}
 .swatch-wrap code{font-size:12.5px;color:var(--text-2)}
 .imgs .thumb{width:60px;height:60px}
+.imgs.dim{gap:10px}
+.imgcard{display:flex;flex-direction:column;gap:3px;width:104px;font-size:11px;line-height:1.35;color:var(--text-2)}
+.imgcard .thumb{width:104px;height:104px;object-fit:contain;background:#fff;border:1px solid var(--line)}
+.imgcard.bad .thumb{border:2px solid var(--crit)}
+.imgcard.warn .thumb{border:2px solid var(--warn)}
+.imgcard b{color:var(--text);font-size:12px}
+.imgcard .fn{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.imgcard .nt{color:var(--crit-ink)}
+.imgcard .nt.w{color:var(--warn-ink)}
+.mark{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:1px 7px;border-radius:999px;background:var(--crit-soft,rgba(200,40,40,.12));color:var(--crit-ink);white-space:nowrap}
+.mark.ok{background:var(--good-soft,rgba(30,140,80,.12));color:var(--good-ink)}
+.mark.pend{background:var(--warn-soft,rgba(220,160,0,.15));color:var(--warn-ink)}
+.mark.na{background:transparent;color:var(--muted);font-weight:500}
 .empty-state{padding:80px 20px;text-align:center;color:var(--text-2)}
 .empty-state h2{color:var(--text);margin:0 0 8px}
 #tip{position:fixed;pointer-events:none;background:var(--text);color:var(--surface);padding:7px 10px;border-radius:7px;font-size:12px;line-height:1.4;box-shadow:var(--shadow);opacity:0;transition:opacity .08s;z-index:40;max-width:300px}
@@ -304,6 +317,8 @@ footer{color:var(--muted);font-size:12px;padding:24px 0 40px}
         </div>
       </label>
       <label>Problema<select id="fIssue"></select></label>
+      <label>IA de contenido<select id="fIa"><option value="">Todos</option><option value="pendiente">Pendiente IA hoy</option><option value="hoy">Validado hoy</option><option value="anterior">Validado otro día</option><option value="na">No aplica</option></select></label>
+      <label>Imágenes<select id="fImg"><option value="">Todas</option><option value="ajuste">Requiere ajuste de dimensión</option><option value="guia">Fuera de la guía (cualquier regla)</option><option value="okdim">Dimensiones OK</option></select></label>
       <label>Buscar<input type="search" id="fQ" placeholder="Nombre, ID producto, SKU, RefId, marca…"></label>
       <button class="btn sm" id="btnClear" style="margin-bottom:4px">Limpiar</button>
     </section>
@@ -365,6 +380,7 @@ footer{color:var(--muted);font-size:12px;padding:24px 0 40px}
     <section data-view="contenido" class="hidden">
       <div class="filters" style="padding-top:0">
         <label class="check"><input type="checkbox" id="fPend" checked> Ocultar revisados</label>
+        <label class="check"><input type="checkbox" id="fIaPend"> Ver también pendientes de IA hoy</label>
         <span style="font-size:12px;color:var(--muted);padding-bottom:7px">Las sugerencias de la IA son propuestas: valida cada dato técnico antes de cargarlo en VTEX.</span>
       </div>
       <div id="contentList"></div>
@@ -402,7 +418,7 @@ const VIS = {
 };
 const VIS_ORDER = ['visible', 'sin_stock', 'inactivo_con_stock', 'inactivo_sin_stock'];
 const ISSUE_LABEL = {
-  img_0:'Sin imágenes', img_pocas:'Menos de 3 imágenes', spec_faltante:'Faltan especificaciones de su categoría', spec_prod_faltante:'Faltan especificaciones de producto', spec_sku_faltante:'Faltan especificaciones de SKU', spec_pocas:'Pocas especificaciones',
+  img_0:'Sin imágenes', img_pocas:'Menos imágenes que el mínimo del perfil', img_dimension:'Requiere ajuste de dimensión', img_peso:'Imágenes de más de 300 KB', img_formato:'Imágenes que no son .jpg', img_nombre:'Nombre de imagen fuera de la guía', spec_faltante:'Faltan especificaciones de su categoría', spec_prod_faltante:'Faltan especificaciones de producto', spec_sku_faltante:'Faltan especificaciones de SKU', spec_pocas:'Pocas especificaciones',
   spec_vacia:'Campos de especificación vacíos', desc_0:'Sin descripción', desc_muy_corta:'Descripción con menos de 100 car.', desc_corta:'Descripción con menos de 300 car.',
   desc_relleno:'Texto de relleno', desc_igual_nombre:'Descripción = nombre', desc_duplicada:'Descripción duplicada', desc_html:'HTML con estilos embebidos',
   desc_corta_0:'Sin descripción corta', seo_title_0:'Title SEO vacío', seo_title_len:'Title fuera de 30–65', seo_meta_0:'Meta description vacía',
@@ -412,7 +428,7 @@ const ISSUE_LABEL = {
 };
 
 let A = null, PRODUCTS = [], BYID = {}, TREE = {};
-let state = { path:'', vis:'', sem:'', issue:'', q:'', tab:'resumen', sort:['score', 1], page:0, open:new Set() };
+let state = { path:'', vis:'', sem:'', issue:'', q:'', ia:'', img:'', tab:'resumen', sort:['score', 1], page:0, open:new Set() };
 const PAGE = 40;
 let reviewed = store.get('tigoAudit.reviewed', {});
 
@@ -491,6 +507,16 @@ function buildProduct(pid, skus) {
   P.reasons = blockers(P);
   P.pend = pendientes(P);
   P.priority = Math.max(0, ...skus.map(s => s.priority || 0));
+  // Imágenes medidas (flujo v6): ajuste de dimensión solo cuenta en perfiles estrictos (Celulares / Equipos venta libre)
+  P.imgsInfo = ok.flatMap(s => (s.imagesInfo || []).map(x => ({ ...x, s })));
+  P.imgMedidas = P.imgsInfo.length;
+  P.imgEstricto = !!(P.perfil && (P.perfil.imagenesEstrictas || ['Celulares', 'Equipos venta libre'].includes(P.perfil.nombre)));
+  P.imgAjusteN = P.imgsInfo.filter(x => x.ajusteDim).length;
+  P.imgAjuste = P.imgEstricto && P.imgAjusteN > 0;
+  P.imgFuera = P.imgsInfo.filter(x => (x.notas || []).length).length;
+  // Check de IA: validado hoy / pendiente hoy (elegible y sin validar hoy) / validado otro día / no aplica
+  const elegible = c.iaElegible ?? c.iaPendienteHoy ?? false;
+  P.iaEst = validadoHoy(c.ia) ? 'hoy' : elegible ? 'pendiente' : c.ia && c.ia.ok ? 'anterior' : 'na';
   P.search = [P.productId, P.name, P.brand, ...skus.flatMap(s => [s.skuId, s.refId, s.ean, s.name])].join(' ').toLowerCase();
   return P;
 }
@@ -577,6 +603,12 @@ function pendientes(P) {
     for (const f of missS) { const req = E.reqS.includes(f); if (pideCampo(req)) add('SKU', s, f, 'Especificación de SKU', why(req, 'SKUs'), req ? 'alta' : 'media'); }
     const minImg = s.perfil.minImagenes, nImg = s.imagesCount || 0;
     if (nImg < minImg) add('SKU', s, 'Imágenes', 'Imagen', `Tiene ${nImg}, mínimo ${minImg} para ${s.perfil.nombre}`, nImg ? 'media' : 'alta', String(nImg), `Subir ${minImg - nImg} más`);
+    const dimBad = (s.imagesInfo || []).filter(x => x.ajusteDim);
+    if (dimBad.length && P.imgEstricto) add('SKU', s, 'Imágenes · dimensión', 'Imagen',
+      `Requiere ajuste de dimensión: ${dimBad.map(x => `pos. ${x.pos} ${x.w}×${x.h}`).join(', ')} (guía: cuadrada, mínimo ${GI().rec} px, ideal 1500–2000 px)`, 'alta',
+      dimBad.map(x => `${x.w}×${x.h}`).join(' | '), `Reemplazar por imagen cuadrada de 1500–2000 px, máx. ${GI().kb} KB, .jpg`);
+    const guia = (s.imagesInfo || []).filter(x => !x.ajusteDim && (x.notas || []).length && x.w);
+    if (guia.length) add('SKU', s, 'Imágenes · guía', 'Imagen', guia.map(x => `pos. ${x.pos}: ${x.notas.join('; ')}`).join(' · '), 'baja');
     const col = s.issues.find(i => i.code === 'color_inconsistente');
     if (col && !/#[0-9a-f]{3,8}/i.test(col.label)) add('SKU', s, 'Color', 'Especificación de SKU', col.label, 'alta', (Object.entries(s.specs || {}).find(([k]) => /color/i.test(k)) || [])[1] || '');
     if (s.legacy ? !s.fSku : !s.fSku) add('SKU', s, 'SKU activo (IsActive)', 'Activación', s.legacy ? 'Producto o SKU inactivo' : 'SKU inactivo', 'alta', 'No', 'Activar si debe venderse');
@@ -632,7 +664,7 @@ function syncControls() {
   fillLevel($('#fCat'), parts.length >= 1 ? lvl(1) : null, lvl(2), 'Todas');
   const nSub = fillLevel($('#fSub'), parts.length >= 2 ? lvl(2) : null, lvl(3), 'Todas');
   $('#lSub').classList.toggle('hidden', parts.length >= 2 && !nSub);
-  $('#fVis').value = state.vis; $('#fIssue').value = state.issue; $('#fQ').value = state.q;
+  $('#fVis').value = state.vis; $('#fIssue').value = state.issue; $('#fQ').value = state.q; $('#fIa').value = state.ia; $('#fImg').value = state.img;
   $$('#fSem button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === state.sem)));
   const chips = [];
   if (state.path) chips.push(['path', state.path.split(SEP).map((n, i, arr) => nodeLabel(arr.slice(0, i + 1).join(SEP))).join(' › ')]);
@@ -640,6 +672,8 @@ function syncControls() {
   if (state.sem) chips.push(['sem', 'Calidad: ' + SEM[state.sem][0]]);
   if (state.issue) chips.push(['issue', ISSUE_LABEL[state.issue] || state.issue]);
   if (state.q) chips.push(['q', `"${state.q}"`]);
+  if (state.ia) chips.push(['ia', 'IA: ' + IA_EST[state.ia][0]]);
+  if (state.img) chips.push(['img', { ajuste: 'Requiere ajuste de dimensión', guia: 'Imágenes fuera de la guía', okdim: 'Dimensiones OK' }[state.img]]);
   $('#activeFilters').innerHTML = chips.map(([k, l]) => `<span class="chip neutral" data-clear="${k}" title="Quitar filtro">${esc(l)} ✕</span>`).join('');
   $$('#activeFilters [data-clear]').forEach(el => el.onclick = () => set({ [el.dataset.clear]: '' }));
 }
@@ -649,10 +683,13 @@ $('#fCat').onchange = e => set({ path: e.target.value || state.path.split(SEP).s
 $('#fSub').onchange = e => set({ path: e.target.value || state.path.split(SEP).slice(0, 2).join(SEP) });
 $('#fVis').onchange = e => set({ vis: e.target.value });
 $('#fIssue').onchange = e => set({ issue: e.target.value });
+$('#fIa').onchange = e => set({ ia: e.target.value });
+$('#fImg').onchange = e => set({ img: e.target.value });
 let qT; $('#fQ').oninput = e => { clearTimeout(qT); qT = setTimeout(() => set({ q: e.target.value.trim() }), 180); };
 $$('#fSem button').forEach(b => b.onclick = () => set({ sem: b.dataset.v }));
-$('#btnClear').onclick = () => set({ path:'', vis:'', sem:'', issue:'', q:'' });
+$('#btnClear').onclick = () => set({ path:'', vis:'', sem:'', issue:'', q:'', ia:'', img:'' });
 $('#fPend').onchange = () => renderContent();
+$('#fIaPend').onchange = () => renderContent();
 $('#fLow').onchange = () => renderSpecs();
 
 const skuMatch = s => (!state.sem || s.semaforo === state.sem) && (!state.issue || s._codes.has(state.issue));
@@ -662,6 +699,8 @@ function filtered(opts = {}) {
     (opts.ignorePath || inPath(p, state.path)) &&
     (opts.ignoreVis || !state.vis || p.vis === state.vis) &&
     ((!state.sem && !state.issue) || p.skus.some(skuMatch)) &&
+    (!state.ia || p.iaEst === state.ia) &&
+    (!state.img || (state.img === 'ajuste' ? p.imgAjuste : state.img === 'guia' ? p.imgFuera > 0 : p.imgMedidas > 0 && !p.imgAjuste)) &&
     (!q || p.search.includes(q)));
 }
 const skusOf = prods => prods.flatMap(p => p.skus.filter(s => !s.error && skuMatch(s)));
@@ -750,7 +789,12 @@ function renderQuality(prods) {
     ${kpi('SKUs auditados', fmt(n), `${fmt(prods.length)} productos`)}
     ${kpi('Campos por diligenciar', fmt(pend), `${fmt(pendProd)} de producto · ${fmt(pend - pendProd)} de SKU`)}
     ${kpi('Productos sin descripción completa', fmt(noDesc), `${pct(noDesc, prods.length)} % · bajo el mínimo de su perfil`)}
-    ${kpi('Sugerencias IA', fmt(ia), `${fmt(prods.filter(p => validadoHoy(p.c.ia)).length)} validados hoy${A.iaUltimaCorrida ? ' · última corrida ' + esc(fechaIA({ fecha: A.iaUltimaCorrida })) : ''}`)}`;
+    ${kpi('Sugerencias IA', fmt(ia), `${fmt(prods.filter(p => p.iaEst === 'hoy').length)} validados hoy · <a href="#" data-goia="pendiente" style="color:inherit">${fmt(prods.filter(p => p.iaEst === 'pendiente').length)} pendientes hoy</a>${A.iaUltimaCorrida ? ' · última corrida ' + esc(fechaIA({ fecha: A.iaUltimaCorrida })) : ''}`)}
+    ${(() => { const med = prods.reduce((a, p) => a + p.imgMedidas, 0); const pa = prods.filter(p => p.imgAjuste); const ia2 = pa.reduce((a, p) => a + p.imgAjusteN, 0);
+      return med ? kpi('Requieren ajuste de dimensión', `<a href="#" data-goimg="ajuste" style="color:inherit;text-decoration:none">${fmt(pa.length)}</a>`, `productos de Celulares / Equipos · ${fmt(ia2)} imágenes de ${fmt(med)} medidas`)
+        : kpi('Requieren ajuste de dimensión', '—', 'Ejecuta el flujo v6 para medir las imágenes'); })()}`;
+  $$('#kpis [data-goia]').forEach(a => a.onclick = e => { e.preventDefault(); set({ ia: a.dataset.goia }); goTab('productos'); });
+  $$('#kpis [data-goimg]').forEach(a => a.onclick = e => { e.preventDefault(); set({ img: a.dataset.goimg }); goTab('productos'); });
 }
 const kpi = (l, v, f) => `<div class="panel kpi"><div class="lbl">${l}</div><div class="val">${v}</div><div class="foot">${f}</div></div>`;
 
@@ -803,8 +847,16 @@ function renderTop(prods) {
 const PCOLS = [
   ['name', 'Producto'], ['pathKey', 'Categoría'], ['skus', 'SKUs', 'num-c'], ['stock', 'Stock', 'num-c'],
   ['vis', 'Visibilidad'], ['score', 'Score'], ['pend', 'Pendientes', 'num-c'], ['descOk', 'Descripción', 'ctr'],
+  ['img', 'Imágenes', 'ctr'], ['ia', 'IA hoy', 'ctr'],
 ];
-const pSort = (p, k) => k === 'skus' ? p.skus.length : k === 'pend' ? p.pend.length : k === 'vis' ? VIS_ORDER.indexOf(p.vis) : k === 'descOk' ? (p.descOk ? 1 : 0) : k === 'score' ? (p.score ?? -1) : (p[k] ?? '');
+const IA_EST = { hoy: ['Validado hoy', 'ok', '✓'], pendiente: ['Pendiente IA hoy', 'pend', '☐'], anterior: ['Validado otro día', 'na', '✓'], na: ['No aplica', 'na', '—'] };
+const iaMark = p => { const [l, c, i] = IA_EST[p.iaEst]; const tip = p.iaEst === 'na' ? 'No entra a la IA: fuera de iaDepartamentos, inactivo o sin oportunidades de contenido' : p.c.ia && p.c.ia.fecha ? 'Última validación: ' + fechaIA(p.c.ia) : 'Sin validación de IA';
+  return `<span class="mark ${c}" data-tip="${esc(tip)}">${i} ${p.iaEst === 'anterior' && p.c.ia.fecha ? esc(diaBog(p.c.ia.fecha)) : p.iaEst === 'anterior' ? 'Validado' : l}</span>`; };
+const imgMark = p => !p.imgMedidas ? '<span class="mark na">—</span>'
+  : p.imgAjuste ? `<span class="mark" data-tip="${fmt(p.imgAjusteN)} de ${fmt(p.imgMedidas)} imágenes no son cuadradas o tienen menos de ${GI().rec} px">⚠ Ajustar dimensión</span>`
+  : p.imgFuera ? `<span class="mark pend" data-tip="${fmt(p.imgFuera)} imágenes con observaciones de la guía (peso, formato o nombre)">${fmt(p.imgFuera)} obs.</span>`
+  : '<span class="mark ok">✓ OK</span>';
+const pSort = (p, k) => k === 'img' ? (p.imgAjuste ? 2 : p.imgFuera ? 1 : 0) : k === 'ia' ? ['pendiente', 'anterior', 'hoy', 'na'].indexOf(p.iaEst) : k === 'skus' ? p.skus.length : k === 'pend' ? p.pend.length : k === 'vis' ? VIS_ORDER.indexOf(p.vis) : k === 'descOk' ? (p.descOk ? 1 : 0) : k === 'score' ? (p.score ?? -1) : (p[k] ?? '');
 function renderProducts(prods) {
   const [k, dir] = state.sort;
   const sorted = [...prods].sort((a, b) => { const x = pSort(a, k), y = pSort(b, k); return (typeof x === 'string' ? x.localeCompare(y, 'es') : x - y) * dir; });
@@ -814,7 +866,7 @@ function renderProducts(prods) {
   const nSku = prods.reduce((a, p) => a + p.skus.length, 0);
   $('#prodCount').textContent = `${fmt(prods.length)} productos · ${fmt(nSku)} SKUs · clic en un producto para ver sus SKUs`;
   $('#tProd').innerHTML = `<thead><tr>${PCOLS.map(([key, l, cls]) => `<th data-sort="${key}" class="${cls || ''}">${l} ${k === key ? (dir > 0 ? '↑' : '↓') : ''}</th>`).join('')}<th></th></tr></thead>
-    <tbody>${slice.map(p => productRow(p)).join('') || `<tr><td colspan="9">${noData('Ningún producto coincide con los filtros')}</td></tr>`}</tbody>`;
+    <tbody>${slice.map(p => productRow(p)).join('') || `<tr><td colspan="11">${noData('Ningún producto coincide con los filtros')}</td></tr>`}</tbody>`;
   $$('#tProd th[data-sort]').forEach(th => th.onclick = () => { const key = th.dataset.sort;
     state.sort = [key, state.sort[0] === key ? -state.sort[1] : (['name', 'pathKey', 'vis'].includes(key) ? 1 : (key === 'score' ? 1 : -1))]; renderProducts(filtered()); });
   $$('#tProd tr.prow').forEach(tr => tr.onclick = e => { if (e.target.closest('[data-open]')) return;
@@ -842,10 +894,12 @@ function productRow(p) {
     <td>${p.score == null ? '—' : scoreCell(p.score, p.semAvg)}</td>
     <td class="num-c">${pendTag(p)}</td>
     <td class="ctr">${p.descOk ? '<span class="yes">Sí</span>' : '<span class="no">No</span>'}</td>
+    <td class="ctr">${imgMark(p)}</td>
+    <td class="ctr">${iaMark(p)}</td>
     <td><button class="btn sm" data-open="${esc(p.productId)}">Ficha</button></td></tr>`;
   if (open) {
     const legacy = p.skus.every(s => s.legacy);
-    html += `<tr class="nest"><td colspan="9"><table class="mini"><thead><tr><th>SKU</th><th>Variación</th><th>RefId</th><th class="num-c">Stock</th>
+    html += `<tr class="nest"><td colspan="11"><table class="mini"><thead><tr><th>SKU</th><th>Variación</th><th>RefId</th><th class="num-c">Stock</th>
       ${legacy ? '<th class="ctr">Activo</th>' : '<th class="ctr">Prod. activo</th><th class="ctr">Prod. visible</th><th class="ctr">SKU activo</th>'}
       <th>Estado en tienda</th><th>Score</th><th class="num-c">Problemas</th></tr></thead><tbody>
       ${p.skus.map(s => s.error ? `<tr><td>${esc(s.skuId)}</td><td colspan="8" class="no">${esc(s.error)}</td></tr>` : `<tr class="sk" data-pid="${esc(p.productId)}" data-sku="${esc(s.skuId)}">
@@ -909,7 +963,7 @@ function openProduct(pid, skuId) {
       <div style="flex:1;min-width:0"><div class="t">${esc(p.name)}</div>
         <div class="s">Producto ${esc(p.productId)} · ${esc(p.path.join(' › '))}${p.brand ? ' · ' + esc(p.brand) : ''}</div>
         <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">${chipVis(p.vis)}${p.score == null ? '' : `<span class="chip neutral">Score promedio ${p.score}/100</span>`}
-          <span class="chip neutral">${fmt(p.pend.length)} campos por diligenciar</span>${p.perfil ? `<span class="chip neutral" data-tip="Perfil de exigencia: mínimo ${p.perfil.minImagenes} imágenes, descripción ≥ ${p.perfil.descMin} caracteres${p.perfil.specs === 'requeridos' ? ', solo especificaciones obligatorias' : ', obligatorias + recomendadas'}">Perfil ${esc(p.perfil.nombre)}</span>` : ''}${p.url ? `<a class="btn sm" href="${esc(p.url)}" target="_blank" rel="noopener">Ver en tienda ↗</a>` : ''}</div>
+          <span class="chip neutral">${fmt(p.pend.length)} campos por diligenciar</span>${p.imgMedidas ? imgMark(p) : ''}${iaMark(p)}${p.perfil ? `<span class="chip neutral" data-tip="Perfil de exigencia: mínimo ${p.perfil.minImagenes} imágenes, descripción ≥ ${p.perfil.descMin} caracteres${p.perfil.specs === 'requeridos' ? ', solo especificaciones obligatorias' : ', obligatorias + recomendadas'}">Perfil ${esc(p.perfil.nombre)}</span>` : ''}${p.url ? `<a class="btn sm" href="${esc(p.url)}" target="_blank" rel="noopener">Ver en tienda ↗</a>` : ''}</div>
       </div><button class="btn sm" id="drClose" aria-label="Cerrar">✕</button>
     </div>
     <div class="dr-b">
@@ -942,7 +996,7 @@ function openProduct(pid, skuId) {
               ? `<ul class="issues">${[...own].sort((a, b) => sevOrder[a.sev] - sevOrder[b.sev]).map(i => `<li><span class="sev ${i.sev}">${i.sev}</span><span>${esc(i.label)}</span></li>`).join('')}</ul>`
               : '<p class="yes">Sin problemas propios del SKU.</p>'; })()}
             <p style="font-size:12px;color:var(--muted);margin:8px 0 0">Descripción, SEO, marca y especificaciones de producto se evalúan a nivel de producto (ver arriba).</p>
-            ${(s.images || []).length ? `<div class="imgs">${s.images.map(u => `<a href="${esc(u)}" target="_blank" rel="noopener">${img(u, s)}</a>`).join('')}</div>` : ''}
+            ${imgsBlock(s, p)}
           </div></details>`).join('')}
 
       <h3>Contenido del producto</h3>
@@ -952,6 +1006,19 @@ function openProduct(pid, skuId) {
   $('#drClose').onclick = closeDrawer; bindCopy($('#drawer'));
   $('#drawer').scrollTop = 0;
   if (skuId) { const el = document.getElementById('sk-' + skuId); if (el) setTimeout(() => el.scrollIntoView({ block: 'center' }), 60); }
+}
+const GI = () => ({ rec: (A && A.guiaImagenes && A.guiaImagenes.recomendadoPx) || 1000, kb: (A && A.guiaImagenes && A.guiaImagenes.maxKb) || 300 });
+/* Imágenes del SKU con dimensiones, peso y extensión según la guía del catálogo */
+function imgsBlock(s, p) {
+  const info = s.imagesInfo || [];
+  if (!info.length) return (s.images || []).length ? `<div class="imgs">${s.images.map(u => `<a href="${esc(u)}" target="_blank" rel="noopener">${img(u, s)}</a>`).join('')}</div>` : '';
+  return `<div style="font-size:12px;font-weight:600;margin-top:10px">Imágenes · guía: cuadrada, ≥ ${GI().rec} px (ideal 1500–2000), ≤ ${GI().kb} KB, .jpg, nombre-variación-posición</div>
+    <div class="imgs dim">${info.map(x => { const bad = x.ajusteDim && p.imgEstricto, warn = !bad && (x.notas || []).length;
+      return `<div class="imgcard ${bad ? 'bad' : warn ? 'warn' : ''}"><a href="${esc(x.url)}" target="_blank" rel="noopener">${img(x.url, s)}</a>
+        <div><b>${x.w ? `${x.w} × ${x.h}` : '¿? × ¿?'}</b> px</div>
+        <div>${x.kb != null ? fmt(x.kb) + ' KB' : '— KB'} · ${esc((x.ext || '?').toUpperCase())} · pos. ${x.pos}</div>
+        <div class="fn" title="${esc(x.file)}">${esc(x.file)}</div>
+        ${(x.notas || []).map(n => `<div class="nt ${bad && /cuadrada|px/.test(n) ? '' : 'w'}">• ${esc(n)}</div>`).join('')}</div>`; }).join('')}</div>`;
 }
 /* Valores hexadecimales (#8A9598): muestra una muestra del color junto al código */
 const HEX = /^#?([0-9a-f]{3}|[0-9a-f]{6})$/i;
@@ -1010,7 +1077,7 @@ function contentCompare(c) {
       ${fieldHtml('Descripción corta', c.descriptionShort)}
       ${fieldHtml('Descripción', c.description, `<span class="len ${(c.descLength || 0) >= 300 ? '' : 'bad'}">${c.descLength || 0} car.</span>`, true)}</div>`;
   let sug;
-  if (!ia) sug = `<div><h4>Sugerencia IA</h4><p style="color:var(--muted)">Este producto no entró en la corrida de IA (fuera del top <code>aiMaxProductos</code> o sin problemas de contenido).</p></div>`;
+  if (!ia) sug = `<div><h4>Sugerencia IA</h4><p style="color:var(--muted)">${c.iaElegible || c.iaPendienteHoy ? 'Pendiente: se procesa en la próxima ejecución del flujo <b>Tigo · IA de contenido</b>.' : 'Este producto no entra a la IA (fuera de los departamentos configurados, inactivo o sin oportunidades de contenido).'}</p></div>`;
   else if (!ia.ok) sug = `<div><h4>Sugerencia IA</h4><p class="no">La IA no respondió: ${esc(ia.error)}</p></div>`;
   else sug = `<div><h4><span>Sugerencia IA${ia.fecha ? ` <span style="text-transform:none;letter-spacing:0;font-weight:500;color:var(--text-2)">· validado ${esc(fechaIA(ia))}${validadoHoy(ia) ? ' <span class="chip visible" style="font-size:10.5px;padding:0 6px">hoy</span>' : ''}</span>` : ''}</span><span class="quality">Calidad actual <span class="dots">${Array.from({ length: 10 }, (_, i) => `<i class="${i < ia.calidad ? 'on' : ''}"></i>`).join('')}</span> ${ia.calidad}/10</span></h4>
       ${fieldHtml('Title', ia.titleSugerido, lenTag(ia.titleSugerido, 30, 65), false, true)}
@@ -1032,13 +1099,14 @@ function bindCopy(root) {
 }
 function renderContent() {
   const hide = $('#fPend').checked;
-  const list = filtered().filter(p => p.c.ia && (!hide || !reviewed[p.productId]))
+  const conPend = $('#fIaPend').checked;
+  const list = filtered().filter(p => (p.c.ia || (conPend && p.iaEst === 'pendiente')) && (!hide || !reviewed[p.productId]))
     .sort((a, b) => VIS_ORDER.indexOf(a.vis) - VIS_ORDER.indexOf(b.vis) || b.priority - a.priority);
   $('#contentList').innerHTML = list.length ? list.map(p => `<div class="panel pcard ${reviewed[p.productId] ? 'reviewed' : ''}">
       <div class="pcard-h">${img(p.imageUrl, p)}
         <div class="meta"><div class="t">${esc(p.name)}</div>
           <div class="s">Producto ${esc(p.productId)} · ${esc(p.path.join(' › '))} · ${p.skus.length} SKU${p.skus.length > 1 ? 's' : ''}${p.c.ia && p.c.ia.fecha ? ` · validado por IA ${esc(fechaIA(p.c.ia))}` : ''}</div></div>
-        <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">${chipVis(p.vis)}
+        <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">${chipVis(p.vis)}${iaMark(p)}
           <button class="btn sm" data-open="${esc(p.productId)}">Ficha</button>
           <button class="btn sm ${reviewed[p.productId] ? '' : 'primary'}" data-rev="${esc(p.productId)}">${reviewed[p.productId] ? 'Revisado ✓' : 'Marcar revisado'}</button></div>
       </div>${contentCompare(p.c).replace('class="panel" style="box-shadow:none;overflow:hidden"', 'style="overflow:hidden;border-radius:0 0 12px 12px"')}</div>`).join('')
@@ -1069,8 +1137,18 @@ function exportRows(prods) {
     'Especificaciones de producto faltantes': (p.missP || legacyCommon(p)).join(' | '),
     'Campos por diligenciar': p.pend.length, 'Pendientes prioridad alta': p.pend.filter(x => x.prioridad === 'alta').length,
     'Descripción (car.)': p.c.descLength || 0, 'Title (car.)': (p.c.title || '').length, 'Meta description (car.)': (p.c.metaDescription || '').length,
-    'Sugerencia IA': p.c.ia?.ok ? 'Sí' : '', 'Validado por IA': fechaIA(p.c.ia), 'URL': p.url,
+    'Sugerencia IA': p.c.ia?.ok ? 'Sí' : '', 'Validado por IA': fechaIA(p.c.ia), 'Estado IA hoy': IA_EST[p.iaEst][0],
+    'Imágenes medidas': p.imgMedidas, 'Requiere ajuste de dimensión': p.imgMedidas ? yn(p.imgAjuste) : '', 'Imágenes a ajustar': p.imgEstricto ? p.imgAjusteN : '',
+    'Imágenes con observaciones': p.imgFuera, 'URL': p.url,
   }));
+  const imagenes = prods.flatMap(p => p.imgsInfo.map(x => ({
+    'Requiere ajuste de dimensión': x.ajusteDim && p.imgEstricto ? 'Sí' : x.ajusteDim ? 'Sí (perfil no estricto)' : 'No',
+    'ID producto': p.productId, 'Producto': p.name, 'ID SKU': x.s.skuId, 'Nombre SKU': x.s.name || '', ...lvlCols(p), 'Perfil': p.perfil ? p.perfil.nombre : '',
+    'Posición': x.pos, 'Archivo': x.file, 'Ancho (px)': x.w ?? '', 'Alto (px)': x.h ?? '', 'Cuadrada': x.w ? yn(x.cuadrada) : '',
+    'Lado menor (px)': x.w ? Math.min(x.w, x.h) : '', [`≥ ${GI().rec} px (zoom)`]: x.w ? yn(Math.min(x.w, x.h) >= GI().rec) : '', '1500–2000 px (ideal)': x.w ? yn(Math.min(x.w, x.h) >= 1500 && Math.max(x.w, x.h) <= 2000) : '',
+    'Peso (KB)': x.kb ?? '', [`≤ ${GI().kb} KB`]: x.kb != null ? yn(x.okPeso) : '', 'Extensión': x.ext || '', 'Extensión .jpg': yn(x.okExt), 'Nombre según guía': yn(x.okNombre),
+    'Observaciones': (x.notas || []).join(' | '), 'URL imagen': x.url,
+  }))).sort((a, b) => (a['Requiere ajuste de dimensión'] === 'Sí' ? 0 : 1) - (b['Requiere ajuste de dimensión'] === 'Sí' ? 0 : 1));
   const skus = prods.flatMap(p => p.skus.map(s => ({
     'ID SKU': s.skuId, 'ID producto': p.productId, 'RefId': s.refId || '', 'EAN': s.ean || '', 'Nombre SKU': s.name || '', 'Variación': s.skuName || '',
     'Producto': p.name, ...lvlCols(p),
@@ -1084,7 +1162,7 @@ function exportRows(prods) {
     'Nivel': x.nivel, 'ID SKU': x.skuId, 'RefId': x.refId, 'Nombre SKU': x.skuName, 'Tipo': x.tipo, 'Campo': x.campo, 'Situación': x.situacion,
     'Valor actual': x.actual, 'Sugerencia IA': x.sugerencia, 'Valor a diligenciar': '',
   }))).sort((a, b) => ({ alta: 0, media: 1, baja: 2 }[a.Prioridad] - { alta: 0, media: 1, baja: 2 }[b.Prioridad]) || String(a['ID producto']).localeCompare(String(b['ID producto']), 'es', { numeric: true }));
-  return { productos, skus, pend };
+  return { productos, skus, pend, imagenes };
 }
 async function exportXlsx() {
   if (!A) return;
@@ -1093,7 +1171,7 @@ async function exportXlsx() {
   const btn = $('#btnXlsx'); btn.disabled = true; btn.textContent = 'Generando…';
   try {
     const X = await loadXlsx();
-    const { productos, skus, pend } = exportRows(prods);
+    const { productos, skus, pend, imagenes } = exportRows(prods);
     const wb = X.utils.book_new();
     const HEAD = { font: { bold: true, color: { rgb: 'FFFFFF' } }, fill: { fgColor: { rgb: '0033A0' } }, alignment: { vertical: 'center', wrapText: true }, border: { bottom: { style: 'thin', color: { rgb: '9AA3B5' } } } };
     const FILL = { fill: { fgColor: { rgb: 'FFF4CC' } }, border: { left: { style: 'thin', color: { rgb: 'E0B84C' } }, right: { style: 'thin', color: { rgb: 'E0B84C' } }, bottom: { style: 'hair', color: { rgb: 'E0B84C' } } } };
@@ -1121,6 +1199,8 @@ async function exportXlsx() {
       [], ['Campos por diligenciar', pend.length], ['Prioridad alta', pend.filter(x => x.Prioridad === 'alta').length],
       ['Pendientes de producto', pend.filter(x => x.Nivel === 'Producto').length], ['Pendientes de SKU', pend.filter(x => x.Nivel === 'SKU').length],
       ['Especificaciones faltantes', pend.filter(x => String(x.Tipo).startsWith('Especificación')).length], ['SKUs', skus.length],
+      ['Imágenes medidas', imagenes.length], ['Imágenes que requieren ajuste de dimensión', imagenes.filter(x => x['Requiere ajuste de dimensión'] === 'Sí').length],
+      ['Productos que requieren ajuste de dimensión', prods.filter(p => p.imgAjuste).length], ['Productos pendientes de IA hoy', prods.filter(p => p.iaEst === 'pendiente').length],
     ];
     const wsR = X.utils.aoa_to_sheet(resumen);
     wsR['!cols'] = [{ wch: 30 }, { wch: 14 }, { wch: 12 }];
@@ -1139,6 +1219,16 @@ async function exportXlsx() {
     });
     sheet(productos, 'Productos', [11, 36, 16, 18, 10, 20, 10, 22, 12, 14, 6, 10, 22, 40, 9, 11, 40, 10, 10, 10, 9, 10, 9, 44]);
     sheet(skus, 'SKUs', [9, 11, 12, 15, 40, 20, 32, 18, 10, 20, 10, 22, 12, 9, 9, 9, 9, 22, 16, 7, 11, 9, 40, 60, 44]);
+    if (imagenes.length) sheet(imagenes, 'Imágenes', [14, 11, 34, 9, 34, 18, 10, 20, 10, 22, 12, 14, 8, 34, 10, 10, 9, 12, 12, 14, 9, 9, 9, 10, 12, 50, 50], (ws, ref) => {
+      const hdr = Object.keys(imagenes[0]);
+      const BAD = { fill: { fgColor: { rgb: 'FBE2E2' } }, font: { color: { rgb: 'A8262A' }, bold: true } };
+      const OK = { font: { color: { rgb: '1E7A46' } } };
+      const yesNoCols = ['Cuadrada', `≥ ${GI().rec} px (zoom)`, `≤ ${GI().kb} KB`, 'Extensión .jpg', 'Nombre según guía'].map(h => hdr.indexOf(h));
+      for (let r = 1; r <= ref.e.r; r++) {
+        const f = ws[X.utils.encode_cell({ r, c: 0 })]; if (f && f.v === 'Sí') f.s = BAD;
+        yesNoCols.forEach(c => { const cell = ws[X.utils.encode_cell({ r, c })]; if (cell) cell.s = cell.v === 'No' ? BAD : cell.v === 'Sí' ? OK : undefined; });
+      }
+    });
     // Matrices de especificaciones: producto (una fila por producto) y SKU (una fila por SKU)
     const markMiss = startCol => (ws, ref) => { for (let r = 1; r <= ref.e.r; r++) for (let c = startCol; c <= ref.e.c; c++) {
       const cell = ws[X.utils.encode_cell({ r, c })]; if (cell && cell.v === 'FALTA') cell.s = MISS; } };
