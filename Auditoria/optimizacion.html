@@ -1,0 +1,905 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Optimización de Catálogo Tigo</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: banda de marca + pestañas; resumen antes que detalle; tablas con scroll propio */
+:root{
+  color-scheme: light;
+  --bg:#f3f4f7; --surface:#ffffff; --surface-2:#f6f7fa; --line:#e2e5eb; --line-2:#d0d4dc;
+  --ink:#0d1220; --ink-2:#343b4c; --muted:#5b6274;
+  --brand:#001a57; --brand-2:#0b2a72; --brand-ink:#ffffff; --brand-muted:#c3cde6; --brand-line:#3a4f86;
+  --accent:#0033a0; --accent-soft:#e8eefb; --yellow:#ffc72c;
+  --good:#0c7a3e; --warn:#e8a200; --crit:#d03b3b; --info:#6da7ec;
+  --good-ink:#06700a; --warn-ink:#7a5200; --crit-ink:#a8262a;
+  --good-bg:#e7f6e7; --warn-bg:#fff4dc; --crit-bg:#fbe7e7; --na-bg:#eceef2;
+  --track:#eceef2;
+  --font:'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono:'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --radius:14px; --shadow:0 1px 2px rgba(13,18,32,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --bg:#0e1220; --surface:#171c2b; --surface-2:#1d2334; --line:#2a3142; --line-2:#3a4256;
+    --ink:#e9ecf3; --ink-2:#c3c8d4; --muted:#9aa1b2;
+    --brand:#0a1640; --brand-2:#14245a; --brand-ink:#ffffff; --brand-muted:#b5c0dc; --brand-line:#34477c;
+    --accent:#86a9ff; --accent-soft:#1c2a4f;
+    --good-ink:#73d494; --warn-ink:#f2c25a; --crit-ink:#ff9393;
+    --good-bg:#13301f; --warn-bg:#3a2c0b; --crit-bg:#3d1717; --na-bg:#262c3b;
+    --track:#262c3b; --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --bg:#0e1220; --surface:#171c2b; --surface-2:#1d2334; --line:#2a3142; --line-2:#3a4256;
+  --ink:#e9ecf3; --ink-2:#c3c8d4; --muted:#9aa1b2;
+  --brand:#0a1640; --brand-2:#14245a; --brand-ink:#ffffff; --brand-muted:#b5c0dc; --brand-line:#34477c;
+  --accent:#86a9ff; --accent-soft:#1c2a4f;
+  --good-ink:#73d494; --warn-ink:#f2c25a; --crit-ink:#ff9393;
+  --good-bg:#13301f; --warn-bg:#3a2c0b; --crit-bg:#3d1717; --na-bg:#262c3b;
+  --track:#262c3b; --shadow:none;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 var(--font);font-variant-numeric:tabular-nums}
+.wrap{width:100%;max-width:1240px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+h1,h2,h3{text-wrap:balance;margin:0}
+h1{font-size:28px;font-weight:800}
+h2{font-size:20px;font-weight:700}
+h3{font-size:16px;font-weight:700}
+a{color:var(--accent)}
+button,select,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+.hidden{display:none!important}
+.mono{font-family:var(--mono);font-size:12.5px}
+.muted{color:var(--muted)}
+
+/* banda de marca */
+.top{background:var(--brand);color:var(--brand-ink)}
+.top .wrap{padding-block:16px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:12px}
+.logo .mk{width:40px;height:40px;border-radius:10px;background:var(--yellow);color:#001a57;font-weight:800;display:flex;align-items:center;justify-content:center}
+.logo .t{font-weight:700;font-size:18px}
+.logo .s{font-size:13px;color:var(--brand-muted)}
+.top .actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:8px 14px;border-radius:10px;border:1px solid var(--line-2);background:var(--surface);color:var(--ink);font-weight:600;font-size:14px;cursor:pointer;text-decoration:none}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] .btn.primary{color:#0b1330}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn.primary{color:#0b1330}}
+.btn.ghost{background:transparent;border-color:var(--brand-line);color:var(--brand-ink)}
+.btn.sm{min-height:32px;padding:4px 10px;font-size:13px}
+.tabs{background:var(--brand)}
+.tabs .wrap{display:flex;gap:6px;overflow-x:auto;padding-bottom:14px}
+.tabs button{border:1px solid var(--brand-line);background:transparent;color:var(--brand-ink);border-radius:999px;padding:9px 16px;font-weight:600;font-size:14px;cursor:pointer;white-space:nowrap;min-height:40px}
+.tabs button[aria-selected="true"]{background:#fff;color:#001a57;border-color:#fff}
+.tabs .n{font-family:var(--mono);font-size:11.5px;opacity:.75;margin-left:4px}
+
+.bar{padding-block:14px;display:flex;flex-wrap:wrap;gap:10px;align-items:end}
+.fld{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.fld select,.fld input{min-height:40px;padding:8px 10px;border-radius:10px;border:1px solid var(--line-2);background:var(--surface);font-size:14px;text-transform:none;letter-spacing:0;font-weight:500;color:var(--ink);min-width:200px}
+.banner{background:var(--warn-bg);color:var(--warn-ink);border-radius:10px;padding:10px 14px;font-size:14px}
+main{padding-bottom:64px;display:flex;flex-direction:column;gap:22px}
+section.view{display:flex;flex-direction:column;gap:20px}
+main>*,section.view>*,section.view>div>*{min-width:0}
+
+.card{background:var(--surface);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);border:1px solid var(--line);min-width:0}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.kpi{display:flex;flex-direction:column;gap:4px}
+.kpi .l{font-size:13px;font-weight:600;color:var(--muted)}
+.kpi .v{font-size:30px;font-weight:800;line-height:1.1}
+.kpi .d{font-size:13px;color:var(--ink-2)}
+.chip{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap}
+.ok{background:var(--good-bg);color:var(--good-ink)}
+.mej{background:var(--warn-bg);color:var(--warn-ink)}
+.falta{background:var(--crit-bg);color:var(--crit-ink)}
+.na{background:var(--na-bg);color:var(--muted)}
+.info{background:var(--accent-soft);color:var(--accent)}
+.track{height:10px;background:var(--track);border-radius:5px;overflow:hidden;flex:1}
+.track>i{display:block;height:100%;border-radius:inherit}
+.row{display:flex;align-items:center;gap:10px}
+
+/* hero */
+.hero{display:flex;flex-wrap:wrap;gap:36px;align-items:center}
+.hero .big{display:flex;align-items:baseline;gap:10px}
+.hero .big b{font-size:68px;font-weight:800;line-height:1}
+.hero p{max-width:440px;font-size:16.5px;color:var(--ink-2);margin:6px 0 0}
+.steps{flex:2 1 480px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.step{display:grid;grid-template-columns:minmax(0,200px) minmax(0,1fr) 48px;gap:12px;align-items:center}
+.step .track{height:22px;border-radius:6px}
+.step b{font-size:18px;text-align:right}
+
+/* pilares */
+.pillars{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.pillar{display:flex;flex-direction:column;gap:12px}
+.pillar.top3{border:2px solid var(--accent)}
+.pillar .h{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.pillar .rk{width:28px;height:28px;border-radius:8px;background:var(--accent);color:#fff;font-weight:800;display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:none}
+:root[data-theme="dark"] .pillar .rk{color:#0b1330}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pillar .rk{color:#0b1330}}
+.pillar .rk.low{background:var(--na-bg);color:var(--ink-2)}
+.pillar .g{font-size:20px;font-weight:800;color:var(--accent);white-space:nowrap}
+.facts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.facts li{display:flex;justify-content:space-between;gap:8px;font-size:14px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.facts li b{font-weight:700}
+.why{margin:0;font-size:14px;background:var(--surface-2);border-radius:10px;padding:12px;color:var(--ink-2)}
+.why strong{color:var(--ink)}
+
+/* tablas */
+.tbl{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.05em;padding:10px 12px;border-bottom:2px solid var(--line);white-space:nowrap}
+td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+td.num,th.num{text-align:right}
+tr.click{cursor:pointer}
+tr.click:hover td{background:var(--surface-2)}
+.pname{font-weight:700}
+.psub{font-size:12px;color:var(--muted)}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{border:1px solid var(--line-2);background:var(--surface);border-radius:999px;padding:8px 14px;font-weight:600;font-size:14px;cursor:pointer;min-height:40px}
+.pill[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] .pill[aria-pressed="true"]{color:#0b1330}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pill[aria-pressed="true"]{color:#0b1330}}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.more{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-size:14px;color:var(--muted)}
+.rules{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.rules .card{padding:16px}
+.rules p{margin:4px 0 0;font-size:14px;color:var(--ink-2)}
+
+/* especificaciones */
+details.sp{border-bottom:1px solid var(--line)}
+details.sp summary{list-style:none;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,2fr) 90px;gap:12px;padding:12px 4px;cursor:pointer;align-items:start}
+details.sp summary::-webkit-details-marker{display:none}
+details.sp summary:hover{background:var(--surface-2)}
+details.sp .in{padding:4px 4px 16px;display:flex;flex-direction:column;gap:12px}
+.fields{display:flex;flex-wrap:wrap;gap:6px}
+.matrix td,.matrix th{font-size:13px;padding:7px 10px}
+.matrix td.miss{color:var(--crit-ink);font-weight:700}
+.sw{display:inline-block;width:12px;height:12px;border-radius:3px;border:1px solid var(--line-2);vertical-align:-1px;margin-right:4px}
+@media (max-width:640px){details.sp summary{grid-template-columns:1fr}}
+
+/* propuesta */
+.prop{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-start}
+.plist{flex:1 1 280px;max-height:880px;overflow:auto;display:flex;flex-direction:column;gap:4px;padding:12px}
+.plist button{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;min-height:56px;padding:10px 12px;border-radius:10px;border:1px solid transparent;background:transparent;cursor:pointer;text-align:left}
+.plist button[aria-current="true"]{background:var(--accent-soft);border-color:var(--accent)}
+.plist button:hover{background:var(--surface-2)}
+.pdetail{flex:999 1 620px;min-width:0;display:flex;flex-direction:column;gap:18px}
+.cmp{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.side{border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px;border:1px solid var(--line)}
+.side.before{background:var(--crit-bg);border-color:transparent}
+.side.after{background:var(--good-bg);border-color:transparent}
+.side .k{display:flex;justify-content:space-between;gap:8px;font-size:12px;font-weight:700;letter-spacing:.05em}
+.side.before .k{color:var(--crit-ink)}
+.side.after .k{color:var(--good-ink)}
+.side .v{font-size:14px;line-height:1.55;white-space:pre-line;color:var(--ink);overflow-wrap:anywhere}
+.side .v.empty{color:var(--muted);font-style:italic}
+.fhead{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.decide{display:flex;flex-wrap:wrap;gap:10px;border-top:1px solid var(--line);padding-top:16px}
+.decide .b-ok{background:var(--good);border-color:var(--good);color:#fff}
+.decide .b-adj{background:var(--warn-bg);border-color:var(--warn);color:var(--warn-ink)}
+.decide .b-no{color:var(--crit-ink)}
+textarea{width:100%;min-height:64px;padding:10px 12px;border-radius:10px;border:1px solid var(--line-2);background:var(--surface);resize:vertical}
+.prog{display:flex;height:10px;border-radius:5px;overflow:hidden;background:var(--track)}
+.prog i{display:block;height:100%}
+
+/* imágenes */
+.dist{display:flex;flex-direction:column;gap:10px}
+.dist .row{display:grid;grid-template-columns:110px minmax(0,1fr) 40px;gap:12px}
+.dist .track{height:20px;border-radius:5px}
+.empty{padding:28px;text-align:center;color:var(--muted)}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom, 0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s}
+#toast.on{opacity:1}
+@media (prefers-reduced-motion: reduce){#toast{transition:none}}
+footer{font-size:12.5px;color:var(--muted);padding-block:12px 40px}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="logo">
+      <div class="mk">tigo</div>
+      <div><div class="t">Optimización del catálogo</div><div class="s" id="meta">Cargando auditoría…</div></div>
+    </div>
+    <div class="actions">
+      <label class="btn ghost" for="file">Cargar JSON</label>
+      <input type="file" id="file" accept=".json,application/json" class="hidden">
+      <button type="button" class="btn ghost" id="btnXlsx">Descargar Excel</button>
+    </div>
+  </div>
+</header>
+<nav class="tabs" aria-label="Secciones">
+  <div class="wrap" role="tablist">
+    <button type="button" role="tab" data-tab="resumen" aria-selected="true">Resumen</button>
+    <button type="button" role="tab" data-tab="textos" aria-selected="false">Textos <span class="n" id="nTextos"></span></button>
+    <button type="button" role="tab" data-tab="specs" aria-selected="false">Especificaciones <span class="n" id="nSpecs"></span></button>
+    <button type="button" role="tab" data-tab="propuesta" aria-selected="false">Propuesta IA <span class="n" id="nProp"></span></button>
+    <button type="button" role="tab" data-tab="imagenes" aria-selected="false">Imágenes <span class="n" id="nImg"></span></button>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap bar">
+    <label class="fld" for="fDep">Departamento<select id="fDep"></select></label>
+    <label class="fld" for="fQ">Buscar<input id="fQ" type="search" placeholder="Nombre, ID de producto o SKU"></label>
+    <span class="muted" style="font-size:13px;padding-bottom:9px" id="scope"></span>
+  </div>
+  <div class="wrap hidden" id="demoBanner"><div class="banner">Datos de demostración. Cuando n8n publique el <code>audit.json</code> real, este tablero mostrará el catálogo de Tigo.</div></div>
+
+  <div class="wrap hidden" id="emptyAll"><div class="card empty">
+    <h2>No se encontró <code>data/audit.json</code></h2>
+    <p>Ejecuta el flujo de auditoría en n8n o carga el archivo con el botón «Cargar JSON».</p>
+  </div></div>
+
+  <!-- RESUMEN -->
+  <section class="wrap view" data-view="resumen">
+    <div class="card hero">
+      <div style="flex:1 1 280px;display:flex;flex-direction:column;gap:6px">
+        <div class="fld" style="color:var(--muted)">Salud del catálogo hoy</div>
+        <div class="big"><b id="hScore">–</b><span class="muted" style="font-size:20px">/ 100</span><span class="chip" id="hSem"></span></div>
+        <p id="hText"></p>
+      </div>
+      <div class="steps" id="hSteps"></div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="fhead"><h2>Dónde mejorar, en orden de prioridad</h2><span class="muted" style="font-size:14px">Puntos = cuánto sube el promedio del catálogo al corregirlo</span></div>
+      <div class="pillars" id="pillars"></div>
+    </div>
+
+    <div class="card" style="display:flex;flex-direction:column;gap:14px">
+      <h2>Qué cambia para el comprador con cada ajuste</h2>
+      <div class="tbl"><table id="tImpact" style="min-width:760px"></table></div>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:14px">
+      <div class="card" style="flex:3 1 520px;display:flex;flex-direction:column;gap:14px">
+        <h2>Por departamento</h2>
+        <div class="tbl"><table id="tDeps" style="min-width:620px"></table></div>
+      </div>
+      <button type="button" class="card" id="iaCard" style="flex:2 1 300px;background:var(--brand);color:var(--brand-ink);border:0;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:12px"></button>
+    </div>
+  </section>
+
+  <!-- TEXTOS -->
+  <section class="wrap view hidden" data-view="textos">
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <h1>Títulos, meta y descripciones</h1>
+      <p style="margin:0;color:var(--ink-2);max-width:760px">Cada fila es un producto. El color dice si el texto está bien, se puede mejorar o falta. Los productos están ordenados por cuántos puntos ganan al corregir sus textos.</p>
+    </div>
+    <div class="grid" id="tKpis"></div>
+    <div class="card" style="display:flex;flex-direction:column;gap:14px">
+      <div class="fhead">
+        <div class="pills" id="tFilters" role="group" aria-label="Filtrar por campo"></div>
+        <div class="legend"><span><i style="background:var(--good)"></i>Bien</span><span><i style="background:var(--warn)"></i>Mejorable</span><span><i style="background:var(--crit)"></i>Falta</span></div>
+      </div>
+      <div class="tbl"><table id="tTextos" style="min-width:960px"></table></div>
+      <div class="more"><span id="tCount"></span><button type="button" class="btn sm" id="tMore">Mostrar más</button></div>
+    </div>
+    <div class="rules">
+      <div class="card"><h3>Nombre del producto</h3><p>Marca + modelo + dato clave. Sin MAYÚSCULAS sostenidas. Es el título que se ve en la página del producto.</p></div>
+      <div class="card"><h3>Título (meta título)</h3><p>Entre 30 y 65 caracteres. Es el texto azul de Google. Sin frases de precio ni promociones.</p></div>
+      <div class="card"><h3>Meta descripción</h3><p>Entre 70 y 160 caracteres. Dos beneficios reales y una invitación a comprar en Tigo.</p></div>
+      <div class="card"><h3>Descripción</h3><p id="ruleDesc">Mínimo según el perfil del departamento. Texto propio, sin copiar de Word ni repetir entre productos.</p></div>
+    </div>
+  </section>
+
+  <!-- ESPECIFICACIONES -->
+  <section class="wrap view hidden" data-view="specs">
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <h1>Especificaciones</h1>
+      <p style="margin:0;color:var(--ink-2);max-width:760px">Las especificaciones alimentan los filtros de la tienda y la ficha técnica. Si faltan, el producto no aparece al filtrar (por ejemplo, por memoria o color) y el comprador no puede comparar.</p>
+    </div>
+    <div class="grid" id="sKpis"></div>
+    <div class="card" style="display:flex;flex-direction:column;gap:14px">
+      <div class="fhead"><h2>Por categoría</h2><span class="muted" style="font-size:13px" id="sSource"></span></div>
+      <div class="tbl"><table id="tSpecCat" style="min-width:860px"></table></div>
+    </div>
+    <div class="card" style="display:flex;flex-direction:column;gap:12px">
+      <div class="fhead">
+        <h2>Productos con campos por diligenciar</h2>
+        <div class="pills" id="sFilters" role="group" aria-label="Filtrar especificaciones"></div>
+      </div>
+      <div class="legend"><span><span class="chip falta">Obligatoria</span> configurada como requerida en VTEX</span><span><span class="chip mej">Recomendada</span> la tiene la mayoría de su categoría</span></div>
+      <div id="sList"></div>
+      <div class="more"><span id="sCount"></span><button type="button" class="btn sm" id="sMore">Mostrar más</button></div>
+    </div>
+  </section>
+
+  <!-- PROPUESTA -->
+  <section class="wrap view hidden" data-view="propuesta">
+    <div class="fhead" style="align-items:flex-end">
+      <div style="display:flex;flex-direction:column;gap:6px;flex:1 1 520px">
+        <h1>Propuesta de textos para aprobación</h1>
+        <p style="margin:0;color:var(--ink-2)">Compare el texto actual con el propuesto y marque cada producto. Nada se publica en la tienda hasta que esté aprobado.</p>
+      </div>
+      <div class="card" style="flex:0 1 380px;padding:16px;display:flex;flex-direction:column;gap:8px">
+        <div class="fhead" style="font-size:14px"><b>Avance de la revisión</b><span class="muted" id="pDone"></span></div>
+        <div class="prog" id="pProg"></div>
+        <div class="legend" id="pLegend"></div>
+      </div>
+    </div>
+    <div class="banner" id="pBanner"></div>
+    <div class="prop" id="pWrap">
+      <div class="card plist" id="pList" aria-label="Productos con propuesta"></div>
+      <div class="card pdetail" id="pDetail"></div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end">
+      <label class="btn" for="decFile">Importar decisiones</label>
+      <input type="file" id="decFile" accept=".json" class="hidden">
+      <button type="button" class="btn" id="decExport">Guardar decisiones (.json)</button>
+      <button type="button" class="btn primary" id="decXlsx">Descargar aprobados para VTEX</button>
+    </div>
+  </section>
+
+  <!-- IMÁGENES -->
+  <section class="wrap view hidden" data-view="imagenes">
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <h1>Imágenes</h1>
+      <p style="margin:0;color:var(--ink-2);max-width:760px">Cuántas fotos tiene cada SKU y si cumplen la guía de imágenes del catálogo. Celulares y equipos de venta libre necesitan mínimo 4 vistas.</p>
+    </div>
+    <div class="grid" id="iKpis"></div>
+    <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:stretch">
+      <div class="card" style="flex:1 1 420px;display:flex;flex-direction:column;gap:14px">
+        <h2>SKUs según cantidad de imágenes</h2>
+        <div class="dist" id="iDist"></div>
+        <div class="muted" style="font-size:13px">Rojo: sin foto · Amarillo: por debajo del mínimo de su perfil · Azul: cumple</div>
+      </div>
+      <div class="card" style="flex:1 1 420px;display:flex;flex-direction:column;gap:12px">
+        <h2>Guía de imágenes</h2>
+        <ul class="facts" id="iGuide"></ul>
+      </div>
+    </div>
+    <div class="card" style="display:flex;flex-direction:column;gap:12px">
+      <div class="fhead"><h2>SKUs vendibles que necesitan fotos primero</h2><span class="muted" style="font-size:14px">Activos y con stock, ordenados por stock</span></div>
+      <div class="tbl"><table id="tImg" style="min-width:720px"></table></div>
+    </div>
+    <div class="card hidden" id="iDimCard" style="display:flex;flex-direction:column;gap:12px">
+      <h2>Imágenes que requieren ajuste o están fuera de la guía</h2>
+      <div class="tbl"><table id="tImgDim" style="min-width:760px"></table></div>
+    </div>
+  </section>
+
+  <footer class="wrap" id="foot"></footer>
+</main>
+<div id="toast" role="status"></div>
+
+<script>
+(() => {
+'use strict';
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt = n => (n ?? 0).toLocaleString('es-CO');
+const pts = n => '+' + (Math.round(n * 10) / 10).toLocaleString('es-CO', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const avg = a => a.length ? a.reduce((x, y) => x + y, 0) / a.length : 0;
+const store = { get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+                set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} } };
+let tT; const toast = m => { const t = $('#toast'); t.textContent = m; t.classList.add('on'); clearTimeout(tT); tT = setTimeout(() => t.classList.remove('on'), 2200); };
+
+/* ===== perfiles y reglas (mismas del dashboard de auditoría) ===== */
+const W_DEF = { imagenes: 20, especificaciones: 25, descripcion: 20, seo: 15, consistencia: 10, vendibilidad: 10 };
+const PERFIL_DEF = {
+  default:   { nombre: 'General',   minImagenes: 3, descMin: 300, descCorta: true,  specs: 'requeridos+recomendados' },
+  servicios: { nombre: 'Servicios', minImagenes: 1, descMin: 100, descCorta: false, specs: 'requeridos' },
+  celulares: { nombre: 'Celulares', minImagenes: 4, descMin: 400, descCorta: true,  specs: 'requeridos+recomendados' },
+  'equipos venta libre': { nombre: 'Equipos venta libre', minImagenes: 4, descMin: 400, descCorta: true, specs: 'requeridos+recomendados' },
+};
+const normKey = t => String(t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, ' ').trim();
+const SEP = ' › ';
+const DESC_CODES = ['desc_html', 'desc_relleno', 'desc_duplicada', 'desc_igual_nombre'];
+const DESC_LBL = { desc_html: 'Formato pegado de Word', desc_relleno: 'Texto de relleno', desc_duplicada: 'Repetida en otro producto', desc_igual_nombre: 'Igual al nombre' };
+const ST = { ok: 'Bien', mej: 'Mejorable', falta: 'Falta', na: 'No aplica' };
+const DEC = { pend: ['Por revisar', 'na'], ok: ['Aprobado', 'ok'], adj: ['Con ajustes', 'mej'], no: ['Rechazado', 'falta'] };
+
+let A = null, W = W_DEF, PRODUCTS = [], PROP = null, PROP_DATE = null;
+let state = { tab: 'resumen', dep: '', q: '', tFilter: 'todos', tLimit: 50, sFilter: 'todas', sLimit: 30, sel: null, pFilter: 'todos' };
+let dec = store.get('tigoOpt.decisiones', {});
+const saveDec = () => store.set('tigoOpt.decisiones', dec);
+
+/* ===== carga ===== */
+async function boot() {
+  try { const r = await fetch('data/propuesta-ia.json', { cache: 'no-store' }); if (r.ok) setProp(await r.json()); } catch (e) {}
+  try {
+    const r = await fetch('data/audit.json', { cache: 'no-store' });
+    if (!r.ok) throw new Error(r.status);
+    load(await r.json(), 'data/audit.json');
+  } catch (e) { $('#emptyAll').classList.remove('hidden'); $$('[data-view]').forEach(v => v.classList.add('hidden')); $('#meta').textContent = 'Sin datos'; }
+}
+function setProp(j) {
+  if (!j || typeof j !== 'object') return;
+  PROP = j.products || j; PROP_DATE = j.generatedAt || null;
+}
+function normSku(s) {
+  s.issues = s.issues || []; s.dims = s.dims || {};
+  s._codes = new Set(s.issues.map(i => i.code));
+  let path = Array.isArray(s.categoryPath) && s.categoryPath.length ? s.categoryPath.slice() : [s.department, s.category].filter(Boolean);
+  path = path.filter((x, i) => x && x !== path[i - 1]);
+  if (!path.length) path = ['Sin categoría'];
+  s.path = path; s.pathKey = path.join(SEP);
+  s.perfil = s.perfil || PERFIL_DEF[normKey(path[0])] || PERFIL_DEF.default;
+  s.fSku = s.skuActive ?? !!s.active;
+  s.fProd = s.productActive ?? !!s.active;
+  s.fVisible = s.productVisible ?? true;
+  s.hasStock = !!s.unlimited || (Number(s.stock) || 0) > 0;
+  s.vendible = !s.error && s.fSku && s.fProd && s.fVisible && (s.hasStock || s.showWithoutStock === true);
+  s.nImg = s.imagesCount ?? (Array.isArray(s.images) ? s.images.length : 0);
+}
+function expFor(key, leaf) {
+  const all = A.expectedByCategory || {};
+  const e = all[key] ?? all[leaf];
+  if (!e) return { producto: [], sku: [], reqP: [], reqS: [], legacy: null };
+  if (Array.isArray(e)) return { producto: [], sku: [], reqP: [], reqS: [], legacy: e };
+  return { producto: e.producto || [], sku: e.sku || [], reqP: e.requeridosProducto || [], reqS: e.requeridosSku || [], fuente: e.fuente || 'inferido', legacy: null };
+}
+function load(data, source) {
+  if (!data || !Array.isArray(data.skus)) { toast('El archivo no tiene el formato de auditoría'); return; }
+  A = data; A.products = A.products || {}; W = { ...W_DEF, ...(A.weights || {}) };
+  A.skus.forEach(normSku);
+  const g = {};
+  for (const s of A.skus) (g[s.productId] = g[s.productId] || []).push(s);
+  PRODUCTS = Object.entries(g).map(([pid, skus]) => buildProduct(pid, skus));
+  $('#emptyAll').classList.add('hidden');
+  $('#demoBanner').classList.toggle('hidden', !A.demo);
+  const d = A.generatedAt ? new Date(A.generatedAt) : null;
+  $('#meta').textContent = `Corte ${d ? d.toLocaleString('es-CO', { dateStyle: 'medium', timeStyle: 'short' }) : '—'} · ${fmt(PRODUCTS.length)} productos · ${fmt(A.skus.length)} SKUs`;
+  $('#foot').textContent = `Fuente: ${source} · cuenta ${A.account || 'VTEX'} · mismo archivo que alimenta el dashboard de auditoría · Óptimo ≥ ${A.thresholds?.verde ?? 85}, Mejorable ≥ ${A.thresholds?.amarillo ?? 60}`;
+  const deps = [...new Set(PRODUCTS.map(p => p.dep))].sort((a, b) => a.localeCompare(b, 'es'));
+  $('#fDep').innerHTML = `<option value="">Todos (${fmt(PRODUCTS.length)})</option>` + deps.map(x => `<option value="${esc(x)}">${esc(x)} (${fmt(PRODUCTS.filter(p => p.dep === x).length)})</option>`).join('');
+  $('#fDep').value = deps.includes(state.dep) ? state.dep : '';
+  state.dep = $('#fDep').value;
+  showTab(state.tab);
+}
+
+/* ===== modelo por producto ===== */
+function buildProduct(pid, skus) {
+  const c = A.products[pid] || {};
+  const ok = skus.filter(s => !s.error);
+  const s0 = ok[0] || skus[0];
+  const perf = s0.perfil;
+  const name = c.name || (s0.name || '').replace(new RegExp('\\s*' + (s0.skuName || '§') + '$'), '') || 'Producto ' + pid;
+  const P = { productId: String(pid), c, skus, ok, s0, perf, name, brand: s0.brand || '', path: s0.path, pathKey: s0.pathKey, dep: s0.path[0], url: s0.url || '' };
+  const dimAvg = k => avg(ok.map(s => s.dims[k] ?? 1));
+  P.gain = {}; for (const k of Object.keys(W)) P.gain[k] = (1 - dimAvg(k)) * W[k];
+  P.score = ok.length ? Math.round(avg(ok.map(s => s.score || 0))) : null;
+  P.vendible = ok.some(s => s.vendible);
+  P.codes = new Set(skus.flatMap(s => [...s._codes]));
+  // Textos
+  const tl = (c.title || '').trim().length, ml = (c.metaDescription || '').trim().length;
+  const L = c.descLength ?? (c.description || '').length;
+  P.t = {
+    nombre: P.codes.has('nombre_mayus') ? ['mej', 'MAYÚSCULAS'] : P.codes.has('nombre_len') ? ['mej', 'Muy corto o largo'] : ['ok', name.length + ' car.'],
+    title: !tl ? ['falta', 'Vacío'] : tl > 65 ? ['mej', tl + ' car. · se corta'] : tl < 30 ? ['mej', tl + ' car. · corto'] : ['ok', tl + ' car.'],
+    meta: !ml ? ['falta', 'Vacía'] : normKey(c.metaDescription) === normKey(name) ? ['mej', 'Repite el nombre'] : (ml < 70 || ml > 160) ? ['mej', ml + ' car.'] : ['ok', ml + ' car.'],
+    desc: !L ? ['falta', 'Vacía'] : L < perf.descMin ? ['mej', L + ' car. (mín. ' + perf.descMin + ')'] :
+      (DESC_CODES.find(k => P.codes.has(k)) ? ['mej', DESC_LBL[DESC_CODES.find(k => P.codes.has(k))]] : ['ok', L + ' car.']),
+    corta: !perf.descCorta ? ['na', 'No aplica'] : (c.descriptionShort || '').trim() ? ['ok', 'OK'] : ['falta', 'Falta'],
+  };
+  P.textGain = P.gain.seo + P.gain.descripcion + (P.t.nombre[0] === 'mej' ? 3 * (W.consistencia / 10) : 0);
+  P.textBad = Object.values(P.t).filter(x => x[0] === 'mej' || x[0] === 'falta').length;
+  // Especificaciones
+  P.specs = specPend(P);
+  P.reqMiss = P.specs.filter(x => x.req).length;
+  P.recMiss = P.specs.length - P.reqMiss;
+  // Imágenes
+  P.imgMiss = ok.filter(s => s.nImg < s.perfil.minImagenes);
+  P.imgsInfo = ok.flatMap(s => (s.imagesInfo || []).map(x => ({ ...x, s })));
+  P.imgEstricto = !!(perf.imagenesEstrictas || ['Celulares', 'Equipos venta libre'].includes(perf.nombre));
+  // Propuesta IA: data/propuesta-ia.json manda; si no, la última sugerencia guardada en audit.json
+  const pr = PROP && PROP[pid] ? PROP[pid] : (c.ia && c.ia.ok ? c.ia : null);
+  P.prop = pr;
+  P.search = [P.productId, name, P.brand, ...skus.flatMap(s => [s.skuId, s.refId, s.ean, s.name])].join(' ').toLowerCase();
+  return P;
+}
+function specPend(P) {
+  const E = expFor(P.pathKey, P.path[P.path.length - 1]);
+  const soloOblig = P.perf.specs === 'requeridos';
+  const out = [];
+  const add = (nivel, s, campo, req) => { if (req || !soloOblig) out.push({ nivel, skuId: s ? s.skuId : '', skuName: s ? (s.skuName || s.name) : '', campo, req }); };
+  const missP = P.c.missingSpecs || (P.s0 && P.s0.missingProductSpecs) || null;
+  let common = [];
+  if (!missP && P.ok.length) common = (P.ok[0].missingSpecs || []).filter(f => P.ok.every(s => (s.missingSpecs || []).includes(f)));
+  for (const f of (missP || common)) add('Producto', null, f, E.reqP.includes(f));
+  for (const s of P.ok) {
+    const missS = s.missingSkuSpecs || (s.missingSpecs || []).filter(f => !common.includes(f));
+    for (const f of missS) add('SKU', s, f, E.reqS.includes(f));
+  }
+  P.E = E;
+  return out;
+}
+
+/* ===== filtros ===== */
+const inScope = p => (!state.dep || p.dep === state.dep) && (!state.q || p.search.includes(state.q));
+const scoped = () => PRODUCTS.filter(inScope);
+$('#fDep').onchange = e => { state.dep = e.target.value; state.tLimit = 50; state.sLimit = 30; render(); };
+let qT; $('#fQ').oninput = e => { clearTimeout(qT); qT = setTimeout(() => { state.q = e.target.value.trim().toLowerCase(); render(); }, 180); };
+
+/* ===== pestañas ===== */
+function showTab(t) {
+  state.tab = t;
+  $$('.tabs [data-tab]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === t)));
+  $$('[data-view]').forEach(v => v.classList.toggle('hidden', v.dataset.view !== t));
+  render();
+}
+$$('.tabs [data-tab]').forEach(b => b.onclick = () => showTab(b.dataset.tab));
+try { const h = location.hash.slice(1); if (['resumen', 'textos', 'specs', 'propuesta', 'imagenes'].includes(h)) state.tab = h; } catch (e) {}
+
+function render() {
+  if (!A) return;
+  const ps = scoped();
+  $('#scope').textContent = `${fmt(ps.length)} productos en esta vista`;
+  $('#nTextos').textContent = fmt(ps.filter(p => p.textBad).length);
+  $('#nSpecs').textContent = fmt(ps.filter(p => p.specs.length).length);
+  $('#nProp').textContent = fmt(ps.filter(p => p.prop).length);
+  $('#nImg').textContent = fmt(ps.reduce((a, p) => a + p.imgMiss.length, 0));
+  ({ resumen: renderResumen, textos: renderTextos, specs: renderSpecs, propuesta: renderProp, imagenes: renderImgs })[state.tab](ps);
+}
+const bar = (pct, color) => `<div class="track"><i style="width:${Math.max(0, Math.min(100, pct))}%;background:${color}"></i></div>`;
+const semOf = v => v >= (A.thresholds?.verde ?? 85) ? ['ok', 'Óptimo'] : v >= (A.thresholds?.amarillo ?? 60) ? ['mej', 'Mejorable'] : ['falta', 'Crítico'];
+const chip = ([k, txt]) => `<span class="chip ${k}">${esc(txt)}</span>`;
+const empty = m => `<div class="empty">${esc(m)}</div>`;
+
+/* ===== RESUMEN ===== */
+function renderResumen(ps) {
+  const skus = ps.flatMap(p => p.ok);
+  const n = skus.length || 1;
+  const g = k => skus.reduce((a, s) => a + (1 - (s.dims[k] ?? 1)) * W[k], 0) / n;
+  const now = avg(skus.map(s => s.score || 0));
+  const gT = g('seo') + g('descripcion'), gS = g('especificaciones'), gI = g('imagenes');
+  const s1 = Math.min(100, now + gT), s2 = Math.min(100, s1 + gS), s3 = Math.min(100, s2 + gI);
+  const sem = semOf(now);
+  $('#hScore').textContent = Math.round(now);
+  $('#hSem').className = 'chip ' + sem[0]; $('#hSem').textContent = sem[1];
+  $('#hText').innerHTML = `Si corregimos <strong>títulos, meta títulos y descripciones</strong>, el catálogo pasa a <strong>${Math.round(s1)} (${semOf(s1)[1]})</strong>.${gS >= 0.5 ? ` Con especificaciones completas llega a ${Math.round(s2)}.` : ''}`;
+  const steps = [['Hoy', now, 'var(--warn)'], ['+ Textos corregidos', s1, 'var(--accent)'], ['+ Especificaciones', s2, 'var(--info)'], ['+ Imágenes completas', s3, 'var(--good)']];
+  $('#hSteps').innerHTML = `<div style="font-size:14px;font-weight:600;color:var(--ink-2)">Cómo sube el puntaje con cada paso</div>` +
+    steps.map(([l, v, c]) => `<div class="step"><span style="font-size:14px;color:var(--ink-2)">${l}</span>${bar(v, c)}<b>${Math.round(v)}</b></div>`).join('') +
+    `<div class="muted" style="font-size:12px">Crítico &lt; ${A.thresholds?.amarillo ?? 60} · Mejorable · Óptimo ≥ ${A.thresholds?.verde ?? 85}</div>`;
+
+  const cnt = (f, k) => ps.filter(p => p.t[f][0] === k).length;
+  const cntL = (f, re) => ps.filter(p => re.test(p.t[f][1])).length;
+  const descHtml = ps.filter(p => p.codes.has('desc_html')).length;
+  const total = ps.length;
+  const seoSplit = (A.weights && A.weights.seo) ? 8 / 15 : 8 / 15;
+  const skuImgOk = skus.filter(s => s.nImg >= s.perfil.minImagenes).length;
+  const pillars = [
+    { name: 'Descripciones', gain: g('descripcion'), ok: ps.filter(p => p.t.desc[0] === 'ok' && p.t.corta[0] !== 'falta').length, total,
+      facts: [['Sin descripción', cnt('desc', 'falta')], ['Más cortas que el mínimo', cntL('desc', /mín/)], ['Sin descripción corta', cnt('corta', 'falta')], ['Formato pegado de Word', descHtml]],
+      why: 'Es lo que el comprador lee para decidir. Sin ella no sabe qué incluye el equipo ni por qué elegirlo.' },
+    { name: 'Títulos y meta títulos', gain: g('seo') * seoSplit, ok: ps.filter(p => p.t.title[0] === 'ok' && p.t.nombre[0] === 'ok').length, total,
+      facts: [['Meta título vacío', cnt('title', 'falta')], ['Meta título que se corta (> 65)', cntL('title', /se corta/)], ['Meta título corto (< 30)', cntL('title', /corto/)], ['Nombre en MAYÚSCULAS o mal formado', cnt('nombre', 'mej')]],
+      why: 'El meta título es el texto azul de Google y la pestaña del navegador. Vacío o cortado, se pierden clics.' },
+    { name: 'Meta descripciones', gain: g('seo') * (1 - seoSplit), ok: cnt('meta', 'ok'), total,
+      facts: [['Vacías', cnt('meta', 'falta')], ['Solo repiten el nombre', cntL('meta', /Repite/)], ['Fuera de 70–160 caracteres', ps.filter(p => p.t.meta[0] === 'mej' && /car\./.test(p.t.meta[1])).length]],
+      why: 'Es el resumen bajo el título en Google. Una buena meta descripción convence de entrar a la tienda de Tigo.' },
+    { name: 'Especificaciones', gain: gS, ok: ps.filter(p => !p.specs.length).length, total,
+      facts: [['Obligatorias faltantes', ps.reduce((a, p) => a + p.reqMiss, 0)], ['Recomendadas faltantes', ps.reduce((a, p) => a + p.recMiss, 0)], ['Productos con alguna faltante', ps.filter(p => p.specs.length).length]],
+      why: 'Alimentan los filtros de la tienda. Sin ellas el producto no aparece al filtrar por memoria, color o tamaño.' },
+    { name: 'Imágenes', gain: gI, ok: skuImgOk, total: skus.length, unit: 'SKUs',
+      facts: [['SKUs sin imagen', skus.filter(s => !s.nImg).length], ['Por debajo del mínimo', skus.filter(s => s.nImg && s.nImg < s.perfil.minImagenes).length], ['Requieren ajuste de dimensión', ps.reduce((a, p) => a + (p.imgEstricto ? p.imgsInfo.filter(x => x.ajusteDim).length : 0), 0)]],
+      why: 'Sin foto el producto no genera confianza. Celulares y equipos necesitan mínimo 4 vistas.' },
+  ];
+  $('#pillars').innerHTML = pillars.map((p, i) => {
+    const pc = p.total ? Math.round(p.ok / p.total * 100) : 0;
+    return `<article class="card pillar ${i < 3 ? 'top3' : ''}">
+      <div class="h"><div class="row"><span class="rk ${i < 3 ? '' : 'low'}">${i + 1}</span><h3 style="font-size:17px">${p.name}</h3></div><span class="g">${pts(p.gain)} pts</span></div>
+      <div style="display:flex;flex-direction:column;gap:6px"><div class="fhead" style="font-size:13px;color:var(--muted)"><span>${p.unit || 'Productos'} correctos</span><b style="color:var(--ink)">${fmt(p.ok)} de ${fmt(p.total)}</b></div>
+        ${bar(pc, pc >= 85 ? 'var(--good)' : pc >= 60 ? 'var(--warn)' : 'var(--crit)')}</div>
+      <ul class="facts">${p.facts.map(([t, v]) => `<li><span>${t}</span><b>${fmt(v)}</b></li>`).join('')}</ul>
+      <p class="why"><strong>Por qué importa:</strong> ${p.why}</p></article>`;
+  }).join('');
+
+  const eff = { Bajo: 'ok', Medio: 'mej', Alto: 'falta' };
+  const impact = [
+    ['Escribir la descripción completa', 'Página del producto, debajo del precio', 'Resuelve dudas antes de comprar y reduce consultas', 'Medio', ps.filter(p => p.t.desc[0] !== 'ok').length],
+    ['Agregar descripción corta', 'Junto al botón de compra y en el listado', 'El comprador entiende el producto en segundos', 'Bajo', cnt('corta', 'falta')],
+    ['Corregir el meta título', 'Resultado de Google y pestaña del navegador', 'Más clics desde Google; el título no se corta', 'Bajo', ps.filter(p => p.t.title[0] !== 'ok').length],
+    ['Escribir la meta descripción', 'Texto bajo el título en Google', 'Diferencia a Tigo frente a otras tiendas en la búsqueda', 'Bajo', ps.filter(p => p.t.meta[0] !== 'ok').length],
+    ['Completar especificaciones', 'Filtros de la tienda y ficha técnica', 'El producto aparece al filtrar y se puede comparar', 'Medio', ps.filter(p => p.specs.length).length],
+    ['Completar imágenes', 'Galería del producto', 'Más confianza; el producto se ve desde todos los ángulos', 'Alto', ps.filter(p => p.imgMiss.length).length],
+  ];
+  $('#tImpact').innerHTML = `<thead><tr><th>Ajuste</th><th>Dónde lo ve el comprador</th><th>Qué mejora</th><th>Esfuerzo</th><th class="num">Productos</th></tr></thead><tbody>` +
+    impact.map(r => `<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td><td><span class="chip ${eff[r[3]]}">${r[3]}</span></td><td class="num"><b>${fmt(r[4])}</b></td></tr>`).join('') + '</tbody>';
+
+  const deps = {};
+  ps.forEach(p => (deps[p.dep] = deps[p.dep] || []).push(p));
+  const rows = Object.entries(deps).map(([d, list]) => {
+    const ss = list.flatMap(p => p.ok);
+    const dim = k => avg(ss.map(s => s.dims[k] ?? 1)) * 100;
+    const txt = (dim('seo') * W.seo + dim('descripcion') * W.descripcion) / (W.seo + W.descripcion);
+    return { d, n: ss.length, txt, sp: dim('especificaciones'), im: dim('imagenes'), score: avg(ss.map(s => s.score || 0)) };
+  }).sort((a, b) => b.n - a.n);
+  const cell = v => `<td><div class="row">${bar(v, 'var(--accent)')}<span style="width:40px;text-align:right;font-weight:600">${Math.round(v)}%</span></div></td>`;
+  $('#tDeps').innerHTML = `<thead><tr><th>Departamento</th><th>Textos</th><th>Especificaciones</th><th>Imágenes</th><th class="num">Puntaje</th></tr></thead><tbody>` +
+    (rows.map(r => `<tr class="click" data-dep="${esc(r.d)}"><td><div class="pname">${esc(r.d)}</div><div class="psub">${fmt(r.n)} SKUs</div></td>${cell(r.txt)}${cell(r.sp)}${cell(r.im)}<td class="num">${chip([semOf(r.score)[0], Math.round(r.score)])}</td></tr>`).join('') || `<tr><td colspan="5">${empty('Sin productos en esta vista')}</td></tr>`) + '</tbody>';
+  $$('#tDeps [data-dep]').forEach(tr => tr.onclick = () => { state.dep = tr.dataset.dep; $('#fDep').value = state.dep; render(); });
+
+  const withP = ps.filter(p => p.prop);
+  const c = k => withP.filter(p => (dec[p.productId]?.estado || 'pend') === k).length;
+  $('#iaCard').innerHTML = `<div style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--yellow)">Propuesta de textos con IA</div>
+    <div style="font-size:24px;font-weight:700;line-height:1.25">${withP.length ? `${fmt(withP.length)} productos con texto nuevo listo para revisar` : 'Aún no hay propuesta generada'}</div>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px">
+      ${[['Aprobados', c('ok') + c('adj')], ['Rechazados', c('no')], ['Por revisar', c('pend')]].map(([l, v]) => `<div style="background:var(--brand-2);border-radius:10px;padding:12px"><div style="font-size:24px;font-weight:800">${fmt(v)}</div><div style="font-size:12px;color:var(--brand-muted)">${l}</div></div>`).join('')}
+    </div>
+    <div style="font-size:13px;color:var(--brand-muted)">${propOrigin()} Nada se publica en la tienda hasta que Tigo lo apruebe.</div>
+    <div style="font-weight:700;color:var(--yellow)">Revisar propuesta →</div>`;
+}
+$('#iaCard').onclick = () => showTab('propuesta');
+const propOrigin = () => PROP ? `Propuesta única${PROP_DATE ? ' generada el ' + new Date(PROP_DATE).toLocaleDateString('es-CO', { dateStyle: 'medium' }) : ''} (data/propuesta-ia.json).` : 'Sugerencias guardadas en audit.json.';
+
+/* ===== TEXTOS ===== */
+const T_FILTERS = [['todos', 'Todos', p => p.textBad > 0], ['title', 'Meta título', p => p.t.title[0] !== 'ok'], ['meta', 'Meta descripción', p => p.t.meta[0] !== 'ok'],
+  ['desc', 'Descripción', p => p.t.desc[0] !== 'ok'], ['corta', 'Descripción corta', p => p.t.corta[0] === 'falta'], ['nombre', 'Nombre', p => p.t.nombre[0] !== 'ok'], ['bien', 'Textos completos', p => !p.textBad]];
+function renderTextos(ps) {
+  const k = f => ps.filter(p => p.t[f][0] !== 'ok' && p.t[f][0] !== 'na').length;
+  const kpis = [['Meta títulos', k('title'), `${ps.filter(p => p.t.title[0] === 'falta').length} vacíos · ${ps.filter(p => p.t.title[0] === 'mej').length} fuera de 30–65 caracteres`],
+    ['Meta descripciones', k('meta'), `${ps.filter(p => p.t.meta[0] === 'falta').length} vacías · ${ps.filter(p => p.t.meta[0] === 'mej').length} por mejorar`],
+    ['Descripciones', k('desc'), `${ps.filter(p => p.t.desc[0] === 'falta').length} vacías · ${ps.filter(p => p.t.desc[0] === 'mej').length} cortas o con formato`],
+    ['Descripciones cortas', k('corta'), 'No aparecen junto al botón de compra']];
+  $('#tKpis').innerHTML = kpis.map(([l, v, d]) => `<div class="card kpi"><span class="l">${l}</span><span class="v">${fmt(v)} <span class="muted" style="font-size:14px;font-weight:500">de ${fmt(ps.length)} por corregir</span></span><span class="d">${d}</span></div>`).join('');
+  $('#tFilters').innerHTML = T_FILTERS.map(([key, l, fn]) => `<button type="button" class="pill" data-f="${key}" aria-pressed="${state.tFilter === key}">${l} · ${fmt(ps.filter(fn).length)}</button>`).join('');
+  $$('#tFilters [data-f]').forEach(b => b.onclick = () => { state.tFilter = b.dataset.f; state.tLimit = 50; render(); });
+  const fn = (T_FILTERS.find(f => f[0] === state.tFilter) || T_FILTERS[0])[2];
+  const rows = ps.filter(fn).sort((a, b) => b.textGain - a.textGain || b.textBad - a.textBad);
+  const show = rows.slice(0, state.tLimit);
+  $('#tTextos').innerHTML = `<thead><tr><th>Producto</th><th>Nombre</th><th>Meta título</th><th>Meta descripción</th><th>Descripción</th><th>Desc. corta</th><th class="num">Gana</th><th>Propuesta</th></tr></thead><tbody>` +
+    (show.map(p => `<tr><td><div class="pname">${esc(p.name)}</div><div class="psub">${esc(p.dep)} · ID ${esc(p.productId)}</div></td>
+      <td>${chip(p.t.nombre)}</td><td>${chip(p.t.title)}</td><td>${chip(p.t.meta)}</td><td>${chip(p.t.desc)}</td><td>${chip(p.t.corta)}</td>
+      <td class="num" style="font-weight:800;color:var(--accent)">${pts(p.textGain)}</td>
+      <td>${p.prop ? `<button type="button" class="btn sm" data-prop="${esc(p.productId)}">Antes / después</button>` : '<span class="muted" style="font-size:13px">Sin propuesta</span>'}</td></tr>`).join('')
+      || `<tr><td colspan="8">${empty('Ningún producto en este filtro')}</td></tr>`) + '</tbody>';
+  $$('#tTextos [data-prop]').forEach(b => b.onclick = () => { state.sel = b.dataset.prop; state.pFilter = 'todos'; showTab('propuesta'); });
+  $('#tCount').textContent = `Mostrando ${fmt(show.length)} de ${fmt(rows.length)} productos`;
+  $('#tMore').classList.toggle('hidden', show.length >= rows.length);
+  const perfs = [...new Set(ps.map(p => p.perf.nombre + ' ' + p.perf.descMin))];
+  $('#ruleDesc').textContent = `Mínimo según el perfil: ${[...new Set(ps.map(p => p.perf))].map(x => `${x.nombre} ${x.descMin}`).join(', ') || '—'} caracteres. Texto propio, sin copiar de Word ni repetir entre productos.`;
+  void perfs;
+}
+$('#tMore').onclick = () => { state.tLimit += 50; render(); };
+
+/* ===== ESPECIFICACIONES ===== */
+const HEX = /^#?([0-9a-f]{3}|[0-9a-f]{6})$/i;
+const specVal = v => String(v).split(/\s*,\s*/).map(x => HEX.test(x.trim()) ? `<span class="sw" style="background:#${x.trim().replace('#', '')}"></span><span class="mono">#${esc(x.trim().replace('#', '').toUpperCase())}</span>` : esc(x)).join(' ');
+function renderSpecs(ps) {
+  const req = ps.reduce((a, p) => a + p.reqMiss, 0), rec = ps.reduce((a, p) => a + p.recMiss, 0);
+  const comp = avg(ps.flatMap(p => p.ok.map(s => s.dims.especificaciones ?? 1))) * 100;
+  const fuente = ps.some(p => p.E.fuente === 'vtex');
+  $('#sKpis').innerHTML = [
+    ['Completitud promedio', Math.round(comp) + '%', 'De los campos esperados en su categoría'],
+    ['Productos completos', `${fmt(ps.filter(p => !p.specs.length).length)} <span class="muted" style="font-size:14px;font-weight:500">de ${fmt(ps.length)}</span>`, 'Sin campos por diligenciar'],
+    ['Obligatorias faltantes', `<span style="color:var(--crit-ink)">${fmt(req)}</span>`, fuente ? 'Marcadas como requeridas en VTEX' : 'Sin obligatorias configuradas en VTEX'],
+    ['Recomendadas faltantes', `<span style="color:var(--warn-ink)">${fmt(rec)}</span>`, 'Las tiene la mayoría de su categoría'],
+  ].map(([l, v, d]) => `<div class="card kpi"><span class="l">${l}</span><span class="v">${v}</span><span class="d">${d}</span></div>`).join('');
+  $('#sSource').textContent = fuente ? 'Campos y obligatoriedad tomados de la configuración de VTEX' : 'Campos esperados inferidos del catálogo';
+
+  const g = {};
+  ps.forEach(p => (g[p.pathKey] = g[p.pathKey] || []).push(p));
+  const cats = Object.entries(g).map(([k, list]) => {
+    const ss = list.flatMap(p => p.ok);
+    const miss = {};
+    list.forEach(p => new Set(p.specs.map(x => x.campo)).forEach(f => miss[f] = (miss[f] || 0) + 1));
+    return { k, list, comp: avg(ss.map(s => s.dims.especificaciones ?? 1)), req: list.reduce((a, p) => a + p.reqMiss, 0), rec: list.reduce((a, p) => a + p.recMiss, 0),
+      full: list.filter(p => !p.specs.length).length, top: Object.entries(miss).sort((a, b) => b[1] - a[1]).slice(0, 4), E: list[0].E };
+  }).sort((a, b) => a.comp - b.comp || b.list.length - a.list.length);
+  $('#tSpecCat').innerHTML = `<thead><tr><th>Categoría</th><th class="num">Productos</th><th>Completitud</th><th class="num">Completos</th><th class="num">Obligatorias faltantes</th><th class="num">Recomendadas faltantes</th><th>Campos que más faltan</th></tr></thead><tbody>` +
+    (cats.map(r => `<tr><td><div class="pname">${esc(r.k.split(SEP).slice(-1)[0])}</div><div class="psub">${esc(r.k)}</div></td><td class="num">${fmt(r.list.length)}</td>
+      <td style="min-width:160px"><div class="row">${bar(r.comp * 100, r.comp >= .85 ? 'var(--good)' : r.comp >= .6 ? 'var(--warn)' : 'var(--crit)')}<b style="width:40px;text-align:right">${Math.round(r.comp * 100)}%</b></div></td>
+      <td class="num">${fmt(r.full)}</td><td class="num" style="color:var(--crit-ink);font-weight:700">${fmt(r.req)}</td><td class="num" style="color:var(--warn-ink);font-weight:700">${fmt(r.rec)}</td>
+      <td><div class="fields">${r.top.map(([f, n]) => `<span class="chip na">${esc(f)} · ${n}</span>`).join('') || '<span class="chip ok">Completa</span>'}</div></td></tr>`).join('')
+      || `<tr><td colspan="7">${empty('Sin productos en esta vista')}</td></tr>`) + '</tbody>';
+
+  const SF = [['todas', 'Con faltantes', p => p.specs.length], ['oblig', 'Con obligatorias', p => p.reqMiss], ['vend', 'Vendibles', p => p.specs.length && p.vendible]];
+  $('#sFilters').innerHTML = SF.map(([k, l, fn]) => `<button type="button" class="pill" data-f="${k}" aria-pressed="${state.sFilter === k}">${l} · ${fmt(ps.filter(fn).length)}</button>`).join('');
+  $$('#sFilters [data-f]').forEach(b => b.onclick = () => { state.sFilter = b.dataset.f; state.sLimit = 30; render(); });
+  const fn = (SF.find(f => f[0] === state.sFilter) || SF[0])[2];
+  const list = ps.filter(fn).sort((a, b) => b.reqMiss - a.reqMiss || b.gain.especificaciones - a.gain.especificaciones);
+  const show = list.slice(0, state.sLimit);
+  $('#sList').innerHTML = show.map(p => {
+    const prod = p.specs.filter(x => x.nivel === 'Producto'), sku = p.specs.filter(x => x.nivel === 'SKU');
+    const uniq = arr => { const m = {}; arr.forEach(x => { const k = x.campo; m[k] = m[k] || { ...x, n: 0 }; m[k].n++; }); return Object.values(m); };
+    const tag = x => `<span class="chip ${x.req ? 'falta' : 'mej'}">${esc(x.campo)}${x.n > 1 ? ' · ' + x.n + ' SKUs' : ''}</span>`;
+    return `<details class="sp"><summary>
+      <div><div class="pname">${esc(p.name)}</div><div class="psub">${esc(p.path.join(SEP))} · ID ${esc(p.productId)} · ${p.ok.length} SKU${p.ok.length === 1 ? '' : 's'}</div></div>
+      <div class="fields">${prod.length ? `<span class="psub" style="width:100%">De producto (una vez):</span>${prod.map(tag).join('')}` : ''}${sku.length ? `<span class="psub" style="width:100%">De SKU:</span>${uniq(sku).map(tag).join('')}` : ''}</div>
+      <div style="text-align:right;font-weight:800;color:var(--accent)">${pts(p.gain.especificaciones)}</div></summary>
+      <div class="in">${specMatrix(p)}</div></details>`;
+  }).join('') || empty('Ningún producto con especificaciones pendientes en esta vista');
+  $('#sCount').textContent = `Mostrando ${fmt(show.length)} de ${fmt(list.length)} productos · clic en un producto para ver su ficha técnica`;
+  $('#sMore').classList.toggle('hidden', show.length >= list.length);
+}
+function specMatrix(p) {
+  const mx = p.ok.slice(0, 6), E = p.E;
+  const pSpecs = p.c.specs || p.s0.productSpecs || null;
+  const cell = v => v ? `<td>${specVal(v)}</td>` : '<td class="miss">Falta</td>';
+  if (pSpecs) {
+    const pf = [...new Set([...E.producto, ...Object.keys(pSpecs)])];
+    const sf = [...new Set([...E.sku, ...mx.flatMap(s => Object.keys(s.skuSpecs || {}))])];
+    return `<h3>Especificaciones de producto</h3><div class="tbl"><table class="matrix"><tbody>${pf.map(f => `<tr><td style="width:40%"><b>${esc(f)}</b>${E.reqP.includes(f) ? ' <span class="chip falta">obligatoria</span>' : ''}</td>${cell(pSpecs[f])}</tr>`).join('') || '<tr><td>Sin campos</td></tr>'}</tbody></table></div>
+      <h3>Especificaciones de SKU</h3><div class="tbl"><table class="matrix"><thead><tr><th>Campo</th>${mx.map(s => `<th>${esc(s.skuName || 'SKU ' + s.skuId)}</th>`).join('')}</tr></thead><tbody>
+      ${sf.map(f => `<tr><td><b>${esc(f)}</b>${E.reqS.includes(f) ? ' <span class="chip falta">obligatoria</span>' : ''}</td>${mx.map(s => cell((s.skuSpecs || {})[f])).join('')}</tr>`).join('')}</tbody></table></div>`;
+  }
+  const fields = [...new Set([...(E.legacy || []), ...mx.flatMap(s => Object.keys(s.specs || {}))])];
+  return `<div class="tbl"><table class="matrix"><thead><tr><th>Campo</th>${mx.map(s => `<th>${esc(s.name)}<div class="psub">SKU ${esc(s.skuId)}</div></th>`).join('')}</tr></thead><tbody>
+    ${fields.map(f => `<tr><td><b>${esc(f)}</b></td>${mx.map(s => cell((s.specs || {})[f])).join('')}</tr>`).join('')}</tbody></table></div>
+    <p class="psub">Versión anterior del flujo: especificaciones de producto y de SKU vienen mezcladas.</p>`;
+}
+$('#sMore').onclick = () => { state.sLimit += 30; render(); };
+
+/* ===== PROPUESTA ===== */
+const len = s => (s || '').length;
+function renderProp(ps) {
+  const all = ps.filter(p => p.prop).sort((a, b) => b.textGain - a.textGain);
+  const est = p => dec[p.productId]?.estado || 'pend';
+  const n = k => all.filter(p => est(p) === k).length;
+  const tot = all.length || 1;
+  $('#pDone').textContent = `${fmt(all.length - n('pend'))} de ${fmt(all.length)} revisados`;
+  $('#pProg').innerHTML = [['ok', 'var(--good)'], ['adj', 'var(--warn)'], ['no', 'var(--crit)']].map(([k, c]) => `<i style="width:${n(k) / tot * 100}%;background:${c}"></i>`).join('');
+  const PF = [['todos', 'Todos'], ['pend', 'Por revisar'], ['ok', 'Aprobados'], ['adj', 'Con ajustes'], ['no', 'Rechazados']];
+  $('#pLegend').innerHTML = PF.map(([k, l]) => `<button type="button" class="pill" style="min-height:32px;padding:4px 10px;font-size:13px" data-pf="${k}" aria-pressed="${state.pFilter === k}">${l} ${fmt(k === 'todos' ? all.length : n(k))}</button>`).join('');
+  $$('#pLegend [data-pf]').forEach(b => b.onclick = () => { state.pFilter = b.dataset.pf; render(); });
+  $('#pBanner').innerHTML = `<strong>Propuesta única:</strong> ${esc(propOrigin())} No se regenera en cada auditoría. Precios, tarifas y promociones no se incluyen. Las decisiones se guardan en este navegador; use «Guardar decisiones» para compartirlas.`;
+  const list = all.filter(p => state.pFilter === 'todos' || est(p) === state.pFilter);
+  if (!all.length) {
+    $('#pList').innerHTML = ''; $('#pList').classList.add('hidden');
+    $('#pDetail').innerHTML = `<div class="empty"><h2>Aún no hay propuesta de IA</h2><p>Ejecute una vez el flujo «Tigo · IA de contenido» o publique <code>data/propuesta-ia.json</code>. Esta pestaña la mostrará automáticamente.</p></div>`;
+    return;
+  }
+  $('#pList').classList.remove('hidden');
+  if (!list.some(p => p.productId === state.sel)) state.sel = (list[0] || {}).productId || null;
+  $('#pList').innerHTML = list.map(p => `<button type="button" data-pid="${esc(p.productId)}" aria-current="${p.productId === state.sel}">
+      <span style="display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font-weight:700;font-size:14px">${esc(p.name)}</span><span class="psub">${esc(p.dep)} · gana ${pts(p.textGain)}</span></span>
+      ${chip([DEC[est(p)][1], DEC[est(p)][0]])}</button>`).join('') || empty('Ningún producto en este estado');
+  $$('#pList [data-pid]').forEach(b => b.onclick = () => { state.sel = b.dataset.pid; render(); });
+  const p = all.find(x => x.productId === state.sel);
+  if (!p) { $('#pDetail').innerHTML = empty('Seleccione un producto'); return; }
+  const c = p.c, pr = p.prop;
+  const fields = [
+    ['Nombre del producto', 'Título visible en la página', p.name, pr.nombreSugerido],
+    ['Meta título', '30–65 caracteres', c.title, pr.titleSugerido],
+    ['Meta descripción', '70–160 caracteres', c.metaDescription, pr.metaSugerida],
+    ['Descripción corta', 'Junto al botón de compra', c.descriptionShort, pr.descCortaSugerida],
+    ['Descripción', `Mínimo ${p.perf.descMin} caracteres`, c.description, pr.descSugerida],
+  ].filter(f => f[3] && String(f[3]).trim() && String(f[3]).trim() !== String(f[2] || '').trim());
+  const d = dec[p.productId] || {};
+  $('#pDetail').innerHTML = `
+    <div class="fhead"><div><h2 style="font-size:22px">${esc(p.name)}</h2><div class="psub">ID ${esc(p.productId)} · ${esc(p.path.join(SEP))} · gana ${pts(p.textGain)} pts al aprobar</div></div>
+      <div class="row">${chip([DEC[d.estado || 'pend'][1], DEC[d.estado || 'pend'][0]])}${p.url ? `<a class="btn sm" href="${esc(p.url)}" target="_blank" rel="noopener">Ver en la tienda ↗</a>` : ''}</div></div>
+    ${fields.map(([l, rule, before, after]) => `<div style="display:flex;flex-direction:column;gap:8px">
+      <div class="fhead"><h3>${l}</h3><span class="psub">${rule}</span></div>
+      <div class="cmp">
+        <div class="side before"><div class="k"><span>ACTUAL</span><span class="mono">${len(before) ? len(before) + ' car.' : '—'}</span></div><div class="v ${len(before) ? '' : 'empty'}">${len(before) ? esc(before) : 'Vacío'}</div></div>
+        <div class="side after"><div class="k"><span>PROPUESTA</span><span class="mono">${len(after)} car.</span></div><div class="v">${esc(after)}</div>
+          <div><button type="button" class="btn sm" data-copy="${esc(after)}">Copiar</button></div></div>
+      </div></div>`).join('') || empty('La propuesta no cambia ningún texto de este producto')}
+    ${(pr.datosFaltantes || []).length ? `<div class="banner"><strong>La IA sugiere completar:</strong> ${pr.datosFaltantes.map(esc).join(' · ')}</div>` : ''}
+    <div style="display:flex;flex-direction:column;gap:6px"><label for="pCom"><b>Comentario para el equipo (opcional)</b></label>
+      <textarea id="pCom" placeholder="Ej.: usar «5G» en el título; no mencionar envío gratis">${esc(d.comentario || '')}</textarea></div>
+    <div class="decide">
+      <button type="button" class="btn b-ok" data-dec="ok">Aprobar</button>
+      <button type="button" class="btn b-adj" data-dec="adj">Aprobar con ajustes</button>
+      <button type="button" class="btn b-no" data-dec="no">Rechazar</button>
+      ${d.estado ? '<button type="button" class="btn" data-dec="pend">Deshacer</button>' : ''}
+      <button type="button" class="btn" id="pNext" style="margin-left:auto">Siguiente →</button>
+    </div>`;
+  $$('#pDetail [data-copy]').forEach(b => b.onclick = async () => {
+    try { await navigator.clipboard.writeText(b.dataset.copy); toast('Copiado'); } catch (e) { toast('Seleccione el texto y cópielo manualmente'); } });
+  $$('#pDetail [data-dec]').forEach(b => b.onclick = () => {
+    const v = b.dataset.dec, com = $('#pCom').value.trim();
+    if (v === 'adj' && !com) { toast('Escriba en el comentario qué ajuste necesita'); $('#pCom').focus(); return; }
+    if (v === 'pend') delete dec[p.productId]; else dec[p.productId] = { estado: v, comentario: com, fecha: new Date().toISOString() };
+    saveDec(); toast(v === 'pend' ? 'Decisión deshecha' : DEC[v][0]);
+    const i = list.findIndex(x => x.productId === p.productId);
+    if (v !== 'pend' && list[i + 1]) state.sel = list[i + 1].productId;
+    render();
+  });
+  $('#pNext').onclick = () => { const i = list.findIndex(x => x.productId === p.productId); state.sel = (list[i + 1] || list[0]).productId; render(); };
+}
+$('#decExport').onclick = () => saveFile(new Blob([JSON.stringify({ exportado: new Date().toISOString(), decisiones: dec }, null, 2)], { type: 'application/json' }), 'decisiones-propuesta-ia.json');
+$('#decFile').addEventListener('change', e => {
+  const f = e.target.files[0]; if (!f) return;
+  const rd = new FileReader();
+  rd.onload = () => { try { const j = JSON.parse(rd.result); Object.assign(dec, j.decisiones || j); saveDec(); render(); toast('Decisiones importadas'); } catch (err) { toast('El archivo no es un JSON de decisiones'); } };
+  rd.readAsText(f); e.target.value = '';
+});
+$('#decXlsx').onclick = () => exportXlsx(true);
+
+/* ===== IMÁGENES ===== */
+function renderImgs(ps) {
+  const skus = ps.flatMap(p => p.ok);
+  const info = ps.flatMap(p => p.imgsInfo.map(x => ({ ...x, p })));
+  const dimBad = info.filter(x => x.ajusteDim && x.p.imgEstricto);
+  $('#iKpis').innerHTML = [
+    ['SKUs que cumplen el mínimo', `${fmt(skus.filter(s => s.nImg >= s.perfil.minImagenes).length)} <span class="muted" style="font-size:14px;font-weight:500">de ${fmt(skus.length)}</span>`, 'Según el perfil de su departamento', ''],
+    ['SKUs sin ninguna imagen', fmt(skus.filter(s => !s.nImg).length), `${fmt(skus.filter(s => !s.nImg && s.vendible).length)} de ellos vendibles hoy`, 'var(--crit-ink)'],
+    ['Por debajo del mínimo', fmt(skus.filter(s => s.nImg && s.nImg < s.perfil.minImagenes).length), 'Tienen fotos, pero menos de las necesarias', 'var(--warn-ink)'],
+    ['Requieren ajuste de dimensión', info.length ? fmt(dimBad.length) : '—', info.length ? `No cuadradas o menores a ${A.guiaImagenes?.recomendadoPx || 1000} px` : 'Este audit.json no trae la medición de imágenes', dimBad.length ? 'var(--crit-ink)' : 'var(--good-ink)'],
+  ].map(([l, v, d, c]) => `<div class="card kpi"><span class="l">${l}</span><span class="v" style="${c ? 'color:' + c : ''}">${v}</span><span class="d">${d}</span></div>`).join('');
+  const buckets = [['Sin imagen', s => !s.nImg, 'var(--crit)'], ['1 imagen', s => s.nImg === 1, 'var(--warn)'], ['2 imágenes', s => s.nImg === 2, 'var(--warn)'], ['3 imágenes', s => s.nImg === 3, 'var(--info)'], ['4 o más', s => s.nImg >= 4, 'var(--accent)']]
+    .map(([l, fn, c]) => [l, skus.filter(fn).length, c]);
+  const mx = Math.max(1, ...buckets.map(b => b[1]));
+  $('#iDist').innerHTML = buckets.map(([l, v, c]) => `<div class="row"><span style="font-size:14px;color:var(--ink-2)">${l}</span>${bar(v / mx * 100, c)}<b style="text-align:right">${fmt(v)}</b></div>`).join('');
+  const gi = A.guiaImagenes || {};
+  const guide = [[`Formato cuadrado (tolerancia 1 %)`, 1], [`Mínimo ${gi.recomendadoPx || 1000} px por lado (ideal 1500–2000)`, 1], [`Peso máximo ${gi.maxKb || 300} KB`, 1], ['Extensión .jpg', 1], ['Nombre: producto-variación-posición, sin espacios', 1], ['Fondo blanco', 0], ['Imagen sin estirar', 0]];
+  $('#iGuide').innerHTML = guide.map(([r, a]) => `<li><span>${r}</span><span class="chip ${a ? 'info' : 'na'}">${a ? 'Automático' : 'Revisión manual'}</span></li>`).join('');
+  const need = skus.filter(s => s.vendible && s.nImg < s.perfil.minImagenes).sort((a, b) => a.nImg - b.nImg || (Number(b.stock) || 0) - (Number(a.stock) || 0)).slice(0, 60);
+  $('#tImg').innerHTML = `<thead><tr><th>SKU</th><th>Departamento</th><th class="num">Imágenes</th><th class="num">Mínimo</th><th class="num">Stock</th><th>Acción</th></tr></thead><tbody>` +
+    (need.map(s => `<tr><td><div class="pname">${esc(s.name)}</div><div class="psub">SKU ${esc(s.skuId)}${s.refId ? ' · ' + esc(s.refId) : ''}</div></td><td>${esc(s.path[0])}</td>
+      <td class="num">${chip([s.nImg ? 'mej' : 'falta', s.nImg])}</td><td class="num">${s.perfil.minImagenes}</td><td class="num">${s.unlimited ? '∞' : fmt(s.stock)}</td>
+      <td>${s.nImg ? `Agregar ${s.perfil.minImagenes - s.nImg} vistas` : `Cargar ${s.perfil.minImagenes} imágenes`}</td></tr>`).join('') || `<tr><td colspan="6">${empty('Todos los SKUs vendibles tienen las imágenes mínimas')}</td></tr>`) + '</tbody>';
+  const flagged = info.filter(x => (x.ajusteDim && x.p.imgEstricto) || (x.notas || []).length).slice(0, 80);
+  $('#iDimCard').classList.toggle('hidden', !flagged.length);
+  $('#tImgDim').innerHTML = `<thead><tr><th>SKU</th><th class="num">Pos.</th><th class="num">Medidas</th><th class="num">Peso</th><th>Archivo</th><th>Observación</th></tr></thead><tbody>` +
+    flagged.map(x => `<tr><td><div class="pname">${esc(x.s.name)}</div><div class="psub">SKU ${esc(x.s.skuId)}</div></td><td class="num">${x.pos ?? ''}</td>
+      <td class="num">${x.ajusteDim && x.p.imgEstricto ? chip(['falta', `${x.w ?? '?'}×${x.h ?? '?'}`]) : `${x.w ?? '?'}×${x.h ?? '?'}`}</td><td class="num">${x.kb != null ? fmt(x.kb) + ' KB' : '—'}</td>
+      <td class="mono" style="overflow-wrap:anywhere">${esc(x.file || '')}</td><td>${(x.notas || []).map(esc).join(' · ')}</td></tr>`).join('') + '</tbody>';
+}
+
+/* ===== exportar ===== */
+function saveFile(blob, name) { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500); }
+const XLSX_URL = 'https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js';
+function loadXlsx() {
+  if (window.XLSX) return Promise.resolve(window.XLSX);
+  return new Promise((res, rej) => { const s = document.createElement('script'); s.src = XLSX_URL; s.onload = () => window.XLSX ? res(window.XLSX) : rej(new Error('XLSX')); s.onerror = rej; document.head.appendChild(s); });
+}
+function sheets(onlyApproved) {
+  const ps = scoped();
+  const prop = ps.filter(p => p.prop).map(p => {
+    const d = dec[p.productId] || {}, pr = p.prop, c = p.c;
+    return { 'ID producto': p.productId, 'Producto': p.name, 'Departamento': p.dep, 'Decisión': DEC[d.estado || 'pend'][0], 'Comentario': d.comentario || '', 'Fecha decisión': d.fecha || '',
+      'Nombre actual': p.name, 'Nombre propuesto': pr.nombreSugerido || '', 'Meta título actual': c.title || '', 'Meta título propuesto': pr.titleSugerido || '',
+      'Meta descripción actual': c.metaDescription || '', 'Meta descripción propuesta': pr.metaSugerida || '', 'Descripción corta actual': c.descriptionShort || '', 'Descripción corta propuesta': pr.descCortaSugerida || '',
+      'Descripción actual': c.description || '', 'Descripción propuesta': pr.descSugerida || '' };
+  });
+  if (onlyApproved) return { 'Aprobados para VTEX': prop.filter(r => ['Aprobado', 'Con ajustes'].includes(r['Decisión'])) };
+  return {
+    'Textos': ps.map(p => ({ 'ID producto': p.productId, 'Producto': p.name, 'Departamento': p.dep, 'Nombre': p.t.nombre[1], 'Meta título': p.t.title[1], 'Meta descripción': p.t.meta[1], 'Descripción': p.t.desc[1], 'Descripción corta': p.t.corta[1], 'Puntos a ganar': Math.round(p.textGain * 10) / 10 })),
+    'Especificaciones': ps.flatMap(p => p.specs.map(x => ({ 'ID producto': p.productId, 'Producto': p.name, 'Categoría': p.path.join(SEP), 'Nivel': x.nivel, 'SKU': x.skuId, 'Nombre SKU': x.skuName, 'Campo': x.campo, 'Tipo': x.req ? 'Obligatoria' : 'Recomendada' }))),
+    'Propuesta IA': prop,
+    'Imágenes': ps.flatMap(p => p.ok.map(s => ({ 'SKU': s.skuId, 'Nombre': s.name, 'Departamento': p.dep, 'Imágenes': s.nImg, 'Mínimo': s.perfil.minImagenes, 'Vendible': s.vendible ? 'Sí' : 'No', 'Stock': s.unlimited ? 'Ilimitado' : (s.stock ?? 0) }))),
+  };
+}
+async function exportXlsx(onlyApproved) {
+  if (!A) return;
+  const sh = sheets(onlyApproved);
+  const name = (onlyApproved ? 'tigo-textos-aprobados-' : 'tigo-optimizacion-catalogo-') + new Date().toISOString().slice(0, 10);
+  if (onlyApproved && !Object.values(sh)[0].length) { toast('Todavía no hay productos aprobados'); return; }
+  try {
+    const X = await loadXlsx(); const wb = X.utils.book_new();
+    for (const [n, rows] of Object.entries(sh)) {
+      const ws = X.utils.json_to_sheet(rows.length ? rows : [{ 'Sin datos': '' }]);
+      const keys = Object.keys(rows[0] || { x: 1 });
+      ws['!cols'] = keys.map(k => ({ wch: /Descripción (actual|propuesta)/.test(k) ? 60 : Math.min(40, Math.max(12, k.length + 2)) }));
+      keys.forEach((k, i) => { const a = X.utils.encode_cell({ r: 0, c: i }); if (ws[a]) ws[a].s = { font: { bold: true, color: { rgb: 'FFFFFF' } }, fill: { fgColor: { rgb: '001A57' } } }; });
+      X.utils.book_append_sheet(wb, ws, n.slice(0, 31));
+    }
+    X.writeFile(wb, name + '.xlsx'); toast('Excel descargado');
+  } catch (e) {
+    const rows = Object.values(sh)[0];
+    const keys = Object.keys(rows[0] || {});
+    const csv = [keys.join(';'), ...rows.map(r => keys.map(k => `"${String(r[k] ?? '').replace(/"/g, '""')}"`).join(';'))].join('\n');
+    saveFile(new Blob(['﻿' + csv], { type: 'text/csv' }), name + '.csv'); toast('No cargó Excel: se descargó CSV');
+  }
+}
+$('#btnXlsx').onclick = () => exportXlsx(false);
+
+$('#file').addEventListener('change', e => {
+  const f = e.target.files[0]; if (!f) return;
+  const rd = new FileReader();
+  rd.onload = () => { try { const j = JSON.parse(rd.result);
+    if (Array.isArray(j.skus)) { load(j, f.name); toast('Auditoría cargada'); }
+    else { setProp(j); if (A) load(A, 'data/audit.json'); toast('Propuesta de IA cargada'); } } catch (err) { toast('El archivo no es un JSON válido'); } };
+  rd.readAsText(f); e.target.value = '';
+});
+
+boot();
+})();
+</script>
+</body>
+</html>
